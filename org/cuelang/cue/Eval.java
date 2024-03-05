@@ -13,29 +13,29 @@
 // limitations under the License.
 
 public final class Eval {
-	public record All() implements EvalOption {}
+    public record All() implements EvalOption {}
 
-	public record Attributes(boolean b) implements EvalOption {}
+    public record Attributes(boolean b) implements EvalOption {}
 
-	public record Concrete(boolean b) implements EvalOption {}
+    public record Concrete(boolean b) implements EvalOption {}
 
-	public record Definitions(boolean b) implements EvalOption {}
+    public record Definitions(boolean b) implements EvalOption {}
 
-	public record DisallowCycles(boolean b) implements EvalOption {}
+    public record DisallowCycles(boolean b) implements EvalOption {}
 
-	public record Docs(boolean b) implements EvalOption {}
+    public record Docs(boolean b) implements EvalOption {}
 
-	public record ErrorsAsValues(boolean b) implements EvalOption {}
+    public record ErrorsAsValues(boolean b) implements EvalOption {}
 
-	public record Final() implements EvalOption {}
+    public record Final() implements EvalOption {}
 
-	public record Hidden(boolean b) implements EvalOption {}
+    public record Hidden(boolean b) implements EvalOption {}
 
-	public record InlineImports(boolean b) implements EvalOption {}
+    public record InlineImports(boolean b) implements EvalOption {}
 
-	public record Optionals(boolean b) implements EvalOption {}
+    public record Optionals(boolean b) implements EvalOption {}
 
-	public record Raw() implements EvalOption {}
+    public record Raw() implements EvalOption {}
 
-	public record Schema() implements EvalOption {}
+    public record Schema() implements EvalOption {}
 }

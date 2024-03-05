@@ -13,16 +13,16 @@
 // limitations under the License.
 
 public sealed interface EvalOption permits
-	Eval.All,
-	Eval.Attributes,
-	Eval.Concrete,
-	Eval.Definitions,
-	Eval.DisallowCycles,
-	Eval.Docs,
-	Eval.ErrorsAsValues,
-	Eval.Final,
-	Eval.Hidden,
-	Eval.InlineImports,
-	Eval.Optionals,
-	Eval.Raw,
-	Eval.Schema {}
+    Eval.All,
+    Eval.Attributes,
+    Eval.Concrete,
+    Eval.Definitions,
+    Eval.DisallowCycles,
+    Eval.Docs,
+    Eval.ErrorsAsValues,
+    Eval.Final,
+    Eval.Hidden,
+    Eval.InlineImports,
+    Eval.Optionals,
+    Eval.Raw,
+    Eval.Schema {}

@@ -13,11 +13,11 @@
 // limitations under the License.
 
 public final class Build {
-	public record FileName(String name) implements BuildOption {}
+    public record FileName(String name) implements BuildOption {}
 
-	public record ImportPath(String path) implements BuildOption {}
+    public record ImportPath(String path) implements BuildOption {}
 
-	public record InferBuiltins(boolean b) implements BuildOption {}
+    public record InferBuiltins(boolean b) implements BuildOption {}
 
-	public record Scope(CueValue v) implements BuildOption {}
+    public record Scope(CueValue v) implements BuildOption {}
 }

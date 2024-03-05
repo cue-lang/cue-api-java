@@ -13,7 +13,7 @@
 // limitations under the License.
 
 public sealed interface BuildOption permits
-	Build.FileName,
-	Build.ImportPath,
-	Build.InferBuiltins,
-	Build.Scope {}
+    Build.FileName,
+    Build.ImportPath,
+    Build.InferBuiltins,
+    Build.Scope {}
