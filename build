@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+srcdir="$(cd `dirname "$0"` && pwd)"
+cd "$srcdir"
+
+# TODO: remove this.
+PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+javac --enable-preview --source=21 org/cuelang/cue/*.java org/cuelang/libcue/*.java
