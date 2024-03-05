@@ -182,13 +182,13 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * unsigned long cue_newctx(,...);
+     * unsigned long cue_newctx();
      * }
      */
-    public static long cue_newctx(Object... x0) {
+    public static long cue_newctx() {
         var mh$ = cue_newctx$MH();
         try {
-            return (long)mh$.invokeExact(x0);
+            return (long)mh$.invokeExact();
         } catch (Throwable ex$) {
             throw new AssertionError("should not reach here", ex$);
         }

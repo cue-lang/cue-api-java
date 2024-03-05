@@ -12,7 +12,7 @@ final class constants$0 {
     // Suppresses default constructor, ensuring non-instantiability.
     private constants$0() {}
     static final FunctionDescriptor const$0 = FunctionDescriptor.of(JAVA_LONG);
-    static final MethodHandle const$1 = RuntimeHelper.downcallHandleVariadic(
+    static final MethodHandle const$1 = RuntimeHelper.downcallHandle(
         "cue_newctx",
         constants$0.const$0
     );
