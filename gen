@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+srcdir="$(cd `dirname "$0"` && pwd)"
+cd "$srcdir"
+
+# TODO: remove this.
+PATH=$PATH:$HOME/src/jextract/build/jextract/bin
+
+# TODO: find this in a more reliable way.
+CUE_H=$HOME/src/libcue/cue.h
+
+rm -rf org/cuelang/libcue
+jextract --source -t org.cuelang.libcue -lcue --header-class-name CueNative @includes.txt $HOME/src/libcue/cue.h
