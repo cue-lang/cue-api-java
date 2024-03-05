@@ -7,4 +7,5 @@ cd "$srcdir"
 # TODO: remove this.
 PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
-javac --enable-preview --source=21 org/cuelang/cue/*.java org/cuelang/libcue/*.java
+javac --enable-preview --source=21 -sourcepath org/cuelang/libcue org/cuelang/libcue/*.java
+javac --enable-preview --source=21 -sourcepath org/cuelang/cue org/cuelang/cue/*.java
