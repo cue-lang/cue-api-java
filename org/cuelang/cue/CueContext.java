@@ -25,6 +25,14 @@ public final class CueContext implements AutoCloseable {
 		this.ctx = new CueResource(cleaner, CueNative.cue_newctx());
 	}
 
+	public CueValue top() {
+		return new CueValue(new CueResource(cleaner, CueNative.cue_top(ctx.res)));
+	}
+
+	public CueValue bottom() {
+		return new CueValue(new CueResource(cleaner, CueNative.cue_bottom(ctx.res)));
+	}
+
     public void close() {
         ctx.close();
     }

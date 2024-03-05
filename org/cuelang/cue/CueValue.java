@@ -14,4 +14,10 @@
 
 package org.cuelang.cue;
 
-public final class CueValue {}
+public final class CueValue {
+    private final CueResource val;
+
+    CueValue(CueResource val) {
+        this.val = val;
+    }
+}
