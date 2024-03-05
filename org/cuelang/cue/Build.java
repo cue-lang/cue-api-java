@@ -13,35 +13,11 @@
 // limitations under the License.
 
 public final class Build {
-	public static final class FileName extends BuildOption {
-		public final String name;
+	public record FileName(String name) implements BuildOption {}
 
-		public FileName(String s) {
-			this.name = s;
-		}
-	}
+	public record ImportPath(String path) implements BuildOption {}
 
-	public static final class ImportPath extends BuildOption {
-		public final String path;
+	public record InferBuiltins(boolean b) implements BuildOption {}
 
-		public ImportPath(String s) {
-			this.path = s;
-		}
-	}
-
-	public static final class InferBuiltins extends BuildOption {
-		public final boolean infer;
-
-		public InferBuiltins(boolean b) {
-			this.infer = b;
-		}
-	}
-
-	public static final class Scope extends BuildOption {
-		public final CueValue scope;
-
-		public Scope(CueValue scope) {
-			this.scope = scope;
-		}
-	}
+	public record Scope(CueValue v) implements BuildOption {}
 }

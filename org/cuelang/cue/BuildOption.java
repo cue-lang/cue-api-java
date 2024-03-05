@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-public sealed class BuildOption permits
+public sealed interface BuildOption permits
 	Build.FileName,
 	Build.ImportPath,
 	Build.InferBuiltins,
-	Build.Scope
-{}
+	Build.Scope {}
