@@ -14,14 +14,27 @@
 
 package org.cuelang.cue;
 
-public final class CueValue {
-    private final CueResource val;
+import static org.cuelang.libcue.cue_h.*;
 
-    CueValue(CueResource val) {
-        this.val = val;
+public final class CueValue {
+    private final CueContext ctx;
+    private final CueResource res;
+
+    CueValue(CueContext ctx, CueResource res) {
+        this.ctx = ctx;
+        this.res = res;
     }
 
     long handle() {
-        return this.val.handle();
+        return this.res.handle();
+    }
+
+    public CueContext cueContext() {
+        return this.ctx;
+    }
+
+    public CueValue unify(CueValue v) {
+        var res = new CueResource(ctx.cleaner(), cue_unify(this.handle(), v.handle()));
+        return new CueValue(ctx, res);
     }
 }

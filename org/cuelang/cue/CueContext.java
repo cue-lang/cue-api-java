@@ -27,12 +27,18 @@ public final class CueContext {
 		this.ctx = new CueResource(cleaner, cue_newctx());
 	}
 
+	Cleaner cleaner() {
+		return this.cleaner;
+	}
+
 	public CueValue top() {
-		return new CueValue(new CueResource(cleaner, cue_top(ctx.handle())));
+		var res = new CueResource(cleaner, cue_top(ctx.handle()));
+		return new CueValue(this, res);
 	}
 
 	public CueValue bottom() {
-		return new CueValue(new CueResource(cleaner, cue_bottom(ctx.handle())));
+		var res = new CueResource(cleaner, cue_bottom(ctx.handle()));
+		return new CueValue(this, res);
 	}
 
 	public CueValue compileString(String s, BuildOption... opts) {
@@ -41,7 +47,7 @@ public final class CueContext {
 			var bOpts = encodeBuildOptions(arena, opts);
 			var res = cue_compile_string(ctx.handle(), cString, bOpts);
 
-			return new CueValue(new CueResource(cleaner, res));
+			return new CueValue(this, new CueResource(cleaner, res));
 		}
 	}
 
@@ -51,7 +57,7 @@ public final class CueContext {
 			var bOpts = encodeBuildOptions(arena, opts);
 			var res = cue_compile_bytes(ctx.handle(), mem, buf.length, bOpts);
 
-			return new CueValue(new CueResource(cleaner, res));
+			return new CueValue(this, new CueResource(cleaner, res));
 		}
 	}
 
