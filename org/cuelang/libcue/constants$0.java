@@ -11,30 +11,19 @@ final class constants$0 {
 
     // Suppresses default constructor, ensuring non-instantiability.
     private constants$0() {}
-    static final FunctionDescriptor const$0 = FunctionDescriptor.of(JAVA_LONG);
-    static final MethodHandle const$1 = RuntimeHelper.downcallHandle(
-        "cue_newctx",
-        constants$0.const$0
-    );
-    static final FunctionDescriptor const$2 = FunctionDescriptor.of(JAVA_LONG,
-        JAVA_LONG,
-        RuntimeHelper.POINTER,
-        RuntimeHelper.POINTER
-    );
-    static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
-        "cue_compile_string",
-        constants$0.const$2
-    );
-    static final FunctionDescriptor const$4 = FunctionDescriptor.of(JAVA_LONG,
-        JAVA_LONG,
-        RuntimeHelper.POINTER,
-        JAVA_LONG,
-        RuntimeHelper.POINTER
-    );
-    static final MethodHandle const$5 = RuntimeHelper.downcallHandle(
-        "cue_compile_bytes",
-        constants$0.const$4
-    );
+    static final StructLayout const$0 = MemoryLayout.structLayout(
+        RuntimeHelper.POINTER.withName("key"),
+        RuntimeHelper.POINTER.withName("val")
+    ).withName("cue_attr_arg");
+    static final VarHandle const$1 = constants$0.const$0.varHandle(MemoryLayout.PathElement.groupElement("key"));
+    static final VarHandle const$2 = constants$0.const$0.varHandle(MemoryLayout.PathElement.groupElement("val"));
+    static final StructLayout const$3 = MemoryLayout.structLayout(
+        JAVA_INT.withName("tag"),
+        JAVA_BOOLEAN.withName("value"),
+        MemoryLayout.paddingLayout(3)
+    ).withName("cue_eopt");
+    static final VarHandle const$4 = constants$0.const$3.varHandle(MemoryLayout.PathElement.groupElement("tag"));
+    static final VarHandle const$5 = constants$0.const$3.varHandle(MemoryLayout.PathElement.groupElement("value"));
 }
 
 

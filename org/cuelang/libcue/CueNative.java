@@ -91,7 +91,7 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * enum CUE_KIND.CUE_KIND_BOTTOM = 0;
+     * enum cue_kind.CUE_KIND_BOTTOM = 0;
      * }
      */
     public static int CUE_KIND_BOTTOM() {
@@ -99,7 +99,7 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * enum CUE_KIND.CUE_KIND_NULL = 1;
+     * enum cue_kind.CUE_KIND_NULL = 1;
      * }
      */
     public static int CUE_KIND_NULL() {
@@ -107,7 +107,7 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * enum CUE_KIND.CUE_KIND_BOOL = 2;
+     * enum cue_kind.CUE_KIND_BOOL = 2;
      * }
      */
     public static int CUE_KIND_BOOL() {
@@ -115,7 +115,7 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * enum CUE_KIND.CUE_KIND_INT = 3;
+     * enum cue_kind.CUE_KIND_INT = 3;
      * }
      */
     public static int CUE_KIND_INT() {
@@ -123,7 +123,7 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * enum CUE_KIND.CUE_KIND_FLOAT = 4;
+     * enum cue_kind.CUE_KIND_FLOAT = 4;
      * }
      */
     public static int CUE_KIND_FLOAT() {
@@ -131,7 +131,7 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * enum CUE_KIND.CUE_KIND_STRING = 5;
+     * enum cue_kind.CUE_KIND_STRING = 5;
      * }
      */
     public static int CUE_KIND_STRING() {
@@ -139,7 +139,7 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * enum CUE_KIND.CUE_KIND_BYTES = 6;
+     * enum cue_kind.CUE_KIND_BYTES = 6;
      * }
      */
     public static int CUE_KIND_BYTES() {
@@ -147,7 +147,7 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * enum CUE_KIND.CUE_KIND_STRUCT = 7;
+     * enum cue_kind.CUE_KIND_STRUCT = 7;
      * }
      */
     public static int CUE_KIND_STRUCT() {
@@ -155,7 +155,7 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * enum CUE_KIND.CUE_KIND_LIST = 8;
+     * enum cue_kind.CUE_KIND_LIST = 8;
      * }
      */
     public static int CUE_KIND_LIST() {
@@ -163,7 +163,7 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * enum CUE_KIND.CUE_KIND_NUMBER = 9;
+     * enum cue_kind.CUE_KIND_NUMBER = 9;
      * }
      */
     public static int CUE_KIND_NUMBER() {
@@ -171,14 +171,166 @@ public class CueNative  {
     }
     /**
      * {@snippet :
-     * enum CUE_KIND.CUE_KIND_TOP = 10;
+     * enum cue_kind.CUE_KIND_TOP = 10;
      * }
      */
     public static int CUE_KIND_TOP() {
         return (int)10L;
     }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_NONE = 0;
+     * }
+     */
+    public static int CUE_OPT_NONE() {
+        return (int)0L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_ALL = 1;
+     * }
+     */
+    public static int CUE_OPT_ALL() {
+        return (int)1L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_ATTR = 2;
+     * }
+     */
+    public static int CUE_OPT_ATTR() {
+        return (int)2L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_CONCRETE = 3;
+     * }
+     */
+    public static int CUE_OPT_CONCRETE() {
+        return (int)3L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_DEFS = 4;
+     * }
+     */
+    public static int CUE_OPT_DEFS() {
+        return (int)4L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_DISALLOW_CYCLES = 5;
+     * }
+     */
+    public static int CUE_OPT_DISALLOW_CYCLES() {
+        return (int)5L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_DOCS = 6;
+     * }
+     */
+    public static int CUE_OPT_DOCS() {
+        return (int)6L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_ERRORS_AS_VALUES = 7;
+     * }
+     */
+    public static int CUE_OPT_ERRORS_AS_VALUES() {
+        return (int)7L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_FINAL = 8;
+     * }
+     */
+    public static int CUE_OPT_FINAL() {
+        return (int)8L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_HIDDEN = 9;
+     * }
+     */
+    public static int CUE_OPT_HIDDEN() {
+        return (int)9L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_INLINE_IMPORTS = 10;
+     * }
+     */
+    public static int CUE_OPT_INLINE_IMPORTS() {
+        return (int)10L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_OPTIONALS = 11;
+     * }
+     */
+    public static int CUE_OPT_OPTIONALS() {
+        return (int)11L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_RAW = 12;
+     * }
+     */
+    public static int CUE_OPT_RAW() {
+        return (int)12L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_eopt_tag.CUE_OPT_SCHEMA = 13;
+     * }
+     */
+    public static int CUE_OPT_SCHEMA() {
+        return (int)13L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_bopt_tag.CUE_BUILD_NONE = 0;
+     * }
+     */
+    public static int CUE_BUILD_NONE() {
+        return (int)0L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_bopt_tag.CUE_BUILD_FILENAME = 1;
+     * }
+     */
+    public static int CUE_BUILD_FILENAME() {
+        return (int)1L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_bopt_tag.CUE_BUILD_IMPORT_PATH = 2;
+     * }
+     */
+    public static int CUE_BUILD_IMPORT_PATH() {
+        return (int)2L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_bopt_tag.CUE_BUILD_INFER_BUILTINS = 3;
+     * }
+     */
+    public static int CUE_BUILD_INFER_BUILTINS() {
+        return (int)3L;
+    }
+    /**
+     * {@snippet :
+     * enum cue_bopt_tag.CUE_BUILD_SCOPE = 4;
+     * }
+     */
+    public static int CUE_BUILD_SCOPE() {
+        return (int)4L;
+    }
     public static MethodHandle cue_newctx$MH() {
-        return RuntimeHelper.requireNonNull(constants$0.const$1,"cue_newctx");
+        return RuntimeHelper.requireNonNull(constants$1.const$6,"cue_newctx");
     }
     /**
      * {@snippet :
@@ -194,7 +346,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_compile_string$MH() {
-        return RuntimeHelper.requireNonNull(constants$0.const$3,"cue_compile_string");
+        return RuntimeHelper.requireNonNull(constants$2.const$1,"cue_compile_string");
     }
     /**
      * {@snippet :
@@ -210,7 +362,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_compile_bytes$MH() {
-        return RuntimeHelper.requireNonNull(constants$0.const$5,"cue_compile_bytes");
+        return RuntimeHelper.requireNonNull(constants$2.const$3,"cue_compile_bytes");
     }
     /**
      * {@snippet :
@@ -226,7 +378,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_top$MH() {
-        return RuntimeHelper.requireNonNull(constants$1.const$1,"cue_top");
+        return RuntimeHelper.requireNonNull(constants$2.const$5,"cue_top");
     }
     /**
      * {@snippet :
@@ -242,7 +394,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_bottom$MH() {
-        return RuntimeHelper.requireNonNull(constants$1.const$2,"cue_bottom");
+        return RuntimeHelper.requireNonNull(constants$3.const$0,"cue_bottom");
     }
     /**
      * {@snippet :
@@ -258,7 +410,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_unify$MH() {
-        return RuntimeHelper.requireNonNull(constants$1.const$4,"cue_unify");
+        return RuntimeHelper.requireNonNull(constants$3.const$2,"cue_unify");
     }
     /**
      * {@snippet :
@@ -274,7 +426,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_instance_of$MH() {
-        return RuntimeHelper.requireNonNull(constants$1.const$6,"cue_instance_of");
+        return RuntimeHelper.requireNonNull(constants$3.const$4,"cue_instance_of");
     }
     /**
      * {@snippet :
@@ -290,7 +442,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_lookup_string$MH() {
-        return RuntimeHelper.requireNonNull(constants$2.const$0,"cue_lookup_string");
+        return RuntimeHelper.requireNonNull(constants$3.const$5,"cue_lookup_string");
     }
     /**
      * {@snippet :
@@ -306,7 +458,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_from_int64$MH() {
-        return RuntimeHelper.requireNonNull(constants$2.const$1,"cue_from_int64");
+        return RuntimeHelper.requireNonNull(constants$4.const$0,"cue_from_int64");
     }
     /**
      * {@snippet :
@@ -322,7 +474,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_from_uint64$MH() {
-        return RuntimeHelper.requireNonNull(constants$2.const$2,"cue_from_uint64");
+        return RuntimeHelper.requireNonNull(constants$4.const$1,"cue_from_uint64");
     }
     /**
      * {@snippet :
@@ -338,7 +490,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_from_bool$MH() {
-        return RuntimeHelper.requireNonNull(constants$2.const$4,"cue_from_bool");
+        return RuntimeHelper.requireNonNull(constants$4.const$3,"cue_from_bool");
     }
     /**
      * {@snippet :
@@ -354,7 +506,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_from_double$MH() {
-        return RuntimeHelper.requireNonNull(constants$2.const$6,"cue_from_double");
+        return RuntimeHelper.requireNonNull(constants$4.const$5,"cue_from_double");
     }
     /**
      * {@snippet :
@@ -370,7 +522,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_from_string$MH() {
-        return RuntimeHelper.requireNonNull(constants$3.const$1,"cue_from_string");
+        return RuntimeHelper.requireNonNull(constants$5.const$1,"cue_from_string");
     }
     /**
      * {@snippet :
@@ -386,7 +538,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_from_bytes$MH() {
-        return RuntimeHelper.requireNonNull(constants$3.const$3,"cue_from_bytes");
+        return RuntimeHelper.requireNonNull(constants$5.const$3,"cue_from_bytes");
     }
     /**
      * {@snippet :
@@ -402,7 +554,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_dec_int64$MH() {
-        return RuntimeHelper.requireNonNull(constants$3.const$4,"cue_dec_int64");
+        return RuntimeHelper.requireNonNull(constants$5.const$4,"cue_dec_int64");
     }
     /**
      * {@snippet :
@@ -418,7 +570,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_dec_uint64$MH() {
-        return RuntimeHelper.requireNonNull(constants$3.const$5,"cue_dec_uint64");
+        return RuntimeHelper.requireNonNull(constants$5.const$5,"cue_dec_uint64");
     }
     /**
      * {@snippet :
@@ -434,7 +586,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_dec_bool$MH() {
-        return RuntimeHelper.requireNonNull(constants$4.const$0,"cue_dec_bool");
+        return RuntimeHelper.requireNonNull(constants$6.const$0,"cue_dec_bool");
     }
     /**
      * {@snippet :
@@ -450,7 +602,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_dec_double$MH() {
-        return RuntimeHelper.requireNonNull(constants$4.const$1,"cue_dec_double");
+        return RuntimeHelper.requireNonNull(constants$6.const$1,"cue_dec_double");
     }
     /**
      * {@snippet :
@@ -466,7 +618,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_dec_string$MH() {
-        return RuntimeHelper.requireNonNull(constants$4.const$2,"cue_dec_string");
+        return RuntimeHelper.requireNonNull(constants$6.const$2,"cue_dec_string");
     }
     /**
      * {@snippet :
@@ -482,7 +634,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_dec_bytes$MH() {
-        return RuntimeHelper.requireNonNull(constants$4.const$3,"cue_dec_bytes");
+        return RuntimeHelper.requireNonNull(constants$6.const$3,"cue_dec_bytes");
     }
     /**
      * {@snippet :
@@ -498,7 +650,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_dec_json$MH() {
-        return RuntimeHelper.requireNonNull(constants$4.const$4,"cue_dec_json");
+        return RuntimeHelper.requireNonNull(constants$6.const$4,"cue_dec_json");
     }
     /**
      * {@snippet :
@@ -514,7 +666,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_validate$MH() {
-        return RuntimeHelper.requireNonNull(constants$4.const$5,"cue_validate");
+        return RuntimeHelper.requireNonNull(constants$6.const$5,"cue_validate");
     }
     /**
      * {@snippet :
@@ -530,7 +682,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_default$MH() {
-        return RuntimeHelper.requireNonNull(constants$5.const$0,"cue_default");
+        return RuntimeHelper.requireNonNull(constants$7.const$0,"cue_default");
     }
     /**
      * {@snippet :
@@ -545,16 +697,16 @@ public class CueNative  {
             throw new AssertionError("should not reach here", ex$);
         }
     }
-    public static MethodHandle cue_kind$MH() {
-        return RuntimeHelper.requireNonNull(constants$5.const$2,"cue_kind");
+    public static MethodHandle cue_concrete_kind$MH() {
+        return RuntimeHelper.requireNonNull(constants$7.const$2,"cue_concrete_kind");
     }
     /**
      * {@snippet :
-     * enum CUE_KIND cue_kind(unsigned long);
+     * enum cue_kind cue_concrete_kind(unsigned long);
      * }
      */
-    public static int cue_kind(long x0) {
-        var mh$ = cue_kind$MH();
+    public static int cue_concrete_kind(long x0) {
+        var mh$ = cue_concrete_kind$MH();
         try {
             return (int)mh$.invokeExact(x0);
         } catch (Throwable ex$) {
@@ -562,11 +714,11 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_incomplete_kind$MH() {
-        return RuntimeHelper.requireNonNull(constants$5.const$3,"cue_incomplete_kind");
+        return RuntimeHelper.requireNonNull(constants$7.const$3,"cue_incomplete_kind");
     }
     /**
      * {@snippet :
-     * enum CUE_KIND cue_incomplete_kind(unsigned long);
+     * enum cue_kind cue_incomplete_kind(unsigned long);
      * }
      */
     public static int cue_incomplete_kind(long x0) {
@@ -578,7 +730,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_is_equal$MH() {
-        return RuntimeHelper.requireNonNull(constants$5.const$5,"cue_is_equal");
+        return RuntimeHelper.requireNonNull(constants$7.const$5,"cue_is_equal");
     }
     /**
      * {@snippet :
@@ -593,8 +745,296 @@ public class CueNative  {
             throw new AssertionError("should not reach here", ex$);
         }
     }
+    public static MethodHandle cue_filename$MH() {
+        return RuntimeHelper.requireNonNull(constants$8.const$1,"cue_filename");
+    }
+    /**
+     * {@snippet :
+     * struct cue_bopt cue_filename(char*);
+     * }
+     */
+    public static MemorySegment cue_filename(SegmentAllocator allocator, MemorySegment x1) {
+        var mh$ = cue_filename$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_import_path$MH() {
+        return RuntimeHelper.requireNonNull(constants$8.const$2,"cue_import_path");
+    }
+    /**
+     * {@snippet :
+     * struct cue_bopt cue_import_path(char*);
+     * }
+     */
+    public static MemorySegment cue_import_path(SegmentAllocator allocator, MemorySegment x1) {
+        var mh$ = cue_import_path$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_infer_builtins$MH() {
+        return RuntimeHelper.requireNonNull(constants$8.const$4,"cue_infer_builtins");
+    }
+    /**
+     * {@snippet :
+     * struct cue_bopt cue_infer_builtins(_Bool);
+     * }
+     */
+    public static MemorySegment cue_infer_builtins(SegmentAllocator allocator, boolean x1) {
+        var mh$ = cue_infer_builtins$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_scope$MH() {
+        return RuntimeHelper.requireNonNull(constants$8.const$6,"cue_scope");
+    }
+    /**
+     * {@snippet :
+     * struct cue_bopt cue_scope(unsigned long);
+     * }
+     */
+    public static MemorySegment cue_scope(SegmentAllocator allocator, long x1) {
+        var mh$ = cue_scope$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_all$MH() {
+        return RuntimeHelper.requireNonNull(constants$9.const$1,"cue_all");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_all();
+     * }
+     */
+    public static MemorySegment cue_all(SegmentAllocator allocator) {
+        var mh$ = cue_all$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_attributes$MH() {
+        return RuntimeHelper.requireNonNull(constants$9.const$3,"cue_attributes");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_attributes(_Bool);
+     * }
+     */
+    public static MemorySegment cue_attributes(SegmentAllocator allocator, boolean x1) {
+        var mh$ = cue_attributes$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_concrete$MH() {
+        return RuntimeHelper.requireNonNull(constants$9.const$4,"cue_concrete");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_concrete(_Bool);
+     * }
+     */
+    public static MemorySegment cue_concrete(SegmentAllocator allocator, boolean x1) {
+        var mh$ = cue_concrete$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_definitions$MH() {
+        return RuntimeHelper.requireNonNull(constants$9.const$5,"cue_definitions");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_definitions(_Bool);
+     * }
+     */
+    public static MemorySegment cue_definitions(SegmentAllocator allocator, boolean x1) {
+        var mh$ = cue_definitions$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_disallow_cycles$MH() {
+        return RuntimeHelper.requireNonNull(constants$10.const$0,"cue_disallow_cycles");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_disallow_cycles(_Bool);
+     * }
+     */
+    public static MemorySegment cue_disallow_cycles(SegmentAllocator allocator, boolean x1) {
+        var mh$ = cue_disallow_cycles$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_docs$MH() {
+        return RuntimeHelper.requireNonNull(constants$10.const$1,"cue_docs");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_docs(_Bool);
+     * }
+     */
+    public static MemorySegment cue_docs(SegmentAllocator allocator, boolean x1) {
+        var mh$ = cue_docs$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_errors_as_values$MH() {
+        return RuntimeHelper.requireNonNull(constants$10.const$2,"cue_errors_as_values");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_errors_as_values(_Bool);
+     * }
+     */
+    public static MemorySegment cue_errors_as_values(SegmentAllocator allocator, boolean x1) {
+        var mh$ = cue_errors_as_values$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_final$MH() {
+        return RuntimeHelper.requireNonNull(constants$10.const$3,"cue_final");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_final();
+     * }
+     */
+    public static MemorySegment cue_final(SegmentAllocator allocator) {
+        var mh$ = cue_final$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_hidden$MH() {
+        return RuntimeHelper.requireNonNull(constants$10.const$4,"cue_hidden");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_hidden(_Bool);
+     * }
+     */
+    public static MemorySegment cue_hidden(SegmentAllocator allocator, boolean x1) {
+        var mh$ = cue_hidden$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_inline_imports$MH() {
+        return RuntimeHelper.requireNonNull(constants$10.const$5,"cue_inline_imports");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_inline_imports(_Bool);
+     * }
+     */
+    public static MemorySegment cue_inline_imports(SegmentAllocator allocator, boolean x1) {
+        var mh$ = cue_inline_imports$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_optionals$MH() {
+        return RuntimeHelper.requireNonNull(constants$11.const$0,"cue_optionals");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_optionals(_Bool);
+     * }
+     */
+    public static MemorySegment cue_optionals(SegmentAllocator allocator, boolean x1) {
+        var mh$ = cue_optionals$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator, x1);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_raw$MH() {
+        return RuntimeHelper.requireNonNull(constants$11.const$1,"cue_raw");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_raw();
+     * }
+     */
+    public static MemorySegment cue_raw(SegmentAllocator allocator) {
+        var mh$ = cue_raw$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_schema$MH() {
+        return RuntimeHelper.requireNonNull(constants$11.const$2,"cue_schema");
+    }
+    /**
+     * {@snippet :
+     * struct cue_eopt cue_schema();
+     * }
+     */
+    public static MemorySegment cue_schema(SegmentAllocator allocator) {
+        var mh$ = cue_schema$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(allocator);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
+    public static MethodHandle cue_attr_args$MH() {
+        return RuntimeHelper.requireNonNull(constants$11.const$4,"cue_attr_args");
+    }
+    /**
+     * {@snippet :
+     * struct cue_attr_arg* cue_attr_args(unsigned long);
+     * }
+     */
+    public static MemorySegment cue_attr_args(long x0) {
+        var mh$ = cue_attr_args$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(x0);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
     public static MethodHandle cue_attrs$MH() {
-        return RuntimeHelper.requireNonNull(constants$6.const$1,"cue_attrs");
+        return RuntimeHelper.requireNonNull(constants$11.const$6,"cue_attrs");
     }
     /**
      * {@snippet :
@@ -610,7 +1050,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_attr_name$MH() {
-        return RuntimeHelper.requireNonNull(constants$6.const$3,"cue_attr_name");
+        return RuntimeHelper.requireNonNull(constants$12.const$0,"cue_attr_name");
     }
     /**
      * {@snippet :
@@ -626,7 +1066,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_attr_value$MH() {
-        return RuntimeHelper.requireNonNull(constants$6.const$4,"cue_attr_value");
+        return RuntimeHelper.requireNonNull(constants$12.const$1,"cue_attr_value");
     }
     /**
      * {@snippet :
@@ -642,7 +1082,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_free$MH() {
-        return RuntimeHelper.requireNonNull(constants$6.const$6,"cue_free");
+        return RuntimeHelper.requireNonNull(constants$12.const$3,"cue_free");
     }
     /**
      * {@snippet :
@@ -658,7 +1098,7 @@ public class CueNative  {
         }
     }
     public static MethodHandle cue_free_all$MH() {
-        return RuntimeHelper.requireNonNull(constants$7.const$1,"cue_free_all");
+        return RuntimeHelper.requireNonNull(constants$12.const$5,"cue_free_all");
     }
     /**
      * {@snippet :

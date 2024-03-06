@@ -7,33 +7,31 @@ import java.lang.invoke.VarHandle;
 import java.nio.ByteOrder;
 import java.lang.foreign.*;
 import static java.lang.foreign.ValueLayout.*;
-final class constants$4 {
+final class constants$12 {
 
     // Suppresses default constructor, ensuring non-instantiability.
-    private constants$4() {}
+    private constants$12() {}
     static final MethodHandle const$0 = RuntimeHelper.downcallHandle(
-        "cue_from_int64",
-        constants$3.const$1
+        "cue_attr_name",
+        constants$11.const$3
     );
     static final MethodHandle const$1 = RuntimeHelper.downcallHandle(
-        "cue_from_uint64",
-        constants$3.const$1
+        "cue_attr_value",
+        constants$11.const$3
     );
-    static final FunctionDescriptor const$2 = FunctionDescriptor.of(JAVA_LONG,
-        JAVA_LONG,
-        JAVA_BOOLEAN
+    static final FunctionDescriptor const$2 = FunctionDescriptor.ofVoid(
+        JAVA_LONG
     );
     static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
-        "cue_from_bool",
-        constants$4.const$2
+        "cue_free",
+        constants$12.const$2
     );
-    static final FunctionDescriptor const$4 = FunctionDescriptor.of(JAVA_LONG,
-        JAVA_LONG,
-        JAVA_DOUBLE
+    static final FunctionDescriptor const$4 = FunctionDescriptor.ofVoid(
+        RuntimeHelper.POINTER
     );
     static final MethodHandle const$5 = RuntimeHelper.downcallHandle(
-        "cue_from_double",
-        constants$4.const$4
+        "cue_free_all",
+        constants$12.const$4
     );
 }
 
