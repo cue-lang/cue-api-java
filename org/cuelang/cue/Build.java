@@ -14,6 +14,8 @@
 
 package org.cuelang.cue;
 
+import java.lang.foreign.*;
+
 public final class Build {
     public record FileName(String name) implements BuildOption {}
 

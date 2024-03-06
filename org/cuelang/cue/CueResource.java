@@ -15,14 +15,18 @@
 package org.cuelang.cue;
 
 import java.lang.ref.Cleaner;
-import org.cuelang.libcue.cue_h;
+import static org.cuelang.libcue.cue_h.*;
 
 final class CueResource {
     private final Cleaner.Cleanable cleanable;
-    final long res;
+    private final long res;
 
     CueResource(Cleaner c, long res) {
         this.res = res;
-        this.cleanable = c.register(this, () -> cue_h.cue_free(res));
+        this.cleanable = c.register(this, () -> cue_free(res));
+	}
+
+	long handle() {
+	   return this.res;
 	}
 }

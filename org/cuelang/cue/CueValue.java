@@ -20,4 +20,8 @@ public final class CueValue {
     CueValue(CueResource val) {
         this.val = val;
     }
+
+    long handle() {
+        return this.val.handle();
+    }
 }
