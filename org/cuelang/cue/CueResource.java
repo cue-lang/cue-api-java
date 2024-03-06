@@ -15,7 +15,7 @@
 package org.cuelang.cue;
 
 import java.lang.ref.Cleaner;
-import org.cuelang.libcue.CueNative;
+import org.cuelang.libcue.cue_h;
 
 final class CueResource implements AutoCloseable {
     private final Cleaner.Cleanable cleanable;
@@ -23,7 +23,7 @@ final class CueResource implements AutoCloseable {
 
     CueResource(Cleaner c, long res) {
         this.res = res;
-        this.cleanable = c.register(this, () -> CueNative.cue_free(res));
+        this.cleanable = c.register(this, () -> cue_h.cue_free(res));
 	}
 
     public void close() {

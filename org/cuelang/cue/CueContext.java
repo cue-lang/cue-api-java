@@ -15,22 +15,22 @@
 package org.cuelang.cue;
 
 import java.lang.ref.Cleaner;
-import org.cuelang.libcue.CueNative;
+import org.cuelang.libcue.cue_h;
 
 public final class CueContext implements AutoCloseable {
 	private static final Cleaner cleaner = Cleaner.create();
 	private final CueResource ctx;
 
 	public CueContext() {
-		this.ctx = new CueResource(cleaner, CueNative.cue_newctx());
+		this.ctx = new CueResource(cleaner, cue_h.cue_newctx());
 	}
 
 	public CueValue top() {
-		return new CueValue(new CueResource(cleaner, CueNative.cue_top(ctx.res)));
+		return new CueValue(new CueResource(cleaner, cue_h.cue_top(ctx.res)));
 	}
 
 	public CueValue bottom() {
-		return new CueValue(new CueResource(cleaner, CueNative.cue_bottom(ctx.res)));
+		return new CueValue(new CueResource(cleaner, cue_h.cue_bottom(ctx.res)));
 	}
 
     public void close() {

@@ -7,7 +7,7 @@ import java.lang.invoke.VarHandle;
 import java.nio.ByteOrder;
 import java.lang.foreign.*;
 import static java.lang.foreign.ValueLayout.*;
-public class CueNative  {
+public class cue_h  {
 
     public static final OfByte C_CHAR = JAVA_BYTE;
     public static final OfShort C_SHORT = JAVA_SHORT;
