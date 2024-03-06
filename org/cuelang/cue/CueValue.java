@@ -37,4 +37,8 @@ public final class CueValue {
         var res = new CueResource(ctx.cleaner(), cue_unify(this.handle(), v.handle()));
         return new CueValue(ctx, res);
     }
+
+    public boolean equals(CueValue v) {
+        return cue_is_equal(this.handle(), v.handle());
+    }
 }
