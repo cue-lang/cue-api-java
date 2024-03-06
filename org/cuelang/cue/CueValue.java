@@ -14,11 +14,28 @@
 
 package org.cuelang.cue;
 
+import java.util.HashMap;
+import java.util.Map;
 import static org.cuelang.libcue.cue_h.*;
 
 public final class CueValue {
     private final CueContext ctx;
     private final CueResource res;
+
+    private static final Map<Integer, CueKind> toKind = new HashMap<>();
+
+    static {
+        toKind.put(CUE_KIND_BOTTOM(), CueKind.BOTTOM);
+        toKind.put(CUE_KIND_NULL(), CueKind.NULL);
+        toKind.put(CUE_KIND_BOOL(), CueKind.BOOL);
+        toKind.put(CUE_KIND_INT(), CueKind.INT);
+        toKind.put(CUE_KIND_FLOAT(), CueKind.FLOAT);
+        toKind.put(CUE_KIND_STRING(), CueKind.STRING);
+        toKind.put(CUE_KIND_BYTES(), CueKind.BYTES);
+        toKind.put(CUE_KIND_STRUCT(), CueKind.STRUCT);
+        toKind.put(CUE_KIND_LIST(), CueKind.LIST);
+        toKind.put(CUE_KIND_NUMBER(), CueKind.TOP);
+    }
 
     CueValue(CueContext ctx, CueResource res) {
         this.ctx = ctx;
@@ -40,5 +57,13 @@ public final class CueValue {
 
     public boolean equals(CueValue v) {
         return cue_is_equal(this.handle(), v.handle());
+    }
+
+    public CueKind kind() {
+        return toKind.get(cue_concrete_kind(this.handle()));
+    }
+
+    public CueKind incompleteKind() {
+        return toKind.get(cue_incomplete_kind(this.handle()));
     }
 }
