@@ -64,6 +64,9 @@ public final class CueContext {
 	private static MemorySegment encodeBuildOptions(Arena arena, BuildOption... opts) {
 		var options = cue_bopt.allocateArray(opts.length + 1, arena);
 
+		// add end of array marker.
+		cue_bopt.tag$set(options, opts.length, CUE_BUILD_NONE());
+
 		for (int i = 0; i < opts.length; i++) {
 			switch (opts[i]) {
 				case Build.FileName f -> {
@@ -89,9 +92,6 @@ public final class CueContext {
 				}
 			}
 		}
-
-		// add end of array marker.
-		cue_bopt.tag$set(options, opts.length, CUE_BUILD_NONE());
 
 		return options;
 	}
