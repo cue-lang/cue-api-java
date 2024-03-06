@@ -37,6 +37,7 @@
 --include-function cue_disallow_cycles
 --include-function cue_docs
 --include-function cue_errors_as_values
+--include-function cue_error_string
 --include-function cue_filename
 --include-function cue_final
 --include-function cue_free

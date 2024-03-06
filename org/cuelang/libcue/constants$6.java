@@ -25,11 +25,11 @@ final class constants$6 {
     );
     static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
         "cue_dec_bytes",
-        constants$2.const$0
+        constants$2.const$2
     );
     static final MethodHandle const$4 = RuntimeHelper.downcallHandle(
         "cue_dec_json",
-        constants$2.const$0
+        constants$2.const$2
     );
     static final MethodHandle const$5 = RuntimeHelper.downcallHandle(
         "cue_validate",

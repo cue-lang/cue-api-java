@@ -11,30 +11,30 @@ final class constants$2 {
 
     // Suppresses default constructor, ensuring non-instantiability.
     private constants$2() {}
-    static final FunctionDescriptor const$0 = FunctionDescriptor.of(JAVA_LONG,
-        JAVA_LONG,
-        RuntimeHelper.POINTER,
-        RuntimeHelper.POINTER
+    static final FunctionDescriptor const$0 = FunctionDescriptor.of(RuntimeHelper.POINTER,
+        JAVA_LONG
     );
     static final MethodHandle const$1 = RuntimeHelper.downcallHandle(
-        "cue_compile_string",
+        "cue_error_string",
         constants$2.const$0
     );
     static final FunctionDescriptor const$2 = FunctionDescriptor.of(JAVA_LONG,
         JAVA_LONG,
         RuntimeHelper.POINTER,
-        JAVA_LONG,
         RuntimeHelper.POINTER
     );
     static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
-        "cue_compile_bytes",
+        "cue_compile_string",
         constants$2.const$2
     );
     static final FunctionDescriptor const$4 = FunctionDescriptor.of(JAVA_LONG,
-        JAVA_LONG
+        JAVA_LONG,
+        RuntimeHelper.POINTER,
+        JAVA_LONG,
+        RuntimeHelper.POINTER
     );
     static final MethodHandle const$5 = RuntimeHelper.downcallHandle(
-        "cue_top",
+        "cue_compile_bytes",
         constants$2.const$4
     );
 }

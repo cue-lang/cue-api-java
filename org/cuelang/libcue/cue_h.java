@@ -345,8 +345,24 @@ public class cue_h  {
             throw new AssertionError("should not reach here", ex$);
         }
     }
+    public static MethodHandle cue_error_string$MH() {
+        return RuntimeHelper.requireNonNull(constants$2.const$1,"cue_error_string");
+    }
+    /**
+     * {@snippet :
+     * char* cue_error_string(unsigned long);
+     * }
+     */
+    public static MemorySegment cue_error_string(long x0) {
+        var mh$ = cue_error_string$MH();
+        try {
+            return (java.lang.foreign.MemorySegment)mh$.invokeExact(x0);
+        } catch (Throwable ex$) {
+            throw new AssertionError("should not reach here", ex$);
+        }
+    }
     public static MethodHandle cue_compile_string$MH() {
-        return RuntimeHelper.requireNonNull(constants$2.const$1,"cue_compile_string");
+        return RuntimeHelper.requireNonNull(constants$2.const$3,"cue_compile_string");
     }
     /**
      * {@snippet :
@@ -362,7 +378,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_compile_bytes$MH() {
-        return RuntimeHelper.requireNonNull(constants$2.const$3,"cue_compile_bytes");
+        return RuntimeHelper.requireNonNull(constants$2.const$5,"cue_compile_bytes");
     }
     /**
      * {@snippet :
@@ -378,7 +394,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_top$MH() {
-        return RuntimeHelper.requireNonNull(constants$2.const$5,"cue_top");
+        return RuntimeHelper.requireNonNull(constants$3.const$1,"cue_top");
     }
     /**
      * {@snippet :
@@ -394,7 +410,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_bottom$MH() {
-        return RuntimeHelper.requireNonNull(constants$3.const$0,"cue_bottom");
+        return RuntimeHelper.requireNonNull(constants$3.const$2,"cue_bottom");
     }
     /**
      * {@snippet :
@@ -410,7 +426,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_unify$MH() {
-        return RuntimeHelper.requireNonNull(constants$3.const$2,"cue_unify");
+        return RuntimeHelper.requireNonNull(constants$3.const$4,"cue_unify");
     }
     /**
      * {@snippet :
@@ -426,7 +442,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_instance_of$MH() {
-        return RuntimeHelper.requireNonNull(constants$3.const$4,"cue_instance_of");
+        return RuntimeHelper.requireNonNull(constants$3.const$6,"cue_instance_of");
     }
     /**
      * {@snippet :
@@ -442,7 +458,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_lookup_string$MH() {
-        return RuntimeHelper.requireNonNull(constants$3.const$5,"cue_lookup_string");
+        return RuntimeHelper.requireNonNull(constants$4.const$0,"cue_lookup_string");
     }
     /**
      * {@snippet :
@@ -458,7 +474,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_from_int64$MH() {
-        return RuntimeHelper.requireNonNull(constants$4.const$0,"cue_from_int64");
+        return RuntimeHelper.requireNonNull(constants$4.const$1,"cue_from_int64");
     }
     /**
      * {@snippet :
@@ -474,7 +490,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_from_uint64$MH() {
-        return RuntimeHelper.requireNonNull(constants$4.const$1,"cue_from_uint64");
+        return RuntimeHelper.requireNonNull(constants$4.const$2,"cue_from_uint64");
     }
     /**
      * {@snippet :
@@ -490,7 +506,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_from_bool$MH() {
-        return RuntimeHelper.requireNonNull(constants$4.const$3,"cue_from_bool");
+        return RuntimeHelper.requireNonNull(constants$4.const$4,"cue_from_bool");
     }
     /**
      * {@snippet :
@@ -506,7 +522,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_from_double$MH() {
-        return RuntimeHelper.requireNonNull(constants$4.const$5,"cue_from_double");
+        return RuntimeHelper.requireNonNull(constants$4.const$6,"cue_from_double");
     }
     /**
      * {@snippet :
@@ -1018,7 +1034,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_attr_args$MH() {
-        return RuntimeHelper.requireNonNull(constants$11.const$4,"cue_attr_args");
+        return RuntimeHelper.requireNonNull(constants$11.const$3,"cue_attr_args");
     }
     /**
      * {@snippet :
@@ -1034,7 +1050,7 @@ public class cue_h  {
         }
     }
     public static MethodHandle cue_attrs$MH() {
-        return RuntimeHelper.requireNonNull(constants$11.const$6,"cue_attrs");
+        return RuntimeHelper.requireNonNull(constants$11.const$5,"cue_attrs");
     }
     /**
      * {@snippet :

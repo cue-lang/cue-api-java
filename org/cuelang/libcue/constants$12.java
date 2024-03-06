@@ -13,11 +13,11 @@ final class constants$12 {
     private constants$12() {}
     static final MethodHandle const$0 = RuntimeHelper.downcallHandle(
         "cue_attr_name",
-        constants$11.const$3
+        constants$2.const$0
     );
     static final MethodHandle const$1 = RuntimeHelper.downcallHandle(
         "cue_attr_value",
-        constants$11.const$3
+        constants$2.const$0
     );
     static final FunctionDescriptor const$2 = FunctionDescriptor.ofVoid(
         JAVA_LONG
