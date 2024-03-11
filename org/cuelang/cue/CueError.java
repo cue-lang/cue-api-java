@@ -14,18 +14,27 @@
 
 package org.cuelang.cue;
 
+import static org.cuelang.libcue.cue_h.*;
+
 public final class CueError extends Exception {
     private final CueResource res;
 
     CueError(CueResource res) {
+        super(getErrorStringFromHandle(res.handle()));
         this.res = res;
     }
 
     CueError(CueContext ctx, long res) {
+        super(getErrorStringFromHandle(res));
         this.res = new CueResource(ctx.cleaner(), res);
     }
 
     long handle() {
         return this.res.handle();
+    }
+
+    private static String getErrorStringFromHandle(long handle) {
+        var cString = cue_error_string(handle);
+        return cString.getUtf8String(0);
     }
 }
