@@ -24,9 +24,9 @@ final class CueResource {
     CueResource(Cleaner c, long res) {
         this.res = res;
         this.cleanable = c.register(this, () -> cue_free(res));
-	}
+    }
 
-	long handle() {
-	   return this.res;
-	}
+    long handle() {
+        return this.res;
+    }
 }
