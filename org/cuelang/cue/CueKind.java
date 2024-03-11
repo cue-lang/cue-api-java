@@ -17,15 +17,15 @@ package org.cuelang.cue;
 import static org.cuelang.libcue.cue_h.*;
 
 public enum CueKind {
-	BOTTOM,
-	NULL,
-	BOOL,
-	INT,
-	FLOAT,
-	STRING,
-	BYTES,
-	STRUCT,
-	LIST,
-	NUMBER,
-	TOP
+    BOTTOM,
+    NULL,
+    BOOL,
+    INT,
+    FLOAT,
+    STRING,
+    BYTES,
+    STRUCT,
+    LIST,
+    NUMBER,
+    TOP
 }
