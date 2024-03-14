@@ -65,28 +65,28 @@ public final class CueContext {
         }
     }
 
-    public CueValue fromLong(long n) {
+    public CueValue toValue(long n) {
         return new CueValue(this, n);
     }
 
-    public CueValue fromUnsignedLong(long n) {
+    public CueValue toValueAsUnsigned(long n) {
         var res = cue_from_uint64(ctx.handle(), n);
         return new CueValue(this, new CueResource(cleaner, res));
     }
 
-    public CueValue fromBoolean(boolean b) {
+    public CueValue toValue(boolean b) {
         return new CueValue(this, b);
     }
 
-    public CueValue fromDouble(double v) {
+    public CueValue toValue(double v) {
         return new CueValue(this, v);
     }
 
-    public CueValue fromString(String s) {
+    public CueValue toValue(String s) {
         return new CueValue(this, s);
     }
 
-    public CueValue fromBytes(byte[] buf) {
+    public CueValue toValue(byte[] buf) {
         return new CueValue(this, buf);
     }
 
