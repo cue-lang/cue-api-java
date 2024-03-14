@@ -115,6 +115,21 @@ public final class Value {
         }
     }
 
+    public Value lookup(Value v, String path) throws CueError {
+        try (Arena arena = Arena.ofConfined()) {
+            var cString = arena.allocateUtf8String(path);
+            var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+
+            var res = cue_lookup_string(v.handle(), cString, ptr);
+            if (res != 0) {
+                throw new CueError(this.ctx, res);
+            }
+
+            var cueRes = new CueResource(v.context().cleaner(), res);
+            return new Value(v.context(), cueRes);
+        }
+    }
+
 	private static MemorySegment encodeEvalOptions(Arena arena, EvalOption... opts) {
 	   var options = cue_eopt.allocateArray(opts.length + 1, arena);
 
