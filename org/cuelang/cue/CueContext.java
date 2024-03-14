@@ -27,6 +27,10 @@ public final class CueContext {
         this.ctx = new CueResource(cleaner, cue_newctx());
     }
 
+    long handle() {
+        return ctx.handle();
+    }
+
     Cleaner cleaner() {
         return this.cleaner;
     }
@@ -59,6 +63,31 @@ public final class CueContext {
 
             return new CueValue(this, new CueResource(cleaner, res));
         }
+    }
+
+    public CueValue fromLong(long n) {
+        return new CueValue(this, n);
+    }
+
+    public CueValue fromUnsignedLong(long n) {
+        var res = cue_from_uint64(ctx.handle(), n);
+        return new CueValue(this, new CueResource(cleaner, res));
+    }
+
+    public CueValue fromBoolean(boolean b) {
+        return new CueValue(this, b);
+    }
+
+    public CueValue fromDouble(double v) {
+        return new CueValue(this, v);
+    }
+
+    public CueValue fromString(String s) {
+        return new CueValue(this, s);
+    }
+
+    public CueValue fromBytes(byte[] buf) {
+        return new CueValue(this, buf);
     }
 
     private static MemorySegment encodeBuildOptions(Arena arena, BuildOption... opts) {
