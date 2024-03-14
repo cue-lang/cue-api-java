@@ -44,25 +44,25 @@ public final class Value {
         this.res = res;
     }
 
-    Value(CueContext ctx, long n) {
+    public Value(CueContext ctx, long n) {
         var res = cue_from_int64(ctx.handle(), n);
         this.res = new CueResource(ctx.cleaner(), res);
         this.ctx = ctx;
     }
 
-    Value(CueContext ctx, boolean b) {
+    public Value(CueContext ctx, boolean b) {
         var res = cue_from_bool(ctx.handle(), b);
         this.res = new CueResource(ctx.cleaner(), res);
         this.ctx = ctx;
     }
 
-    Value(CueContext ctx, double v) {
+    public Value(CueContext ctx, double v) {
         var res = cue_from_double(ctx.handle(), v);
         this.res = new CueResource(ctx.cleaner(), res);
         this.ctx = ctx;
     }
 
-    Value(CueContext ctx, String s) {
+    public Value(CueContext ctx, String s) {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateUtf8String(s);
             var res = cue_from_string(ctx.handle(), cString);
@@ -71,7 +71,7 @@ public final class Value {
         }
     }
 
-    Value(CueContext ctx, byte[] buf) {
+    public Value(CueContext ctx, byte[] buf) {
         try (Arena arena = Arena.ofConfined()) {
             var mem = arena.allocateArray(ValueLayout.JAVA_BYTE, buf);
             var res = cue_from_bytes(ctx.handle(), mem, buf.length);
