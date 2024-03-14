@@ -84,7 +84,7 @@ public final class CueValue {
         return this.res.handle();
     }
 
-    public CueContext cueContext() {
+    public CueContext context() {
         return this.ctx;
     }
 
