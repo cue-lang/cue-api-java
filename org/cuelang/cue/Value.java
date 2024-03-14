@@ -130,6 +130,19 @@ public final class Value {
         }
     }
 
+    public Pair<Value, Boolean> defaultValue() {
+        try (Arena arena = Arena.ofConfined()) {
+        	var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+        	var res = cue_default(this.handle(), ptr);
+            var cueRes = new CueResource(ctx.cleaner(), res);
+
+        	if (ptr.get(ValueLayout.JAVA_LONG, 0) == 1) {
+        		return new Pair<>(new Value(ctx, cueRes), true);
+        	}
+            return new Pair<>(new Value(ctx, cueRes), false);
+        }
+    }
+
 	private static MemorySegment encodeEvalOptions(Arena arena, EvalOption... opts) {
 	   var options = cue_eopt.allocateArray(opts.length + 1, arena);
 
