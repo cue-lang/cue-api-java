@@ -23,5 +23,5 @@ public final class Build {
 
     public record InferBuiltins(boolean b) implements BuildOption {}
 
-    public record Scope(CueValue v) implements BuildOption {}
+    public record Scope(Value v) implements BuildOption {}
 }

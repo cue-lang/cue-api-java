@@ -20,7 +20,7 @@ import java.util.Map;
 import static org.cuelang.libcue.cue_h.*;
 import org.cuelang.libcue.cue_eopt;
 
-public final class CueValue {
+public final class Value {
     private final CueContext ctx;
     private final CueResource res;
 
@@ -39,30 +39,30 @@ public final class CueValue {
         toKind.put(CUE_KIND_NUMBER(), CueKind.TOP);
     }
 
-    CueValue(CueContext ctx, CueResource res) {
+    Value(CueContext ctx, CueResource res) {
         this.ctx = ctx;
         this.res = res;
     }
 
-    CueValue(CueContext ctx, long n) {
+    Value(CueContext ctx, long n) {
         var res = cue_from_int64(ctx.handle(), n);
         this.res = new CueResource(ctx.cleaner(), res);
         this.ctx = ctx;
     }
 
-    CueValue(CueContext ctx, boolean b) {
+    Value(CueContext ctx, boolean b) {
         var res = cue_from_bool(ctx.handle(), b);
         this.res = new CueResource(ctx.cleaner(), res);
         this.ctx = ctx;
     }
 
-    CueValue(CueContext ctx, double v) {
+    Value(CueContext ctx, double v) {
         var res = cue_from_double(ctx.handle(), v);
         this.res = new CueResource(ctx.cleaner(), res);
         this.ctx = ctx;
     }
 
-    CueValue(CueContext ctx, String s) {
+    Value(CueContext ctx, String s) {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateUtf8String(s);
             var res = cue_from_string(ctx.handle(), cString);
@@ -71,7 +71,7 @@ public final class CueValue {
         }
     }
 
-    CueValue(CueContext ctx, byte[] buf) {
+    Value(CueContext ctx, byte[] buf) {
         try (Arena arena = Arena.ofConfined()) {
             var mem = arena.allocateArray(ValueLayout.JAVA_BYTE, buf);
             var res = cue_from_bytes(ctx.handle(), mem, buf.length);
@@ -88,12 +88,12 @@ public final class CueValue {
         return this.ctx;
     }
 
-    public CueValue unify(CueValue v) {
+    public Value unify(Value v) {
         var res = new CueResource(ctx.cleaner(), cue_unify(this.handle(), v.handle()));
-        return new CueValue(ctx, res);
+        return new Value(ctx, res);
     }
 
-    public boolean equals(CueValue v) {
+    public boolean equals(Value v) {
         return cue_is_equal(this.handle(), v.handle());
     }
 

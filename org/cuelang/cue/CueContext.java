@@ -35,59 +35,59 @@ public final class CueContext {
         return this.cleaner;
     }
 
-    public CueValue top() {
+    public Value top() {
         var res = new CueResource(cleaner, cue_top(ctx.handle()));
-        return new CueValue(this, res);
+        return new Value(this, res);
     }
 
-    public CueValue bottom() {
+    public Value bottom() {
         var res = new CueResource(cleaner, cue_bottom(ctx.handle()));
-        return new CueValue(this, res);
+        return new Value(this, res);
     }
 
-    public CueValue compile(String s, BuildOption... opts) {
+    public Value compile(String s, BuildOption... opts) {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateUtf8String(s);
             var bOpts = encodeBuildOptions(arena, opts);
             var res = cue_compile_string(ctx.handle(), cString, bOpts);
 
-            return new CueValue(this, new CueResource(cleaner, res));
+            return new Value(this, new CueResource(cleaner, res));
         }
     }
 
-    public CueValue compile(byte[] buf, BuildOption... opts) {
+    public Value compile(byte[] buf, BuildOption... opts) {
         try (Arena arena = Arena.ofConfined()) {
             var mem = arena.allocateArray(ValueLayout.JAVA_BYTE, buf);
             var bOpts = encodeBuildOptions(arena, opts);
             var res = cue_compile_bytes(ctx.handle(), mem, buf.length, bOpts);
 
-            return new CueValue(this, new CueResource(cleaner, res));
+            return new Value(this, new CueResource(cleaner, res));
         }
     }
 
-    public CueValue toValue(long n) {
-        return new CueValue(this, n);
+    public Value toValue(long n) {
+        return new Value(this, n);
     }
 
-    public CueValue toValueAsUnsigned(long n) {
+    public Value toValueAsUnsigned(long n) {
         var res = cue_from_uint64(ctx.handle(), n);
-        return new CueValue(this, new CueResource(cleaner, res));
+        return new Value(this, new CueResource(cleaner, res));
     }
 
-    public CueValue toValue(boolean b) {
-        return new CueValue(this, b);
+    public Value toValue(boolean b) {
+        return new Value(this, b);
     }
 
-    public CueValue toValue(double v) {
-        return new CueValue(this, v);
+    public Value toValue(double v) {
+        return new Value(this, v);
     }
 
-    public CueValue toValue(String s) {
-        return new CueValue(this, s);
+    public Value toValue(String s) {
+        return new Value(this, s);
     }
 
-    public CueValue toValue(byte[] buf) {
-        return new CueValue(this, buf);
+    public Value toValue(byte[] buf) {
+        return new Value(this, buf);
     }
 
     private static MemorySegment encodeBuildOptions(Arena arena, BuildOption... opts) {
