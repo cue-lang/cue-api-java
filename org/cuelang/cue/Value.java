@@ -143,6 +143,54 @@ public final class Value {
         }
     }
 
+    public long toLong() throws CueError {
+    	try (Arena arena = Arena.ofConfined()) {
+        	var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+        	var err = cue_dec_int64(this.handle(), ptr);
+        	if (err != 0) {
+        		throw new CueError(this.ctx, err);
+        	}
+        	return ptr.get(ValueLayout.JAVA_LONG, 0);
+    	}
+    }
+
+    public long toLongAsUnsigned() throws CueError {
+    	try (Arena arena = Arena.ofConfined()) {
+        	var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+        	var err = cue_dec_uint64(this.handle(), ptr);
+        	if (err != 0) {
+        		throw new CueError(this.ctx, err);
+        	}
+        	return ptr.get(ValueLayout.JAVA_LONG, 0);
+    	}
+    }
+
+    public boolean toBool() throws CueError {
+    	try (Arena arena = Arena.ofConfined()) {
+        	var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+        	var err = cue_dec_bool(this.handle(), ptr);
+        	if (err != 0) {
+        		throw new CueError(this.ctx, err);
+        	}
+
+        	if (ptr.get(ValueLayout.JAVA_LONG, 0) == 1) {
+        		return true;
+        	}
+        	return false;
+    	}
+    }
+
+    public double toDouble() throws CueError {
+    	try (Arena arena = Arena.ofConfined()) {
+        	var ptr = arena.allocate(ValueLayout.JAVA_DOUBLE, 0);
+        	var err = cue_dec_double(this.handle(), ptr);
+        	if (err != 0) {
+        		throw new CueError(this.ctx, err);
+        	}
+        	return ptr.get(ValueLayout.JAVA_DOUBLE, 0);
+    	}
+    }
+
 	private static MemorySegment encodeEvalOptions(Arena arena, EvalOption... opts) {
 	   var options = cue_eopt.allocateArray(opts.length + 1, arena);
 
