@@ -45,7 +45,7 @@ public final class CueContext {
         return new CueValue(this, res);
     }
 
-    public CueValue compileString(String s, BuildOption... opts) {
+    public CueValue compile(String s, BuildOption... opts) {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateUtf8String(s);
             var bOpts = encodeBuildOptions(arena, opts);
@@ -55,7 +55,7 @@ public final class CueContext {
         }
     }
 
-    public CueValue compileBytes(byte[] buf, BuildOption... opts) {
+    public CueValue compile(byte[] buf, BuildOption... opts) {
         try (Arena arena = Arena.ofConfined()) {
             var mem = arena.allocateArray(ValueLayout.JAVA_BYTE, buf);
             var bOpts = encodeBuildOptions(arena, opts);
