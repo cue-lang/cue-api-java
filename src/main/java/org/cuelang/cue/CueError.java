@@ -14,17 +14,19 @@
 
 package org.cuelang.cue;
 
+import org.jetbrains.annotations.NotNull;
+
 import static org.cuelang.libcue.cue_h.*;
 
 public final class CueError extends Exception {
     private final CueResource res;
 
-    CueError(CueResource res) {
+    CueError(@NotNull CueResource res) {
         super(getErrorStringFromHandle(res.handle()));
         this.res = res;
     }
 
-    CueError(CueContext ctx, long res) {
+    CueError(@NotNull CueContext ctx, long res) {
         super(getErrorStringFromHandle(res));
         this.res = new CueResource(ctx.cleaner(), res);
     }

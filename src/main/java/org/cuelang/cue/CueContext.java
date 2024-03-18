@@ -18,6 +18,8 @@ import java.lang.foreign.*;
 import java.lang.ref.Cleaner;
 import static org.cuelang.libcue.cue_h.*;
 import org.cuelang.libcue.cue_bopt;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public final class CueContext {
     private static final Cleaner cleaner = Cleaner.create();
@@ -35,17 +37,18 @@ public final class CueContext {
         return cleaner;
     }
 
-    public Value top() {
+    public @NotNull Value top() {
         var res = new CueResource(cleaner, cue_top(ctx.handle()));
         return new Value(this, res);
     }
 
-    public Value bottom() {
+    public @NotNull Value bottom() {
         var res = new CueResource(cleaner, cue_bottom(ctx.handle()));
         return new Value(this, res);
     }
 
-    public Value compile(String s, BuildOption... opts) {
+    @Contract("_, _ -> new")
+    public @NotNull Value compile(String s, BuildOption... opts) {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateUtf8String(s);
             var bOpts = encodeBuildOptions(arena, opts);
@@ -55,7 +58,8 @@ public final class CueContext {
         }
     }
 
-    public Value compile(byte[] buf, BuildOption... opts) {
+    @Contract("_, _ -> new")
+    public @NotNull Value compile(byte[] buf, BuildOption... opts) {
         try (Arena arena = Arena.ofConfined()) {
             var mem = arena.allocateArray(ValueLayout.JAVA_BYTE, buf);
             var bOpts = encodeBuildOptions(arena, opts);
@@ -65,32 +69,37 @@ public final class CueContext {
         }
     }
 
-    public Value toValue(long n) {
+    @Contract("_ -> new")
+    public @NotNull Value toValue(long n) {
         return new Value(this, n);
     }
 
-    public Value toValueAsUnsigned(long n) {
+    public @NotNull Value toValueAsUnsigned(long n) {
         var res = cue_from_uint64(ctx.handle(), n);
         return new Value(this, new CueResource(cleaner, res));
     }
 
-    public Value toValue(boolean b) {
+    @Contract("_ -> new")
+    public @NotNull Value toValue(boolean b) {
         return new Value(this, b);
     }
 
-    public Value toValue(double v) {
+    @Contract("_ -> new")
+    public @NotNull Value toValue(double v) {
         return new Value(this, v);
     }
 
-    public Value toValue(String s) {
+    @Contract("_ -> new")
+    public @NotNull Value toValue(String s) {
         return new Value(this, s);
     }
 
-    public Value toValue(byte[] buf) {
+    @Contract("_ -> new")
+    public @NotNull Value toValue(byte[] buf) {
         return new Value(this, buf);
     }
 
-    private static MemorySegment encodeBuildOptions(Arena arena, BuildOption... opts) {
+    private static MemorySegment encodeBuildOptions(Arena arena, BuildOption @NotNull ... opts) {
         var options = cue_bopt.allocateArray(opts.length + 1, arena);
 
         // add end of array marker.

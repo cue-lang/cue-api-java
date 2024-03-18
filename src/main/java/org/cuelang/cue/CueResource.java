@@ -14,6 +14,8 @@
 
 package org.cuelang.cue;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.ref.Cleaner;
 import static org.cuelang.libcue.cue_h.*;
 
@@ -22,7 +24,7 @@ final class CueResource {
     private final Cleaner.Cleanable cleanable;
     private final long res;
 
-    CueResource(Cleaner c, long res) {
+    CueResource(@NotNull Cleaner c, long res) {
         this.res = res;
         this.cleanable = c.register(this, () -> cue_free(res));
     }

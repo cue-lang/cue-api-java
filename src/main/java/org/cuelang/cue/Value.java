@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 import static org.cuelang.libcue.cue_h.*;
 import org.cuelang.libcue.cue_eopt;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public final class Value {
     private final CueContext ctx;
@@ -44,25 +46,25 @@ public final class Value {
         this.res = res;
     }
 
-    public Value(CueContext ctx, long n) {
+    public Value(@NotNull CueContext ctx, long n) {
         var res = cue_from_int64(ctx.handle(), n);
         this.res = new CueResource(ctx.cleaner(), res);
         this.ctx = ctx;
     }
 
-    public Value(CueContext ctx, boolean b) {
+    public Value(@NotNull CueContext ctx, boolean b) {
         var res = cue_from_bool(ctx.handle(), b);
         this.res = new CueResource(ctx.cleaner(), res);
         this.ctx = ctx;
     }
 
-    public Value(CueContext ctx, double v) {
+    public Value(@NotNull CueContext ctx, double v) {
         var res = cue_from_double(ctx.handle(), v);
         this.res = new CueResource(ctx.cleaner(), res);
         this.ctx = ctx;
     }
 
-    public Value(CueContext ctx, String s) {
+    public Value(@NotNull CueContext ctx, String s) {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateUtf8String(s);
             var res = cue_from_string(ctx.handle(), cString);
@@ -71,7 +73,7 @@ public final class Value {
         }
     }
 
-    public Value(CueContext ctx, byte[] buf) {
+    public Value(@NotNull CueContext ctx, byte[] buf) {
         try (Arena arena = Arena.ofConfined()) {
             var mem = arena.allocateArray(ValueLayout.JAVA_BYTE, buf);
             var res = cue_from_bytes(ctx.handle(), mem, buf.length);
@@ -88,12 +90,12 @@ public final class Value {
         return this.ctx;
     }
 
-    public Value unify(Value v) {
+    public @NotNull Value unify(@NotNull Value v) {
         var res = new CueResource(ctx.cleaner(), cue_unify(this.handle(), v.handle()));
         return new Value(ctx, res);
     }
 
-    public boolean equals(Value v) {
+    public boolean equals(@NotNull Value v) {
         return cue_is_equal(this.handle(), v.handle());
     }
 
@@ -115,7 +117,8 @@ public final class Value {
         }
     }
 
-    public Value lookup(Value v, String path) throws CueError {
+    @Contract("_, _ -> new")
+    public @NotNull Value lookup(@NotNull Value v, String path) throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateUtf8String(path);
             var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
@@ -130,7 +133,8 @@ public final class Value {
         }
     }
 
-    public Pair<Value, Boolean> defaultValue() {
+    @Contract(" -> new")
+    public @NotNull Pair<Value, Boolean> defaultValue() {
         try (Arena arena = Arena.ofConfined()) {
         	var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
         	var res = cue_default(this.handle(), ptr);
@@ -191,7 +195,7 @@ public final class Value {
     	}
     }
 
-	private static MemorySegment encodeEvalOptions(Arena arena, EvalOption... opts) {
+	private static MemorySegment encodeEvalOptions(Arena arena, EvalOption @NotNull ... opts) {
 	   var options = cue_eopt.allocateArray(opts.length + 1, arena);
 
 		// add end of array marker.
