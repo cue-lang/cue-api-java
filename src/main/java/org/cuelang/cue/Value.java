@@ -177,11 +177,8 @@ public final class Value {
         		throw new CueError(this.ctx, err);
         	}
 
-        	if (ptr.get(ValueLayout.JAVA_LONG, 0) == 1) {
-        		return true;
-        	}
-        	return false;
-    	}
+            return ptr.get(ValueLayout.JAVA_LONG, 0) == 1;
+        }
     }
 
     public double toDouble() throws CueError {
@@ -203,9 +200,7 @@ public final class Value {
 
 	   for (int i = 0; i < opts.length; i++) {
 	       switch (opts[i]) {
-	           case Eval.All e -> {
-	               cue_eopt.tag$set(options, i, CUE_OPT_ALL());
-	           }
+	           case Eval.All _ -> cue_eopt.tag$set(options, i, CUE_OPT_ALL());
 
 	           case Eval.Attributes e -> {
 	               cue_eopt.tag$set(options, i, CUE_OPT_ATTR());
@@ -237,9 +232,7 @@ public final class Value {
 	               cue_eopt.value$set(options, i, e.b());
 	           }
 
-	           case Eval.Final e -> {
-	               cue_eopt.tag$set(options, i, CUE_OPT_FINAL());
-	           }
+	           case Eval.Final _ -> cue_eopt.tag$set(options, i, CUE_OPT_FINAL());
 
 	           case Eval.Hidden e -> {
 	               cue_eopt.tag$set(options, i, CUE_OPT_HIDDEN());
@@ -256,13 +249,9 @@ public final class Value {
 	               cue_eopt.value$set(options, i, e.b());
 	           }
 
-	           case Eval.Raw e -> {
-	               cue_eopt.tag$set(options, i, CUE_OPT_RAW());
-	           }
+	           case Eval.Raw _ -> cue_eopt.tag$set(options, i, CUE_OPT_RAW());
 
-	           case Eval.Schema e -> {
-	               cue_eopt.tag$set(options, i, CUE_OPT_SCHEMA());
-	           }
+	           case Eval.Schema _ -> cue_eopt.tag$set(options, i, CUE_OPT_SCHEMA());
 	       }
 	   }
 
