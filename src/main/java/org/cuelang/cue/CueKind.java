@@ -14,8 +14,6 @@
 
 package org.cuelang.cue;
 
-import static org.cuelang.libcue.cue_h.*;
-
 public enum CueKind {
     BOTTOM,
     NULL,

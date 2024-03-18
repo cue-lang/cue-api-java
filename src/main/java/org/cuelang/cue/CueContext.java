@@ -32,7 +32,7 @@ public final class CueContext {
     }
 
     Cleaner cleaner() {
-        return this.cleaner;
+        return cleaner;
     }
 
     public Value top() {

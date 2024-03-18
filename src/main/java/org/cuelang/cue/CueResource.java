@@ -18,6 +18,7 @@ import java.lang.ref.Cleaner;
 import static org.cuelang.libcue.cue_h.*;
 
 final class CueResource {
+    @SuppressWarnings("unused")
     private final Cleaner.Cleanable cleanable;
     private final long res;
 
