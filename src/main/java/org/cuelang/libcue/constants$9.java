@@ -13,31 +13,37 @@ final class constants$9 {
     private constants$9() {}
     static final FunctionDescriptor const$0 = FunctionDescriptor.of(MemoryLayout.structLayout(
         JAVA_INT.withName("tag"),
-        JAVA_BOOLEAN.withName("value"),
-        MemoryLayout.paddingLayout(3)
-    ).withName("cue_eopt"));
+        MemoryLayout.paddingLayout(4),
+        JAVA_LONG.withName("value"),
+        RuntimeHelper.POINTER.withName("str"),
+        JAVA_BOOLEAN.withName("b"),
+        MemoryLayout.paddingLayout(7)
+    ).withName("cue_bopt"),
+        JAVA_LONG
+    );
     static final MethodHandle const$1 = RuntimeHelper.downcallHandle(
-        "cue_all",
+        "cue_scope",
         constants$9.const$0
     );
     static final FunctionDescriptor const$2 = FunctionDescriptor.of(MemoryLayout.structLayout(
         JAVA_INT.withName("tag"),
         JAVA_BOOLEAN.withName("value"),
         MemoryLayout.paddingLayout(3)
+    ).withName("cue_eopt"));
+    static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
+        "cue_all",
+        constants$9.const$2
+    );
+    static final FunctionDescriptor const$4 = FunctionDescriptor.of(MemoryLayout.structLayout(
+        JAVA_INT.withName("tag"),
+        JAVA_BOOLEAN.withName("value"),
+        MemoryLayout.paddingLayout(3)
     ).withName("cue_eopt"),
         JAVA_BOOLEAN
     );
-    static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
-        "cue_attributes",
-        constants$9.const$2
-    );
-    static final MethodHandle const$4 = RuntimeHelper.downcallHandle(
-        "cue_concrete",
-        constants$9.const$2
-    );
     static final MethodHandle const$5 = RuntimeHelper.downcallHandle(
-        "cue_definitions",
-        constants$9.const$2
+        "cue_attributes",
+        constants$9.const$4
     );
 }
 

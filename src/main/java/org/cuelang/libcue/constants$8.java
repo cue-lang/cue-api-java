@@ -11,7 +11,15 @@ final class constants$8 {
 
     // Suppresses default constructor, ensuring non-instantiability.
     private constants$8() {}
-    static final FunctionDescriptor const$0 = FunctionDescriptor.of(MemoryLayout.structLayout(
+    static final FunctionDescriptor const$0 = FunctionDescriptor.of(JAVA_BOOLEAN,
+        JAVA_LONG,
+        JAVA_LONG
+    );
+    static final MethodHandle const$1 = RuntimeHelper.downcallHandle(
+        "cue_is_equal",
+        constants$8.const$0
+    );
+    static final FunctionDescriptor const$2 = FunctionDescriptor.of(MemoryLayout.structLayout(
         JAVA_INT.withName("tag"),
         MemoryLayout.paddingLayout(4),
         JAVA_LONG.withName("value"),
@@ -21,27 +29,13 @@ final class constants$8 {
     ).withName("cue_bopt"),
         RuntimeHelper.POINTER
     );
-    static final MethodHandle const$1 = RuntimeHelper.downcallHandle(
+    static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
         "cue_filename",
-        constants$8.const$0
-    );
-    static final MethodHandle const$2 = RuntimeHelper.downcallHandle(
-        "cue_import_path",
-        constants$8.const$0
-    );
-    static final FunctionDescriptor const$3 = FunctionDescriptor.of(MemoryLayout.structLayout(
-        JAVA_INT.withName("tag"),
-        MemoryLayout.paddingLayout(4),
-        JAVA_LONG.withName("value"),
-        RuntimeHelper.POINTER.withName("str"),
-        JAVA_BOOLEAN.withName("b"),
-        MemoryLayout.paddingLayout(7)
-    ).withName("cue_bopt"),
-        JAVA_BOOLEAN
+        constants$8.const$2
     );
     static final MethodHandle const$4 = RuntimeHelper.downcallHandle(
-        "cue_infer_builtins",
-        constants$8.const$3
+        "cue_import_path",
+        constants$8.const$2
     );
     static final FunctionDescriptor const$5 = FunctionDescriptor.of(MemoryLayout.structLayout(
         JAVA_INT.withName("tag"),
@@ -51,10 +45,10 @@ final class constants$8 {
         JAVA_BOOLEAN.withName("b"),
         MemoryLayout.paddingLayout(7)
     ).withName("cue_bopt"),
-        JAVA_LONG
+        JAVA_BOOLEAN
     );
     static final MethodHandle const$6 = RuntimeHelper.downcallHandle(
-        "cue_scope",
+        "cue_infer_builtins",
         constants$8.const$5
     );
 }

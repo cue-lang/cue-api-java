@@ -48,23 +48,35 @@ public final class CueContext {
     }
 
     @Contract("_, _ -> new")
-    public @NotNull Value compile(String s, BuildOption... opts) {
+    public @NotNull Value compile(String s, BuildOption... opts) throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateUtf8String(s);
             var bOpts = encodeBuildOptions(arena, opts);
-            var res = cue_compile_string(ctx.handle(), cString, bOpts);
+            var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
 
+            var err = cue_compile_string(ctx.handle(), cString, bOpts, ptr);
+            if (err != 0) {
+                throw new CueError(this, err);
+            }
+
+            var res = ptr.get(ValueLayout.JAVA_LONG, 0);
             return new Value(this, new CueResource(cleaner, res));
         }
     }
 
     @Contract("_, _ -> new")
-    public @NotNull Value compile(byte[] buf, BuildOption... opts) {
+    public @NotNull Value compile(byte[] buf, BuildOption... opts) throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var mem = arena.allocateArray(ValueLayout.JAVA_BYTE, buf);
             var bOpts = encodeBuildOptions(arena, opts);
-            var res = cue_compile_bytes(ctx.handle(), mem, buf.length, bOpts);
+            var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
 
+            var err = cue_compile_bytes(ctx.handle(), mem, buf.length, bOpts, ptr);
+            if (err != 0) {
+                throw new CueError(this, err);
+            }
+
+            var res = ptr.get(ValueLayout.JAVA_LONG, 0);
             return new Value(this, new CueResource(cleaner, res));
         }
     }

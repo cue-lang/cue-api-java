@@ -21,6 +21,7 @@ final class constants$2 {
     static final FunctionDescriptor const$2 = FunctionDescriptor.of(JAVA_LONG,
         JAVA_LONG,
         RuntimeHelper.POINTER,
+        RuntimeHelper.POINTER,
         RuntimeHelper.POINTER
     );
     static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
@@ -31,6 +32,7 @@ final class constants$2 {
         JAVA_LONG,
         RuntimeHelper.POINTER,
         JAVA_LONG,
+        RuntimeHelper.POINTER,
         RuntimeHelper.POINTER
     );
     static final MethodHandle const$5 = RuntimeHelper.downcallHandle(

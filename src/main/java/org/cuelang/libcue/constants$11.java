@@ -12,28 +12,28 @@ final class constants$11 {
     // Suppresses default constructor, ensuring non-instantiability.
     private constants$11() {}
     static final MethodHandle const$0 = RuntimeHelper.downcallHandle(
-        "cue_optionals",
-        constants$9.const$2
+        "cue_hidden",
+        constants$9.const$4
     );
     static final MethodHandle const$1 = RuntimeHelper.downcallHandle(
-        "cue_raw",
-        constants$9.const$0
+        "cue_inline_imports",
+        constants$9.const$4
     );
     static final MethodHandle const$2 = RuntimeHelper.downcallHandle(
-        "cue_schema",
-        constants$9.const$0
+        "cue_optionals",
+        constants$9.const$4
     );
     static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
-        "cue_attr_args",
-        constants$2.const$0
+        "cue_raw",
+        constants$9.const$2
     );
-    static final FunctionDescriptor const$4 = FunctionDescriptor.of(RuntimeHelper.POINTER,
-        JAVA_LONG,
-        JAVA_INT
+    static final MethodHandle const$4 = RuntimeHelper.downcallHandle(
+        "cue_schema",
+        constants$9.const$2
     );
     static final MethodHandle const$5 = RuntimeHelper.downcallHandle(
-        "cue_attrs",
-        constants$11.const$4
+        "cue_attr_args",
+        constants$2.const$0
     );
 }
 

@@ -12,27 +12,27 @@ final class constants$10 {
     // Suppresses default constructor, ensuring non-instantiability.
     private constants$10() {}
     static final MethodHandle const$0 = RuntimeHelper.downcallHandle(
-        "cue_disallow_cycles",
-        constants$9.const$2
+        "cue_concrete",
+        constants$9.const$4
     );
     static final MethodHandle const$1 = RuntimeHelper.downcallHandle(
-        "cue_docs",
-        constants$9.const$2
+        "cue_definitions",
+        constants$9.const$4
     );
     static final MethodHandle const$2 = RuntimeHelper.downcallHandle(
-        "cue_errors_as_values",
-        constants$9.const$2
+        "cue_disallow_cycles",
+        constants$9.const$4
     );
     static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
-        "cue_final",
-        constants$9.const$0
+        "cue_docs",
+        constants$9.const$4
     );
     static final MethodHandle const$4 = RuntimeHelper.downcallHandle(
-        "cue_hidden",
-        constants$9.const$2
+        "cue_errors_as_values",
+        constants$9.const$4
     );
     static final MethodHandle const$5 = RuntimeHelper.downcallHandle(
-        "cue_inline_imports",
+        "cue_final",
         constants$9.const$2
     );
 }

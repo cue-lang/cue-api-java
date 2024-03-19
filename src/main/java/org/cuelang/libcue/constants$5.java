@@ -13,28 +13,28 @@ final class constants$5 {
     private constants$5() {}
     static final FunctionDescriptor const$0 = FunctionDescriptor.of(JAVA_LONG,
         JAVA_LONG,
-        RuntimeHelper.POINTER
+        JAVA_DOUBLE
     );
     static final MethodHandle const$1 = RuntimeHelper.downcallHandle(
-        "cue_from_string",
+        "cue_from_double",
         constants$5.const$0
     );
     static final FunctionDescriptor const$2 = FunctionDescriptor.of(JAVA_LONG,
         JAVA_LONG,
+        RuntimeHelper.POINTER
+    );
+    static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
+        "cue_from_string",
+        constants$5.const$2
+    );
+    static final FunctionDescriptor const$4 = FunctionDescriptor.of(JAVA_LONG,
+        JAVA_LONG,
         RuntimeHelper.POINTER,
         JAVA_LONG
     );
-    static final MethodHandle const$3 = RuntimeHelper.downcallHandle(
-        "cue_from_bytes",
-        constants$5.const$2
-    );
-    static final MethodHandle const$4 = RuntimeHelper.downcallHandle(
-        "cue_dec_int64",
-        constants$5.const$0
-    );
     static final MethodHandle const$5 = RuntimeHelper.downcallHandle(
-        "cue_dec_uint64",
-        constants$5.const$0
+        "cue_from_bytes",
+        constants$5.const$4
     );
 }
 
