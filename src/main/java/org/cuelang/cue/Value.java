@@ -192,19 +192,20 @@ public final class Value {
         }
     }
 
-    @Contract("_, _ -> new")
-    public @NotNull Value lookup(@NotNull Value v, String path) throws CueError {
+    @Contract("_ -> new")
+    public @NotNull Value lookup(String path) throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateUtf8String(path);
             var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
 
-            var res = cue_lookup_string(v.handle(), cString, ptr);
-            if (res != 0) {
-                throw new CueError(this.ctx, res);
+            var err = cue_lookup_string(this.handle(), cString, ptr);
+            if (err != 0) {
+                throw new CueError(this.ctx, err);
             }
 
-            var cueRes = new CueResource(v.context().cleaner(), res);
-            return new Value(v.context(), cueRes);
+            var res = ptr.get(ValueLayout.JAVA_LONG, 0);
+            var cueRes = new CueResource(this.context().cleaner(), res);
+            return new Value(this.context(), cueRes);
         }
     }
 

@@ -193,4 +193,34 @@ class ValueTest {
             assertFalse(ctx.compile("[1, \"hi\", true]").equals(ctx.compile("[1, \"goodbye\", true]")));
         });
     }
+
+    @Test
+    void lookup() {
+        assertDoesNotThrow(() -> {
+            var v = ctx.compile("{ a: 1, b: { c: true, d: \"hello\" } }");
+
+            var a = v.lookup("a");
+            assertTrue(a.equals(ctx.compile("1")));
+
+            var b = v.lookup("b");
+
+            var c = b.lookup("c");
+            assertTrue(c.equals(ctx.compile("true")));
+
+            var d = b.lookup("d");
+            assertTrue(d.equals(ctx.compile("\"hello\"")));
+        });
+    }
+
+    @Test
+    void lookupInvalid() {
+        assertDoesNotThrow(() -> {
+            var v = ctx.compile("a: b: c: d: 1");
+
+            assertThrows(CueError.class, () -> v.lookup("x"));
+
+            var a = v.lookup("a");
+            assertThrows(CueError.class, () -> a.lookup("x"));
+        });
+    }
 }
