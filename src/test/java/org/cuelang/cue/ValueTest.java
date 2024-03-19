@@ -223,4 +223,96 @@ class ValueTest {
             assertThrows(CueError.class, () -> a.lookup("x"));
         });
     }
+
+    @Test
+    void toLong() {
+        assertDoesNotThrow(() -> {
+            Value v;
+
+            v = ctx.compile("1");
+            assertEquals(1, v.toLong());
+
+            v = ctx.compile("-123");
+            assertEquals(-123, v.toLong());
+        });
+    }
+
+    @Test
+    void toLongError() {
+        assertDoesNotThrow(() -> {
+            var v0 = ctx.compile("int");
+            assertThrows(CueError.class, v0::toLong);
+            assertThrows(CueError.class, v0::toLong);
+
+            var v1 = ctx.compile("123.456");
+            assertThrows(CueError.class, v1::toLong);
+
+            var v2 = ctx.compile("1234567890123456789012345678901234567890");
+            assertThrows(CueError.class, v2::toLong);
+        });
+    }
+
+    @Test
+    void toLongAsUnsigned() {
+        assertDoesNotThrow(() -> {
+            Value v;
+
+            v = ctx.compile("1");
+            assertEquals(1, v.toLongAsUnsigned());
+
+            v = ctx.compile("18_446_744_073_709_551_615");
+            assertEquals(-1, v.toLongAsUnsigned());
+        });
+    }
+
+    @Test
+    void toBoolean() {
+        assertDoesNotThrow(() -> {
+            Value v;
+
+            v = ctx.compile("true");
+            assertTrue(v.toBoolean());
+
+            v = ctx.compile("false");
+            assertFalse(v.toBoolean());
+        });
+    }
+
+    @Test
+    void toBooleanError() {
+        assertDoesNotThrow(() -> {
+            var v0 = ctx.compile("bool");
+            assertThrows(CueError.class, v0::toBoolean);
+
+            var v1 = ctx.compile("123.456");
+            assertThrows(CueError.class, v1::toBoolean);
+        });
+    }
+
+    @Test
+    void toDouble() {
+        assertDoesNotThrow(() -> {
+            Value v;
+
+            v = ctx.compile("123.456");
+            assertEquals(123.456, v.toDouble());
+
+            v = ctx.compile("12345678901234.567");
+            assertEquals(12345678901234.567, v.toDouble());
+        });
+    }
+
+    @Test
+    void toDoubleError() {
+        assertDoesNotThrow(() -> {
+            var v0 = ctx.compile("float");
+            assertThrows(CueError.class, v0::toDouble);
+
+            var v1 = ctx.compile("true");
+            assertThrows(CueError.class, v1::toDouble);
+
+            var v2 = ctx.compile("1.797693134862315708145274237317043567981e+308 + 1");
+            assertThrows(CueError.class, v2::toDouble);
+        });
+    }
 }

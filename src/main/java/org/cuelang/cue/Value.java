@@ -245,7 +245,7 @@ public final class Value {
         }
     }
 
-    public boolean toBool() throws CueError {
+    public boolean toBoolean() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
             var err = cue_dec_bool(this.handle(), ptr);
