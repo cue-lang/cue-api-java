@@ -25,6 +25,12 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -35,7 +41,10 @@
                 <version>3.8.1</version>
                 <configuration>
                     <release>21</release>
-                    <compilerArgs>--enable-preview</compilerArgs>
+                    <compilerArgs>
+                        <arg>--enable-preview</arg>
+                        <arg>--enable-native-access=ALL-UNNAMED</arg>
+                    </compilerArgs>
                     <forceJavacCompilerUse>true</forceJavacCompilerUse>
                 </configuration>
             </plugin>
@@ -44,7 +53,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
-                    <argLine>--enable-preview</argLine>
+                    <argLine>
+                        --enable-preview
+                        --enable-native-access=ALL-UNNAMED
+                    </argLine>
                 </configuration>
             </plugin>
         </plugins>
