@@ -19,8 +19,20 @@ class CueContextTest {
     }
 
     @Test
+    void topIsTOP() {
+        var v = ctx.top();
+        assertEquals(CueKind.TOP, v.incompleteKind());
+    }
+
+    @Test
     void bottom() {
         ctx.bottom();
+    }
+
+    @Test
+    void bottomIsBOTTOM() {
+        var v = ctx.bottom();
+        assertEquals(CueKind.BOTTOM, v.incompleteKind());
     }
 
     @Test

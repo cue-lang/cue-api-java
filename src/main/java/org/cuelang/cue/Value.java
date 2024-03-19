@@ -39,7 +39,8 @@ public final class Value {
         toKind.put(CUE_KIND_BYTES(), CueKind.BYTES);
         toKind.put(CUE_KIND_STRUCT(), CueKind.STRUCT);
         toKind.put(CUE_KIND_LIST(), CueKind.LIST);
-        toKind.put(CUE_KIND_NUMBER(), CueKind.TOP);
+        toKind.put(CUE_KIND_NUMBER(), CueKind.NUMBER);
+        toKind.put(CUE_KIND_TOP(), CueKind.TOP);
     }
 
     private final CueContext ctx;
