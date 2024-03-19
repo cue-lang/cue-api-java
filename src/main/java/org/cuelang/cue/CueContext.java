@@ -99,7 +99,11 @@ public final class CueContext {
         return new Value(this, buf);
     }
 
-    private static MemorySegment encodeBuildOptions(Arena arena, BuildOption @NotNull ... opts) {
+    private static MemorySegment encodeBuildOptions(Arena arena, BuildOption ... opts) {
+        if (opts.length == 0) {
+            return MemorySegment.ofAddress(0);
+        }
+
         var options = cue_bopt.allocateArray(opts.length + 1, arena);
 
         // add end of array marker.

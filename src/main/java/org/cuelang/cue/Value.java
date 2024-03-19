@@ -193,6 +193,10 @@ public final class Value {
     }
 
 	private static MemorySegment encodeEvalOptions(Arena arena, EvalOption @NotNull ... opts) {
+        if (opts.length == 0) {
+            return MemorySegment.ofAddress(0);
+        }
+
 	   var options = cue_eopt.allocateArray(opts.length + 1, arena);
 
 		// add end of array marker.
