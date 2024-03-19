@@ -14,4 +14,4 @@
 
 package org.cuelang.cue;
 
-public record Pair<L, R>(L left, R right) { }
+public record Pair<L, R>(L left, R right) {}

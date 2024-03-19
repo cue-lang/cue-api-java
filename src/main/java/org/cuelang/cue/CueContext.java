@@ -14,12 +14,16 @@
 
 package org.cuelang.cue;
 
-import java.lang.foreign.*;
-import java.lang.ref.Cleaner;
-import static org.cuelang.libcue.cue_h.*;
 import org.cuelang.libcue.cue_bopt;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.foreign.Arena;
+import java.lang.foreign.MemorySegment;
+import java.lang.foreign.ValueLayout;
+import java.lang.ref.Cleaner;
+
+import static org.cuelang.libcue.cue_h.*;
 
 public final class CueContext {
     private static final Cleaner cleaner = Cleaner.create();
@@ -27,6 +31,46 @@ public final class CueContext {
 
     public CueContext() {
         this.ctx = new CueResource(cleaner, cue_newctx());
+    }
+
+    private static MemorySegment encodeBuildOptions(Arena arena, BuildOption... opts) {
+        if (opts.length == 0) {
+            return MemorySegment.ofAddress(0);
+        }
+
+        var options = cue_bopt.allocateArray(opts.length + 1, arena);
+
+        // add end of array marker.
+        cue_bopt.tag$set(options, opts.length, CUE_BUILD_NONE());
+
+        for (int i = 0; i < opts.length; i++) {
+            switch (opts[i]) {
+                case Build.FileName f -> {
+                    var cString = arena.allocateUtf8String(f.name());
+
+                    cue_bopt.tag$set(options, i, CUE_BUILD_FILENAME());
+                    cue_bopt.str$set(options, i, cString);
+                }
+
+                case Build.ImportPath p -> {
+                    var cString = arena.allocateUtf8String(p.path());
+
+                    cue_bopt.tag$set(options, i, CUE_BUILD_IMPORT_PATH());
+                    cue_bopt.str$set(options, i, cString);
+                }
+
+                case Build.InferBuiltins b -> {
+                    cue_bopt.tag$set(options, i, CUE_BUILD_INFER_BUILTINS());
+                    cue_bopt.b$set(options, i, b.b());
+                }
+                case Build.Scope s -> {
+                    cue_bopt.tag$set(options, i, CUE_BUILD_SCOPE());
+                    cue_bopt.value$set(options, i, s.v().handle());
+                }
+            }
+        }
+
+        return options;
     }
 
     long handle() {
@@ -109,45 +153,5 @@ public final class CueContext {
     @Contract("_ -> new")
     public @NotNull Value toValue(byte[] buf) {
         return new Value(this, buf);
-    }
-
-    private static MemorySegment encodeBuildOptions(Arena arena, BuildOption ... opts) {
-        if (opts.length == 0) {
-            return MemorySegment.ofAddress(0);
-        }
-
-        var options = cue_bopt.allocateArray(opts.length + 1, arena);
-
-        // add end of array marker.
-        cue_bopt.tag$set(options, opts.length, CUE_BUILD_NONE());
-
-        for (int i = 0; i < opts.length; i++) {
-            switch (opts[i]) {
-                case Build.FileName f -> {
-                    var cString = arena.allocateUtf8String(f.name());
-
-                    cue_bopt.tag$set(options, i, CUE_BUILD_FILENAME());
-                    cue_bopt.str$set(options, i, cString);
-                }
-
-                case Build.ImportPath p -> {
-                    var cString = arena.allocateUtf8String(p.path());
-
-                    cue_bopt.tag$set(options, i, CUE_BUILD_IMPORT_PATH());
-                    cue_bopt.str$set(options, i, cString);
-                }
-
-             case Build.InferBuiltins b -> {
-                    cue_bopt.tag$set(options, i, CUE_BUILD_INFER_BUILTINS());
-                    cue_bopt.b$set(options, i, b.b());
-                }
-                case Build.Scope s -> {
-                    cue_bopt.tag$set(options, i, CUE_BUILD_SCOPE());
-                    cue_bopt.value$set(options, i, s.v().handle());
-                }
-            }
-        }
-
-        return options;
     }
 }

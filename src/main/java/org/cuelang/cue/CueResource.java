@@ -17,7 +17,8 @@ package org.cuelang.cue;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.Cleaner;
-import static org.cuelang.libcue.cue_h.*;
+
+import static org.cuelang.libcue.cue_h.cue_free;
 
 final class CueResource {
     @SuppressWarnings("unused")
