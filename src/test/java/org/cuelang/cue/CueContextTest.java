@@ -68,6 +68,11 @@ class CueContextTest {
     }
 
     @Test
+    void compileBottom() {
+        assertThrows(CueError.class, () -> ctx.compile("_|_"));
+    }
+
+    @Test
     void toValueFromLong() {
         ctx.toValue(-1);
     }
