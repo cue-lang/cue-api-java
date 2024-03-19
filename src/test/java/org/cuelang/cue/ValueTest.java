@@ -111,4 +111,86 @@ class ValueTest {
             assertEquals(CueKind.TOP, v.incompleteKind());
         });
     }
+
+    @Test
+    void equals() {
+        assertDoesNotThrow(() -> {
+            assertTrue(ctx.compile("null").equals(ctx.compile("null")));
+
+            assertTrue(ctx.compile("true").equals(ctx.compile("true")));
+            assertTrue(ctx.compile("false").equals(ctx.compile("false")));
+
+            assertFalse(ctx.compile("true").equals(ctx.compile("false")));
+            assertFalse(ctx.compile("false").equals(ctx.compile("true")));
+
+            assertTrue(ctx.compile("1").equals(ctx.compile("1")));
+            assertTrue(ctx.compile("-2").equals(ctx.compile("-2")));
+            assertTrue(
+                    ctx.compile("123456789123456781234567").
+                            equals(ctx.compile("123456789123456781234567"))
+            );
+
+            assertFalse(ctx.compile("1").equals(ctx.compile("0")));
+            assertFalse(ctx.compile("-2").equals(ctx.compile("-1")));
+            assertFalse(
+                    ctx.compile("123456789123456781234567").
+                            equals(ctx.compile("123456789123456781234568"))
+            );
+
+            assertTrue(ctx.compile("1.1").equals(ctx.compile("1.1")));
+            assertTrue(ctx.compile("-2.1").equals(ctx.compile("-2.1")));
+            assertTrue(
+                    ctx.compile("123456789123456781234567.11223344").
+                            equals(ctx.compile("123456789123456781234567.11223344"))
+            );
+
+            assertFalse(ctx.compile("1.1").equals(ctx.compile("0")));
+            assertFalse(ctx.compile("-2.1").equals(ctx.compile("-1.1")));
+            assertFalse(
+                    ctx.compile("123456789123456781234567.11223344").
+                            equals(ctx.compile("123456789123456781234567.11223345"))
+            );
+
+            assertTrue(ctx.compile("\"\"").equals(ctx.compile("\"\"")));
+            assertTrue(ctx.compile("\"hello\"").equals(ctx.compile("\"hello\"")));
+
+            assertFalse(ctx.compile("\"\"").equals(ctx.compile("\"x\"")));
+            assertFalse(ctx.compile("\"hello\"").equals(ctx.compile("\"goodbye\"")));
+
+            assertTrue(ctx.compile("'\\x03abc'").equals(ctx.compile("'\\x03abc'")));
+            assertFalse(ctx.compile("'\\x03abc'").equals(ctx.compile("'\\x01abc'")));
+
+            assertTrue(ctx.compile("{ a: 1 }").equals(ctx.compile("{ a: 1 }")));
+            assertTrue(
+                    ctx.compile("{ a: 1, b: \"hello\" }").
+                            equals(ctx.compile("{ a: 1, b: \"hello\" }"))
+            );
+            assertTrue(
+                    ctx.compile("{ a: 1, b: \"hello\", c: d: e: true }").
+                            equals(ctx.compile("{ a: 1, b: \"hello\", c: d: e: true }"))
+            );
+
+            assertFalse(ctx.compile("{ a: 1 }").equals(ctx.compile("{ a: 2 }")));
+            assertFalse(ctx.compile("{ a: 1 }").equals(ctx.compile("{ a: 1, b: 2 }")));
+            assertFalse(ctx.compile("{ a: 1 }").equals(ctx.compile("{ b: 1 }")));
+            assertFalse(
+                    ctx.compile("{ a: 1, b: \"hello\" }").
+                            equals(ctx.compile("{ a: 1, b: \"goodbye\" }"))
+            );
+            assertFalse(
+                    ctx.compile("{ a: 1, b: \"hello\", c: d: e: true }").
+                            equals(ctx.compile("{ a: 1, b: \"hello\", c: d: e: false }"))
+            );
+            assertFalse(
+                    ctx.compile("{ a: 1, b: \"hello\", c: d: e: true }").
+                            equals(ctx.compile("{ a: 1, b: \"hello\", c: d: e: true, x: 42 }"))
+            );
+
+            assertTrue(ctx.compile("[]").equals(ctx.compile("[]")));
+            assertTrue(ctx.compile("[1, \"hi\", true]").equals(ctx.compile("[1, \"hi\", true]")));
+
+            assertFalse(ctx.compile("[]").equals(ctx.compile("{}")));
+            assertFalse(ctx.compile("[1, \"hi\", true]").equals(ctx.compile("[1, \"goodbye\", true]")));
+        });
+    }
 }
