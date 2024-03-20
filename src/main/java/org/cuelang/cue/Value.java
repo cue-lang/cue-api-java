@@ -18,10 +18,8 @@ import org.cuelang.libcue.cue_eopt;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.foreign.AddressLayout;
-import java.lang.foreign.Arena;
-import java.lang.foreign.MemorySegment;
-import java.lang.foreign.ValueLayout;
+import java.lang.foreign.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -292,6 +290,48 @@ public final class Value {
             var strPtr = ptr.get(ValueLayout.ADDRESS.withTargetLayout(AddressLayout.ADDRESS), 0);
             var str = strPtr.getString(0);
             libc_free(strPtr);
+
+            return str;
+        }
+    }
+
+    public byte[] getBytes() throws CueError {
+        try (Arena arena = Arena.ofConfined()) {
+            var bufPtrPtr = arena.allocate(ValueLayout.ADDRESS);
+            var lenPtr = arena.allocate(ValueLayout.JAVA_LONG);
+            var err = cue_dec_bytes(this.handle(), bufPtrPtr, lenPtr);
+            if (err != 0) {
+                throw new CueError(this.ctx, err);
+            }
+
+            var len = lenPtr.get(ValueLayout.JAVA_LONG, 0);
+            var bufLayout = ValueLayout.ADDRESS.withTargetLayout(
+                    MemoryLayout.sequenceLayout(len, ValueLayout.JAVA_BYTE));
+            var buf = bufPtrPtr.get(bufLayout, 0);
+
+            var a = buf.toArray(ValueLayout.JAVA_BYTE);
+            libc_free(buf);
+
+            return a;
+        }
+    }
+
+    public String getJSON() throws CueError {
+        try (Arena arena = Arena.ofConfined()) {
+            var bufPtrPtr = arena.allocate(ValueLayout.ADDRESS);
+            var lenPtr = arena.allocate(ValueLayout.JAVA_LONG);
+            var err = cue_dec_json(this.handle(), bufPtrPtr, lenPtr);
+            if (err != 0) {
+                throw new CueError(this.ctx, err);
+            }
+
+            var len = lenPtr.get(ValueLayout.JAVA_LONG, 0);
+            var bufLayout = ValueLayout.ADDRESS.withTargetLayout(
+                    MemoryLayout.sequenceLayout(len, ValueLayout.JAVA_BYTE));
+            var buf = bufPtrPtr.get(bufLayout, 0);
+
+            var str = new String(buf.toArray(ValueLayout.JAVA_BYTE), StandardCharsets.UTF_8);
+            libc_free(buf);
 
             return str;
         }

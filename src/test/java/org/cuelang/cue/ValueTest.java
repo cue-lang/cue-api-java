@@ -339,6 +339,50 @@ class ValueTest {
     }
 
     @Test
+    void getBytes() {
+        assertDoesNotThrow(() -> {
+            var v = ctx.compile("'\\xde\\xad\\xbe\\xef'");
+            assertArrayEquals(
+                    new byte[] {(byte) 0xde, (byte) 0xad, (byte) 0xbe, (byte) 0xef},
+                    v.getBytes()
+            );
+        });
+    }
+
+    @Test
+    void getBytesError() {
+        assertDoesNotThrow(() -> {
+            var v0 = ctx.compile("float");
+            assertThrows(CueError.class, v0::getBytes);
+
+            var v1 = ctx.compile("true");
+            assertThrows(CueError.class, v1::getBytes);
+
+            var v2 = ctx.compile("{ a: \"hello\" }");
+            assertThrows(CueError.class, v2::getBytes);
+        });
+    }
+
+    @Test
+    void getJSON() {
+        assertDoesNotThrow(() -> {
+            var v = ctx.compile("a: b: c: 42");
+            assertEquals("{\"a\":{\"b\":{\"c\":42}}}", v.getJSON());
+        });
+    }
+
+    @Test
+    void getJSONError() {
+        assertDoesNotThrow(() -> {
+            var v0 = ctx.compile("float");
+            assertThrows(CueError.class, v0::getJSON);
+
+            var v2 = ctx.compile("{ a: int }");
+            assertThrows(CueError.class, v2::getJSON);
+        });
+    }
+
+    @Test
     void unifyTopWithScalar() {
         assertDoesNotThrow(() -> {
             assertTrue(ctx.toValue(true).unify(ctx.top()).getBoolean());
