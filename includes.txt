@@ -65,6 +65,7 @@
 --include-function cue_unify
 --include-function cue_validate
 --include-function cue_value_error
+--include-function libc_free
 --include-constant CUE_ATTR_DECL
 --include-constant CUE_ATTR_FIELD
 --include-constant CUE_ATTR_VALUE

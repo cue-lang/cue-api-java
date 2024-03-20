@@ -2835,5 +2835,51 @@ public class cue_h {
            throw new AssertionError("should not reach here", ex$);
         }
     }
+
+    private static class libc_free {
+        public static final FunctionDescriptor DESC = FunctionDescriptor.ofVoid(
+            cue_h.C_POINTER
+        );
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
+                    cue_h.findOrThrow("libc_free"),
+                    DESC);
+    }
+
+    /**
+     * Function descriptor for:
+     * {@snippet lang=c :
+     * void libc_free(void *)
+     * }
+     */
+    public static FunctionDescriptor libc_free$descriptor() {
+        return libc_free.DESC;
+    }
+
+    /**
+     * Downcall method handle for:
+     * {@snippet lang=c :
+     * void libc_free(void *)
+     * }
+     */
+    public static MethodHandle libc_free$handle() {
+        return libc_free.HANDLE;
+    }
+    /**
+     * {@snippet lang=c :
+     * void libc_free(void *)
+     * }
+     */
+    public static void libc_free(MemorySegment x0) {
+        var mh$ = libc_free.HANDLE;
+        try {
+            if (TRACE_DOWNCALLS) {
+                traceDowncall("libc_free", x0);
+            }
+            mh$.invokeExact(x0);
+        } catch (Throwable ex$) {
+           throw new AssertionError("should not reach here", ex$);
+        }
+    }
 }
 

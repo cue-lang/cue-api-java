@@ -317,6 +317,28 @@ class ValueTest {
     }
 
     @Test
+    void toStr() {
+        assertDoesNotThrow(() -> {
+            var v = ctx.toValue("hello");
+            assertEquals("hello", v.toStr());
+        });
+    }
+
+    @Test
+    void toStrError() {
+        assertDoesNotThrow(() -> {
+            var v0 = ctx.compile("float");
+            assertThrows(CueError.class, v0::toStr);
+
+            var v1 = ctx.compile("true");
+            assertThrows(CueError.class, v1::toStr);
+
+            var v2 = ctx.compile("{ a: \"hello\" }");
+            assertThrows(CueError.class, v2::toStr);
+        });
+    }
+
+    @Test
     void unifyTopWithScalar() {
         assertDoesNotThrow(() -> {
             assertTrue(ctx.toValue(true).unify(ctx.top()).toBoolean());

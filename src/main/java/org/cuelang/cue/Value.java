@@ -18,6 +18,7 @@ import org.cuelang.libcue.cue_eopt;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.foreign.AddressLayout;
 import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
 import java.lang.foreign.ValueLayout;
@@ -277,6 +278,22 @@ public final class Value {
                 throw new CueError(this.ctx, err);
             }
             return ptr.get(ValueLayout.JAVA_DOUBLE, 0);
+        }
+    }
+
+    public String toStr() throws CueError {
+        try (Arena arena = Arena.ofConfined()) {
+            var ptr = arena.allocate(ValueLayout.ADDRESS);
+            var err = cue_dec_string(this.handle(), ptr);
+            if (err != 0) {
+                throw new CueError(this.ctx, err);
+            }
+
+            var strPtr = ptr.get(ValueLayout.ADDRESS.withTargetLayout(AddressLayout.ADDRESS), 0);
+            var str = strPtr.getString(0);
+            libc_free(strPtr);
+
+            return str;
         }
     }
 }
