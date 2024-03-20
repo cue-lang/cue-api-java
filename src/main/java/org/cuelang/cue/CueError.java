@@ -33,7 +33,7 @@ public final class CueError extends Exception {
 
     private static String getErrorStringFromHandle(long handle) {
         var cString = cue_error_string(handle);
-        return cString.getUtf8String(0);
+        return cString.getString(0);
     }
 
     long handle() {

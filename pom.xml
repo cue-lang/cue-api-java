@@ -40,12 +40,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
-                    <source>21</source>
-                    <target>21</target>
-                    <release>21</release>
-                    <compilerArgs>
-                        <arg>--enable-preview</arg>
-                    </compilerArgs>
+                    <release>22</release>
                     <forceJavacCompilerUse>true</forceJavacCompilerUse>
                 </configuration>
             </plugin>
@@ -55,8 +50,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <argLine>
-                        --enable-preview
-                        --enable-native-access=ALL-UNNAMED
+                        --enable-native-access=ALL-UNNAMED -Djava.library.path=${java.library.path}:/Users/aram/src/libcue
                     </argLine>
                 </configuration>
             </plugin>

@@ -71,7 +71,7 @@ public final class Value {
 
     public Value(@NotNull CueContext ctx, String s) {
         try (Arena arena = Arena.ofConfined()) {
-            var cString = arena.allocateUtf8String(s);
+            var cString = arena.allocateFrom(s);
             var res = cue_from_string(ctx.handle(), cString);
             this.res = new CueResource(ctx.cleaner(), res);
             this.ctx = ctx;
@@ -80,7 +80,7 @@ public final class Value {
 
     public Value(@NotNull CueContext ctx, byte[] buf) {
         try (Arena arena = Arena.ofConfined()) {
-            var mem = arena.allocateArray(ValueLayout.JAVA_BYTE, buf);
+            var mem = arena.allocateFrom(ValueLayout.JAVA_BYTE, buf);
             var res = cue_from_bytes(ctx.handle(), mem, buf.length);
             this.res = new CueResource(ctx.cleaner(), res);
             this.ctx = ctx;
@@ -95,62 +95,64 @@ public final class Value {
         var options = cue_eopt.allocateArray(opts.length + 1, arena);
 
         // add end of array marker.
-        cue_eopt.tag$set(options, opts.length, CUE_OPT_NONE());
+        var eoa = cue_eopt.asSlice(options, opts.length);
+        cue_eopt.tag(eoa, CUE_OPT_NONE());
 
         for (int i = 0; i < opts.length; i++) {
+            var elem = cue_eopt.asSlice(options, i);
             switch (opts[i]) {
-                case Eval.All _ -> cue_eopt.tag$set(options, i, CUE_OPT_ALL());
+                case Eval.All _ -> cue_eopt.tag(elem, CUE_OPT_ALL());
 
                 case Eval.Attributes e -> {
-                    cue_eopt.tag$set(options, i, CUE_OPT_ATTR());
-                    cue_eopt.value$set(options, i, e.b());
+                    cue_eopt.tag(elem, CUE_OPT_ATTR());
+                    cue_eopt.value(elem, e.b());
                 }
 
                 case Eval.Concrete e -> {
-                    cue_eopt.tag$set(options, i, CUE_OPT_CONCRETE());
-                    cue_eopt.value$set(options, i, e.b());
+                    cue_eopt.tag(elem, CUE_OPT_CONCRETE());
+                    cue_eopt.value(elem, e.b());
                 }
 
                 case Eval.Definitions e -> {
-                    cue_eopt.tag$set(options, i, CUE_OPT_DEFS());
-                    cue_eopt.value$set(options, i, e.b());
+                    cue_eopt.tag(elem, CUE_OPT_DEFS());
+                    cue_eopt.value(elem, e.b());
                 }
 
                 case Eval.DisallowCycles e -> {
-                    cue_eopt.tag$set(options, i, CUE_OPT_DISALLOW_CYCLES());
-                    cue_eopt.value$set(options, i, e.b());
+                    cue_eopt.tag(elem, CUE_OPT_DISALLOW_CYCLES());
+                    cue_eopt.value(elem, e.b());
                 }
 
                 case Eval.Docs e -> {
-                    cue_eopt.tag$set(options, i, CUE_OPT_DOCS());
-                    cue_eopt.value$set(options, i, e.b());
+                    cue_eopt.tag(elem, CUE_OPT_DOCS());
+                    cue_eopt.value(elem, e.b());
                 }
 
                 case Eval.ErrorsAsValues e -> {
-                    cue_eopt.tag$set(options, i, CUE_OPT_ERRORS_AS_VALUES());
-                    cue_eopt.value$set(options, i, e.b());
+                    cue_eopt.tag(elem, CUE_OPT_ERRORS_AS_VALUES());
+                    cue_eopt.value(elem, e.b());
                 }
 
-                case Eval.Final _ -> cue_eopt.tag$set(options, i, CUE_OPT_FINAL());
+                case Eval.Final _ -> cue_eopt.tag(elem, CUE_OPT_FINAL());
 
                 case Eval.Hidden e -> {
-                    cue_eopt.tag$set(options, i, CUE_OPT_HIDDEN());
-                    cue_eopt.value$set(options, i, e.b());
+                    cue_eopt.tag(elem, CUE_OPT_HIDDEN());
+                    cue_eopt.value(elem, e.b());
                 }
 
                 case Eval.InlineImports e -> {
-                    cue_eopt.tag$set(options, i, CUE_OPT_INLINE_IMPORTS());
-                    cue_eopt.value$set(options, i, e.b());
+                    cue_eopt.tag(elem, CUE_OPT_INLINE_IMPORTS());
+                    cue_eopt.value(elem, e.b());
                 }
 
                 case Eval.Optionals e -> {
-                    cue_eopt.tag$set(options, i, CUE_OPT_OPTIONALS());
-                    cue_eopt.value$set(options, i, e.b());
+                    cue_eopt.tag(elem, CUE_OPT_OPTIONALS());
+                    cue_eopt.value(elem, e.b());
                 }
 
-                case Eval.Raw _ -> cue_eopt.tag$set(options, i, CUE_OPT_RAW());
+                case Eval.Raw _ -> cue_eopt.tag(elem, CUE_OPT_RAW());
 
-                case Eval.Schema _ -> cue_eopt.tag$set(options, i, CUE_OPT_SCHEMA());
+                case Eval.Schema _ -> cue_eopt.tag(elem, CUE_OPT_SCHEMA());
             }
         }
 
@@ -195,8 +197,8 @@ public final class Value {
     @Contract("_ -> new")
     public @NotNull Value lookup(String path) throws CueError {
         try (Arena arena = Arena.ofConfined()) {
-            var cString = arena.allocateUtf8String(path);
-            var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+            var cString = arena.allocateFrom(path);
+            var ptr = arena.allocate(ValueLayout.JAVA_LONG);
 
             var err = cue_lookup_string(this.handle(), cString, ptr);
             if (err != 0) {
@@ -212,7 +214,7 @@ public final class Value {
     @Contract(" -> new")
     public @NotNull Pair<Value, Boolean> defaultValue() {
         try (Arena arena = Arena.ofConfined()) {
-            var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+            var ptr = arena.allocate(ValueLayout.JAVA_LONG);
             var res = cue_default(this.handle(), ptr);
             var cueRes = new CueResource(ctx.cleaner(), res);
 
@@ -225,7 +227,7 @@ public final class Value {
 
     public long toLong() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
-            var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+            var ptr = arena.allocate(ValueLayout.JAVA_LONG);
             var err = cue_dec_int64(this.handle(), ptr);
             if (err != 0) {
                 throw new CueError(this.ctx, err);
@@ -236,7 +238,7 @@ public final class Value {
 
     public long toLongAsUnsigned() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
-            var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+            var ptr = arena.allocate(ValueLayout.JAVA_LONG);
             var err = cue_dec_uint64(this.handle(), ptr);
             if (err != 0) {
                 throw new CueError(this.ctx, err);
@@ -247,7 +249,7 @@ public final class Value {
 
     public boolean toBoolean() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
-            var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+            var ptr = arena.allocate(ValueLayout.JAVA_LONG);
             var err = cue_dec_bool(this.handle(), ptr);
             if (err != 0) {
                 throw new CueError(this.ctx, err);
@@ -259,7 +261,7 @@ public final class Value {
 
     public double toDouble() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
-            var ptr = arena.allocate(ValueLayout.JAVA_DOUBLE, 0);
+            var ptr = arena.allocate(ValueLayout.JAVA_DOUBLE);
             var err = cue_dec_double(this.handle(), ptr);
             if (err != 0) {
                 throw new CueError(this.ctx, err);

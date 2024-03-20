@@ -5,10 +5,10 @@ srcdir="$(cd `dirname "$0"` && pwd)"
 cd "$srcdir"
 
 # TODO: remove this.
-PATH=$PATH:$HOME/src/jextract/build/jextract/bin
+PATH=$PATH:$HOME/src/jextract-22/bin
 
 # TODO: find this in a more reliable way.
 CUE_H=$HOME/src/libcue/cue.h
 
 rm -rf src/main/java/org/cuelang/libcue
-jextract --source -t org.cuelang.libcue --output src/main/java -lcue @includes.txt $CUE_H
+jextract -t org.cuelang.libcue --output src/main/java -lcue --use-system-load-library @includes.txt $CUE_H

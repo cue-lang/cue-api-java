@@ -41,31 +41,33 @@ public final class CueContext {
         var options = cue_bopt.allocateArray(opts.length + 1, arena);
 
         // add end of array marker.
-        cue_bopt.tag$set(options, opts.length, CUE_BUILD_NONE());
+        var eoa = cue_bopt.asSlice(options, opts.length);
+        cue_bopt.tag(eoa, CUE_BUILD_NONE());
 
         for (int i = 0; i < opts.length; i++) {
+            var elem = cue_bopt.asSlice(options, i);
             switch (opts[i]) {
                 case Build.FileName f -> {
-                    var cString = arena.allocateUtf8String(f.name());
+                    var cString = arena.allocateFrom(f.name());
 
-                    cue_bopt.tag$set(options, i, CUE_BUILD_FILENAME());
-                    cue_bopt.str$set(options, i, cString);
+                    cue_bopt.tag(elem, CUE_BUILD_FILENAME());
+                    cue_bopt.str(elem, cString);
                 }
 
                 case Build.ImportPath p -> {
-                    var cString = arena.allocateUtf8String(p.path());
+                    var cString = arena.allocateFrom(p.path());
 
-                    cue_bopt.tag$set(options, i, CUE_BUILD_IMPORT_PATH());
-                    cue_bopt.str$set(options, i, cString);
+                    cue_bopt.tag(elem, CUE_BUILD_IMPORT_PATH());
+                    cue_bopt.str(elem, cString);
                 }
 
                 case Build.InferBuiltins b -> {
-                    cue_bopt.tag$set(options, i, CUE_BUILD_INFER_BUILTINS());
-                    cue_bopt.b$set(options, i, b.b());
+                    cue_bopt.tag(elem, CUE_BUILD_INFER_BUILTINS());
+                    cue_bopt.b(elem, b.b());
                 }
                 case Build.Scope s -> {
-                    cue_bopt.tag$set(options, i, CUE_BUILD_SCOPE());
-                    cue_bopt.value$set(options, i, s.v().handle());
+                    cue_bopt.tag(elem, CUE_BUILD_SCOPE());
+                    cue_bopt.value(elem, s.v().handle());
                 }
             }
         }
@@ -94,9 +96,9 @@ public final class CueContext {
     @Contract("_, _ -> new")
     public @NotNull Value compile(String s, BuildOption... opts) throws CueError {
         try (Arena arena = Arena.ofConfined()) {
-            var cString = arena.allocateUtf8String(s);
+            var cString = arena.allocateFrom(s);
             var bOpts = encodeBuildOptions(arena, opts);
-            var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+            var ptr = arena.allocate(ValueLayout.JAVA_LONG);
 
             var err = cue_compile_string(ctx.handle(), cString, bOpts, ptr);
             if (err != 0) {
@@ -111,9 +113,9 @@ public final class CueContext {
     @Contract("_, _ -> new")
     public @NotNull Value compile(byte[] buf, BuildOption... opts) throws CueError {
         try (Arena arena = Arena.ofConfined()) {
-            var mem = arena.allocateArray(ValueLayout.JAVA_BYTE, buf);
+            var mem = arena.allocateFrom(ValueLayout.JAVA_BYTE, buf);
             var bOpts = encodeBuildOptions(arena, opts);
-            var ptr = arena.allocate(ValueLayout.JAVA_LONG, 0);
+            var ptr = arena.allocate(ValueLayout.JAVA_LONG);
 
             var err = cue_compile_bytes(ctx.handle(), mem, buf.length, bOpts, ptr);
             if (err != 0) {
