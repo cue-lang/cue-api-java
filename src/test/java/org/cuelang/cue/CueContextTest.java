@@ -87,28 +87,28 @@ class CueContextTest {
     @Test
     void toValueFromLong() {
         assertDoesNotThrow(() ->
-                assertEquals(-1, ctx.toValue(-1).toLong())
+                assertEquals(-1, ctx.toValue(-1).getLong())
         );
     }
 
     @Test
     void toValueAsUnsigned() {
         assertDoesNotThrow(() ->
-                assertEquals(0xcafebabeL, ctx.toValueAsUnsigned(0xcafebabeL).toLongAsUnsigned())
+                assertEquals(0xcafebabeL, ctx.toValueAsUnsigned(0xcafebabeL).getLongAsUnsigned())
         );
     }
 
     @Test
     void toValueFromBoolean() {
         assertDoesNotThrow(() ->
-                assertTrue(ctx.toValue(true).toBoolean())
+                assertTrue(ctx.toValue(true).getBoolean())
         );
     }
 
     @Test
     void toValueFromDouble() {
         assertDoesNotThrow(() ->
-                assertEquals(0.123, ctx.toValue(0.123).toDouble())
+                assertEquals(0.123, ctx.toValue(0.123).getDouble())
         );
     }
 

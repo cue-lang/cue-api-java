@@ -236,7 +236,7 @@ public final class Value {
         }
     }
 
-    public long toLong() throws CueError {
+    public long getLong() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var ptr = arena.allocate(ValueLayout.JAVA_LONG);
             var err = cue_dec_int64(this.handle(), ptr);
@@ -247,7 +247,7 @@ public final class Value {
         }
     }
 
-    public long toLongAsUnsigned() throws CueError {
+    public long getLongAsUnsigned() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var ptr = arena.allocate(ValueLayout.JAVA_LONG);
             var err = cue_dec_uint64(this.handle(), ptr);
@@ -258,7 +258,7 @@ public final class Value {
         }
     }
 
-    public boolean toBoolean() throws CueError {
+    public boolean getBoolean() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var ptr = arena.allocate(ValueLayout.JAVA_LONG);
             var err = cue_dec_bool(this.handle(), ptr);
@@ -270,7 +270,7 @@ public final class Value {
         }
     }
 
-    public double toDouble() throws CueError {
+    public double getDouble() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var ptr = arena.allocate(ValueLayout.JAVA_DOUBLE);
             var err = cue_dec_double(this.handle(), ptr);
@@ -281,7 +281,7 @@ public final class Value {
         }
     }
 
-    public String toStr() throws CueError {
+    public String getString() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var ptr = arena.allocate(ValueLayout.ADDRESS);
             var err = cue_dec_string(this.handle(), ptr);

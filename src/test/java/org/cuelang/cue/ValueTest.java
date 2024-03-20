@@ -225,125 +225,125 @@ class ValueTest {
     }
 
     @Test
-    void toLong() {
+    void getLong() {
         assertDoesNotThrow(() -> {
             Value v;
 
             v = ctx.compile("1");
-            assertEquals(1, v.toLong());
+            assertEquals(1, v.getLong());
 
             v = ctx.compile("-123");
-            assertEquals(-123, v.toLong());
+            assertEquals(-123, v.getLong());
         });
     }
 
     @Test
-    void toLongError() {
+    void getLongError() {
         assertDoesNotThrow(() -> {
             var v0 = ctx.compile("int");
-            assertThrows(CueError.class, v0::toLong);
-            assertThrows(CueError.class, v0::toLong);
+            assertThrows(CueError.class, v0::getLong);
+            assertThrows(CueError.class, v0::getLong);
 
             var v1 = ctx.compile("123.456");
-            assertThrows(CueError.class, v1::toLong);
+            assertThrows(CueError.class, v1::getLong);
 
             var v2 = ctx.compile("1234567890123456789012345678901234567890");
-            assertThrows(CueError.class, v2::toLong);
+            assertThrows(CueError.class, v2::getLong);
         });
     }
 
     @Test
-    void toLongAsUnsigned() {
+    void getLongAsUnsigned() {
         assertDoesNotThrow(() -> {
             Value v;
 
             v = ctx.compile("1");
-            assertEquals(1, v.toLongAsUnsigned());
+            assertEquals(1, v.getLongAsUnsigned());
 
             v = ctx.compile("18_446_744_073_709_551_615");
-            assertEquals(-1, v.toLongAsUnsigned());
+            assertEquals(-1, v.getLongAsUnsigned());
         });
     }
 
     @Test
-    void toBoolean() {
+    void getBoolean() {
         assertDoesNotThrow(() -> {
             Value v;
 
             v = ctx.compile("true");
-            assertTrue(v.toBoolean());
+            assertTrue(v.getBoolean());
 
             v = ctx.compile("false");
-            assertFalse(v.toBoolean());
+            assertFalse(v.getBoolean());
         });
     }
 
     @Test
-    void toBooleanError() {
+    void getBooleanError() {
         assertDoesNotThrow(() -> {
             var v0 = ctx.compile("bool");
-            assertThrows(CueError.class, v0::toBoolean);
+            assertThrows(CueError.class, v0::getBoolean);
 
             var v1 = ctx.compile("123.456");
-            assertThrows(CueError.class, v1::toBoolean);
+            assertThrows(CueError.class, v1::getBoolean);
         });
     }
 
     @Test
-    void toDouble() {
+    void getDouble() {
         assertDoesNotThrow(() -> {
             Value v;
 
             v = ctx.compile("123.456");
-            assertEquals(123.456, v.toDouble());
+            assertEquals(123.456, v.getDouble());
 
             v = ctx.compile("12345678901234.567");
-            assertEquals(12345678901234.567, v.toDouble());
+            assertEquals(12345678901234.567, v.getDouble());
         });
     }
 
     @Test
-    void toDoubleError() {
+    void getDoubleError() {
         assertDoesNotThrow(() -> {
             var v0 = ctx.compile("float");
-            assertThrows(CueError.class, v0::toDouble);
+            assertThrows(CueError.class, v0::getDouble);
 
             var v1 = ctx.compile("true");
-            assertThrows(CueError.class, v1::toDouble);
+            assertThrows(CueError.class, v1::getDouble);
 
             var v2 = ctx.compile("1.797693134862315708145274237317043567981e+308 + 1");
-            assertThrows(CueError.class, v2::toDouble);
+            assertThrows(CueError.class, v2::getDouble);
         });
     }
 
     @Test
-    void toStr() {
+    void getString() {
         assertDoesNotThrow(() -> {
             var v = ctx.toValue("hello");
-            assertEquals("hello", v.toStr());
+            assertEquals("hello", v.getString());
         });
     }
 
     @Test
-    void toStrError() {
+    void getStringError() {
         assertDoesNotThrow(() -> {
             var v0 = ctx.compile("float");
-            assertThrows(CueError.class, v0::toStr);
+            assertThrows(CueError.class, v0::getString);
 
             var v1 = ctx.compile("true");
-            assertThrows(CueError.class, v1::toStr);
+            assertThrows(CueError.class, v1::getString);
 
             var v2 = ctx.compile("{ a: \"hello\" }");
-            assertThrows(CueError.class, v2::toStr);
+            assertThrows(CueError.class, v2::getString);
         });
     }
 
     @Test
     void unifyTopWithScalar() {
         assertDoesNotThrow(() -> {
-            assertTrue(ctx.toValue(true).unify(ctx.top()).toBoolean());
-            assertEquals(1, ctx.toValue(1).unify(ctx.top()).toLong());
-            assertEquals(123.4, ctx.toValue(123.4).unify(ctx.top()).toDouble());
+            assertTrue(ctx.toValue(true).unify(ctx.top()).getBoolean());
+            assertEquals(1, ctx.toValue(1).unify(ctx.top()).getLong());
+            assertEquals(123.4, ctx.toValue(123.4).unify(ctx.top()).getDouble());
         });
     }
 
@@ -362,9 +362,9 @@ class ValueTest {
 
             var fooBar = foo.unify(bar);
 
-            assertEquals(42, fooBar.lookup("a").toLong());
+            assertEquals(42, fooBar.lookup("a").getLong());
             assertEquals(CueKind.STRING, fooBar.lookup("b").incompleteKind());
-            assertTrue(fooBar.lookup("c").toBoolean());
+            assertTrue(fooBar.lookup("c").getBoolean());
         });
     }
 
