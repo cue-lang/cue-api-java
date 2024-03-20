@@ -203,6 +203,16 @@ public final class Value {
         }
     }
 
+    public void checkSchema(Value v, EvalOption... opts) throws CueError {
+        try (Arena arena = Arena.ofConfined()) {
+            var eOpts = encodeEvalOptions(arena, opts);
+            var err = cue_instance_of(this.handle(), v.handle(), eOpts);
+            if (err != 0) {
+                throw new CueError(this.ctx, err);
+            }
+        }
+    }
+
     @Contract("_ -> new")
     public @NotNull Value lookup(String path) throws CueError {
         try (Arena arena = Arena.ofConfined()) {

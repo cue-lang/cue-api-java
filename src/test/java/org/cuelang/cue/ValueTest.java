@@ -466,4 +466,56 @@ class ValueTest {
             assertTrue(barBazFoo.equals(bazBarFoo));
         });
     }
+
+    @Test
+    void validate() {
+        assertDoesNotThrow(() -> ctx.compile("1").validate());
+        assertDoesNotThrow(() -> ctx.compile("{ a: 42 }").validate());
+
+        assertThrows(CueError.class, () -> {
+            var v = ctx.compile("int");
+            v.validate(new Eval.Concrete(true));
+        });
+    }
+
+    @Test
+    void checkSchema() {
+        assertDoesNotThrow(() -> {
+            ctx.toValue(true).checkSchema(ctx.compile("true"));
+            ctx.toValue(true).checkSchema(ctx.compile("bool"));
+        });
+        assertThrows(CueError.class, () ->
+                ctx.toValue(true).checkSchema(ctx.compile("int"))
+        );
+
+        assertDoesNotThrow(() -> {
+            ctx.toValue(1).checkSchema(ctx.compile("1"));
+            ctx.toValue(1).checkSchema(ctx.compile("<128"));
+            ctx.toValue(1).checkSchema(ctx.compile("int"));
+        });
+        assertThrows(CueError.class, () ->
+                ctx.toValue(1).checkSchema(ctx.compile(">128"))
+        );
+        assertThrows(CueError.class, () ->
+                ctx.toValue(1).checkSchema(ctx.compile("string"))
+        );
+
+        assertDoesNotThrow(() -> {
+            ctx.compile("a: b: 1").checkSchema(ctx.compile("a: b: 1"));
+            ctx.compile("a: b: 1").checkSchema(ctx.compile("a: b: int"));
+            ctx.compile("a: b: 1").checkSchema(ctx.compile("a: b!: int"));
+            ctx.compile("a: { b: 1, c: 1 }").checkSchema(ctx.compile("a: b: int"));
+            ctx.compile("a: { b: int, c: 1 }").checkSchema(ctx.compile("a: b: int"));
+        });
+
+        assertThrows(CueError.class, () ->
+                ctx.compile("a: b: 1").checkSchema(ctx.compile("string"))
+        );
+        assertThrows(CueError.class, () ->
+                ctx.compile("a: b: 1").checkSchema(ctx.compile("a: b: 2"))
+        );
+        assertThrows(CueError.class, () ->
+                ctx.compile("a: b: 1").checkSchema(ctx.compile("a: { b: int, c: int }"))
+        );
+    }
 }
