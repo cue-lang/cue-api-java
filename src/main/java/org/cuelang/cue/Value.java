@@ -23,6 +23,7 @@ import java.lang.foreign.MemorySegment;
 import java.lang.foreign.ValueLayout;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.cuelang.libcue.cue_h.*;
 
@@ -165,6 +166,15 @@ public final class Value {
 
     public CueContext context() {
         return this.ctx;
+    }
+
+    public Optional<String> Error() {
+        var err = cue_value_error(this.handle());
+        if (err != 0) {
+            var cString = cue_error_string(err);
+            return Optional.of(cString.getString(0));
+        }
+        return Optional.empty();
     }
 
     public @NotNull Value unify(@NotNull Value v) {

@@ -1669,6 +1669,53 @@ public class cue_h {
         }
     }
 
+    private static class cue_value_error {
+        public static final FunctionDescriptor DESC = FunctionDescriptor.of(
+            cue_h.C_LONG,
+            cue_h.C_LONG
+        );
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
+                    cue_h.findOrThrow("cue_value_error"),
+                    DESC);
+    }
+
+    /**
+     * Function descriptor for:
+     * {@snippet lang=c :
+     * cue_error cue_value_error(cue_value)
+     * }
+     */
+    public static FunctionDescriptor cue_value_error$descriptor() {
+        return cue_value_error.DESC;
+    }
+
+    /**
+     * Downcall method handle for:
+     * {@snippet lang=c :
+     * cue_error cue_value_error(cue_value)
+     * }
+     */
+    public static MethodHandle cue_value_error$handle() {
+        return cue_value_error.HANDLE;
+    }
+    /**
+     * {@snippet lang=c :
+     * cue_error cue_value_error(cue_value)
+     * }
+     */
+    public static long cue_value_error(long x0) {
+        var mh$ = cue_value_error.HANDLE;
+        try {
+            if (TRACE_DOWNCALLS) {
+                traceDowncall("cue_value_error", x0);
+            }
+            return (long)mh$.invokeExact(x0);
+        } catch (Throwable ex$) {
+           throw new AssertionError("should not reach here", ex$);
+        }
+    }
+
     private static class cue_is_equal {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
             cue_h.C_BOOL,

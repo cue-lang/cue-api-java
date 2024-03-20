@@ -64,6 +64,7 @@
 --include-function cue_top
 --include-function cue_unify
 --include-function cue_validate
+--include-function cue_value_error
 --include-constant CUE_ATTR_DECL
 --include-constant CUE_ATTR_FIELD
 --include-constant CUE_ATTR_VALUE

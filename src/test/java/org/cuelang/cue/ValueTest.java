@@ -315,4 +315,89 @@ class ValueTest {
             assertThrows(CueError.class, v2::toDouble);
         });
     }
+
+    @Test
+    void unifyTopWithScalar() {
+        assertDoesNotThrow(() -> {
+            assertTrue(ctx.toValue(true).unify(ctx.top()).toBoolean());
+            assertEquals(1, ctx.toValue(1).unify(ctx.top()).toLong());
+            assertEquals(123.4, ctx.toValue(123.4).unify(ctx.top()).toDouble());
+        });
+    }
+
+    @Test
+    void unifyStruct() {
+        assertDoesNotThrow(() -> {
+            var foo = ctx.compile("""
+                    a: int
+                    b: _
+                    """);
+            var bar = ctx.compile("""
+                    a: 42
+                    b: string
+                    c: true
+                    """);
+
+            var fooBar = foo.unify(bar);
+
+            assertEquals(42, fooBar.lookup("a").toLong());
+            assertEquals(CueKind.STRING, fooBar.lookup("b").incompleteKind());
+            assertTrue(fooBar.lookup("c").toBoolean());
+        });
+    }
+
+    @Test
+    void unifyError() {
+        assertDoesNotThrow(() -> {
+            var foo = ctx.compile("x: 1");
+            var bar = ctx.compile("x: 2");
+
+            var fooBar = foo.unify(bar);
+            var err = fooBar.Error();
+            assertTrue(err.isPresent());
+        });
+    }
+
+    @Test
+    void unifyStructAssociativity() {
+        assertDoesNotThrow(() -> {
+            var foo = ctx.compile("""
+                    a: b: c: int
+                    p: number
+                    x: y: _
+                    """);
+            var bar = ctx.compile("""
+                    a: b: c: 42
+                    """);
+            var baz = ctx.compile("""
+                    p: -1
+                    x: y: "hello"
+                    """);
+
+            var fooBarBaz = foo.unify(bar).unify(baz);
+            var fooBazBar = foo.unify(baz).unify(bar);
+            var barFooBaz = bar.unify(foo).unify(baz);
+            var barBazFoo = bar.unify(baz).unify(foo);
+            var bazFooBar = baz.unify(foo).unify(bar);
+            var bazBarFoo = baz.unify(bar).unify(foo);
+
+            assertTrue(fooBarBaz.equals(fooBazBar));
+            assertTrue(fooBarBaz.equals(barFooBaz));
+            assertTrue(fooBarBaz.equals(barBazFoo));
+            assertTrue(fooBarBaz.equals(bazFooBar));
+            assertTrue(fooBarBaz.equals(bazBarFoo));
+
+            assertTrue(fooBazBar.equals(barFooBaz));
+            assertTrue(fooBazBar.equals(barBazFoo));
+            assertTrue(fooBazBar.equals(bazFooBar));
+            assertTrue(fooBazBar.equals(bazBarFoo));
+
+            assertTrue(barFooBaz.equals(barBazFoo));
+            assertTrue(barFooBaz.equals(bazFooBar));
+            assertTrue(barFooBaz.equals(bazBarFoo));
+
+            assertTrue(barBazFoo.equals(bazFooBar));
+            assertTrue(barBazFoo.equals(bazBarFoo));
+        });
+    }
 }
