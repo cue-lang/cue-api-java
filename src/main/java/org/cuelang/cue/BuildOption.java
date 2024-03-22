@@ -15,7 +15,15 @@
 package org.cuelang.cue;
 
 public sealed interface BuildOption permits
-        Build.FileName,
-        Build.ImportPath,
-        Build.InferBuiltins,
-        Build.Scope {}
+        BuildOption.FileName,
+        BuildOption.ImportPath,
+        BuildOption.InferBuiltins,
+        BuildOption.Scope {
+    record FileName(String name) implements BuildOption {}
+
+    record ImportPath(String path) implements BuildOption {}
+
+    record InferBuiltins(boolean b) implements BuildOption {}
+
+    record Scope(Value v) implements BuildOption {}
+}

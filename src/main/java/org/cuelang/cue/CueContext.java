@@ -47,25 +47,25 @@ public final class CueContext {
         for (int i = 0; i < opts.length; i++) {
             var elem = cue_bopt.asSlice(options, i);
             switch (opts[i]) {
-                case Build.FileName f -> {
+                case BuildOption.FileName f -> {
                     var cString = arena.allocateFrom(f.name());
 
                     cue_bopt.tag(elem, CUE_BUILD_FILENAME());
                     cue_bopt.str(elem, cString);
                 }
 
-                case Build.ImportPath p -> {
+                case BuildOption.ImportPath p -> {
                     var cString = arena.allocateFrom(p.path());
 
                     cue_bopt.tag(elem, CUE_BUILD_IMPORT_PATH());
                     cue_bopt.str(elem, cString);
                 }
 
-                case Build.InferBuiltins b -> {
+                case BuildOption.InferBuiltins b -> {
                     cue_bopt.tag(elem, CUE_BUILD_INFER_BUILTINS());
                     cue_bopt.b(elem, b.b());
                 }
-                case Build.Scope s -> {
+                case BuildOption.Scope s -> {
                     cue_bopt.tag(elem, CUE_BUILD_SCOPE());
                     cue_bopt.value(elem, s.v().handle());
                 }

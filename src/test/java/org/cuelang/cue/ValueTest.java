@@ -503,7 +503,7 @@ class ValueTest {
 
         assertThrows(CueError.class, () -> {
             var v = ctx.compile("int");
-            v.validate(new Eval.Concrete(true));
+            v.validate(new EvalOption.Concrete(true));
         });
     }
 

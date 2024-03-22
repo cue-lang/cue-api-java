@@ -15,16 +15,42 @@
 package org.cuelang.cue;
 
 public sealed interface EvalOption permits
-        Eval.All,
-        Eval.Attributes,
-        Eval.Concrete,
-        Eval.Definitions,
-        Eval.DisallowCycles,
-        Eval.Docs,
-        Eval.ErrorsAsValues,
-        Eval.Final,
-        Eval.Hidden,
-        Eval.InlineImports,
-        Eval.Optionals,
-        Eval.Raw,
-        Eval.Schema {}
+        EvalOption.All,
+        EvalOption.Attributes,
+        EvalOption.Concrete,
+        EvalOption.Definitions,
+        EvalOption.DisallowCycles,
+        EvalOption.Docs,
+        EvalOption.ErrorsAsValues,
+        EvalOption.Final,
+        EvalOption.Hidden,
+        EvalOption.InlineImports,
+        EvalOption.Optionals,
+        EvalOption.Raw,
+        EvalOption.Schema {
+    record All() implements EvalOption {}
+
+    record Attributes(boolean b) implements EvalOption {}
+
+    record Concrete(boolean b) implements EvalOption {}
+
+    record Definitions(boolean b) implements EvalOption {}
+
+    record DisallowCycles(boolean b) implements EvalOption {}
+
+    record Docs(boolean b) implements EvalOption {}
+
+    record ErrorsAsValues(boolean b) implements EvalOption {}
+
+    record Final() implements EvalOption {}
+
+    record Hidden(boolean b) implements EvalOption {}
+
+    record InlineImports(boolean b) implements EvalOption {}
+
+    record Optionals(boolean b) implements EvalOption {}
+
+    record Raw() implements EvalOption {}
+
+    record Schema() implements EvalOption {}
+}

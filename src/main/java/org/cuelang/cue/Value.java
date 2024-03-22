@@ -101,58 +101,58 @@ public final class Value {
         for (int i = 0; i < opts.length; i++) {
             var elem = cue_eopt.asSlice(options, i);
             switch (opts[i]) {
-                case Eval.All _ -> cue_eopt.tag(elem, CUE_OPT_ALL());
+                case EvalOption.All _ -> cue_eopt.tag(elem, CUE_OPT_ALL());
 
-                case Eval.Attributes e -> {
+                case EvalOption.Attributes e -> {
                     cue_eopt.tag(elem, CUE_OPT_ATTR());
                     cue_eopt.value(elem, e.b());
                 }
 
-                case Eval.Concrete e -> {
+                case EvalOption.Concrete e -> {
                     cue_eopt.tag(elem, CUE_OPT_CONCRETE());
                     cue_eopt.value(elem, e.b());
                 }
 
-                case Eval.Definitions e -> {
+                case EvalOption.Definitions e -> {
                     cue_eopt.tag(elem, CUE_OPT_DEFS());
                     cue_eopt.value(elem, e.b());
                 }
 
-                case Eval.DisallowCycles e -> {
+                case EvalOption.DisallowCycles e -> {
                     cue_eopt.tag(elem, CUE_OPT_DISALLOW_CYCLES());
                     cue_eopt.value(elem, e.b());
                 }
 
-                case Eval.Docs e -> {
+                case EvalOption.Docs e -> {
                     cue_eopt.tag(elem, CUE_OPT_DOCS());
                     cue_eopt.value(elem, e.b());
                 }
 
-                case Eval.ErrorsAsValues e -> {
+                case EvalOption.ErrorsAsValues e -> {
                     cue_eopt.tag(elem, CUE_OPT_ERRORS_AS_VALUES());
                     cue_eopt.value(elem, e.b());
                 }
 
-                case Eval.Final _ -> cue_eopt.tag(elem, CUE_OPT_FINAL());
+                case EvalOption.Final _ -> cue_eopt.tag(elem, CUE_OPT_FINAL());
 
-                case Eval.Hidden e -> {
+                case EvalOption.Hidden e -> {
                     cue_eopt.tag(elem, CUE_OPT_HIDDEN());
                     cue_eopt.value(elem, e.b());
                 }
 
-                case Eval.InlineImports e -> {
+                case EvalOption.InlineImports e -> {
                     cue_eopt.tag(elem, CUE_OPT_INLINE_IMPORTS());
                     cue_eopt.value(elem, e.b());
                 }
 
-                case Eval.Optionals e -> {
+                case EvalOption.Optionals e -> {
                     cue_eopt.tag(elem, CUE_OPT_OPTIONALS());
                     cue_eopt.value(elem, e.b());
                 }
 
-                case Eval.Raw _ -> cue_eopt.tag(elem, CUE_OPT_RAW());
+                case EvalOption.Raw _ -> cue_eopt.tag(elem, CUE_OPT_RAW());
 
-                case Eval.Schema _ -> cue_eopt.tag(elem, CUE_OPT_SCHEMA());
+                case EvalOption.Schema _ -> cue_eopt.tag(elem, CUE_OPT_SCHEMA());
             }
         }
 

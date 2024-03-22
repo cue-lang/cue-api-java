@@ -45,14 +45,14 @@ class CueContextTest {
     @Test
     void compileEmptyWithOptions() {
         assertDoesNotThrow(() -> {
-            ctx.compile("", new Build.FileName("empty.cue"), new Build.ImportPath("example.com/foo/bar"));
+            ctx.compile("", new BuildOption.FileName("empty.cue"), new BuildOption.ImportPath("example.com/foo/bar"));
         });
     }
 
     @Test
     void compileScalarWithOptions() {
         assertDoesNotThrow(() -> {
-           ctx.compile("int", new Build.FileName("empty.cue"), new Build.ImportPath("example.com/foo/bar"));
+           ctx.compile("int", new BuildOption.FileName("empty.cue"), new BuildOption.ImportPath("example.com/foo/bar"));
         });
     }
 
@@ -68,14 +68,14 @@ class CueContextTest {
     void compileEmptyBytesWithOptions() {
         byte[] buf = {};
         assertDoesNotThrow(() -> {
-            ctx.compile(buf, new Build.FileName("empty.cue"), new Build.ImportPath("example.com/foo/bar"));
+            ctx.compile(buf, new BuildOption.FileName("empty.cue"), new BuildOption.ImportPath("example.com/foo/bar"));
         });
     }
 
     @Test
     void compileBytesWithOptions() {
         assertDoesNotThrow(() -> {
-           ctx.compile("int".getBytes(), new Build.FileName("empty.cue"), new Build.ImportPath("example.com/foo/bar"));
+           ctx.compile("int".getBytes(), new BuildOption.FileName("empty.cue"), new BuildOption.ImportPath("example.com/foo/bar"));
         });
     }
 
