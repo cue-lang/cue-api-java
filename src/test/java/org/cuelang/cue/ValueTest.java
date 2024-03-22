@@ -418,9 +418,8 @@ class ValueTest {
             var foo = ctx.compile("x: 1");
             var bar = ctx.compile("x: 2");
 
-            var fooBar = foo.unify(bar);
-            var err = fooBar.Error();
-            assertTrue(err.isPresent());
+            var err = foo.unify(bar).error();
+            assertInstanceOf(Result.Err.class, err);
         });
     }
 

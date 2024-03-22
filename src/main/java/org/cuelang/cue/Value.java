@@ -22,7 +22,6 @@ import java.lang.foreign.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import static org.cuelang.libcue.cue_h.*;
 
@@ -167,13 +166,13 @@ public final class Value {
         return this.ctx;
     }
 
-    public Optional<String> Error() {
+    public Result<Value, String> error() {
         var err = cue_value_error(this.handle());
         if (err != 0) {
             var cString = cue_error_string(err);
-            return Optional.of(cString.getString(0));
+            return new Result.Err<>(cString.getString(0));
         }
-        return Optional.empty();
+        return new Result.Ok<>(this);
     }
 
     public @NotNull Value unify(@NotNull Value v) {
