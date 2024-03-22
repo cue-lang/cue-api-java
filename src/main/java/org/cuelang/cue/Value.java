@@ -22,6 +22,7 @@ import java.lang.foreign.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.cuelang.libcue.cue_h.*;
 
@@ -230,16 +231,18 @@ public final class Value {
     }
 
     @Contract(" -> new")
-    public @NotNull Pair<Value, Boolean> defaultValue() {
+    public @NotNull Optional<Value> defaultValue() {
         try (Arena arena = Arena.ofConfined()) {
             var ptr = arena.allocate(ValueLayout.JAVA_LONG);
             var res = cue_default(this.handle(), ptr);
+
             var cueRes = new CueResource(ctx.cleaner(), res);
+            var val = new Value(ctx, cueRes);
 
             if (ptr.get(ValueLayout.JAVA_LONG, 0) == 1) {
-                return new Pair<>(new Value(ctx, cueRes), true);
+                return Optional.of(val);
             }
-            return new Pair<>(new Value(ctx, cueRes), false);
+            return Optional.empty();
         }
     }
 

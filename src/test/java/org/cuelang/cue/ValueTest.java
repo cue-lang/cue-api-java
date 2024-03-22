@@ -3,6 +3,8 @@ package org.cuelang.cue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ValueTest {
@@ -209,6 +211,34 @@ class ValueTest {
 
             var d = b.lookup("d");
             assertTrue(d.equals(ctx.compile("\"hello\"")));
+        });
+    }
+
+    @Test
+    void defaultValue() {
+        assertDoesNotThrow(() -> {
+            Value v;
+            Optional<Value> d;
+
+            v = ctx.compile("int");
+            assertTrue(v.defaultValue().isEmpty());
+
+            v = ctx.compile("1");
+            assertTrue(v.defaultValue().isEmpty());
+
+            v = ctx.compile("int | *1");
+            d = v.defaultValue();
+            assertTrue(d.isPresent());
+            assertTrue(d.get().equals(ctx.toValue(1)));
+
+            v = ctx.compile("string | *\"hello\"");
+            d = v.defaultValue();
+            assertTrue(d.isPresent());
+            assertTrue(d.get().equals(ctx.toValue("hello")));
+
+            v = ctx.compile("(int | *1) & 2");
+            d = v.defaultValue();
+            assertFalse(d.isPresent());
         });
     }
 
