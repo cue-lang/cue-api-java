@@ -46,7 +46,7 @@ public final class Value {
     private final CueContext ctx;
     private final CueResource res;
 
-    Value(CueContext ctx, CueResource res) {
+    Value(@NotNull CueContext ctx, @NotNull CueResource res) {
         this.ctx = ctx;
         this.res = res;
     }
@@ -69,7 +69,7 @@ public final class Value {
         this.ctx = ctx;
     }
 
-    public Value(@NotNull CueContext ctx, String s) {
+    public Value(@NotNull CueContext ctx, @NotNull String s) {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateFrom(s);
             var res = cue_from_string(ctx.handle(), cString);
@@ -87,7 +87,7 @@ public final class Value {
         }
     }
 
-    private static MemorySegment encodeEvalOptions(Arena arena, EvalOption @NotNull ... opts) {
+    private static MemorySegment encodeEvalOptions(@NotNull Arena arena, EvalOption @NotNull ... opts) {
         if (opts.length == 0) {
             return MemorySegment.ofAddress(0);
         }
@@ -167,7 +167,7 @@ public final class Value {
         return this.ctx;
     }
 
-    public Result<Value, String> error() {
+    public @NotNull Result<Value, String> error() {
         var err = cue_value_error(this.handle());
         if (err != 0) {
             var cString = cue_error_string(err);
@@ -214,7 +214,7 @@ public final class Value {
     }
 
     @Contract("_ -> new")
-    public @NotNull Value lookup(String path) throws CueError {
+    public @NotNull Value lookup(@NotNull String path) throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateFrom(path);
             var ptr = arena.allocate(ValueLayout.JAVA_LONG);
@@ -291,7 +291,7 @@ public final class Value {
         }
     }
 
-    public String getString() throws CueError {
+    public @NotNull String getString() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var ptr = arena.allocate(ValueLayout.ADDRESS);
             var err = cue_dec_string(this.handle(), ptr);
@@ -328,7 +328,7 @@ public final class Value {
         }
     }
 
-    public String getJSON() throws CueError {
+    public @NotNull String getJSON() throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var bufPtrPtr = arena.allocate(ValueLayout.ADDRESS);
             var lenPtr = arena.allocate(ValueLayout.JAVA_LONG);

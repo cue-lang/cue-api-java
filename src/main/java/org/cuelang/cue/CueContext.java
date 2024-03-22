@@ -33,7 +33,7 @@ public final class CueContext {
         this.ctx = new CueResource(cleaner, cue_newctx());
     }
 
-    private static MemorySegment encodeBuildOptions(Arena arena, BuildOption... opts) {
+    private static MemorySegment encodeBuildOptions(@NotNull Arena arena, BuildOption @NotNull ... opts) {
         if (opts.length == 0) {
             return MemorySegment.ofAddress(0);
         }
@@ -94,7 +94,7 @@ public final class CueContext {
     }
 
     @Contract("_, _ -> new")
-    public @NotNull Value compile(String s, BuildOption... opts) throws CueError {
+    public @NotNull Value compile(@NotNull String s, BuildOption... opts) throws CueError {
         try (Arena arena = Arena.ofConfined()) {
             var cString = arena.allocateFrom(s);
             var bOpts = encodeBuildOptions(arena, opts);
