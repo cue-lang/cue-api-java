@@ -17,6 +17,7 @@ package org.cuelang.cue;
 import org.jetbrains.annotations.NotNull;
 
 import static org.cuelang.libcue.cue_h.cue_error_string;
+import static org.cuelang.libcue.cue_h.libc_free;
 
 public final class CueError extends Exception {
     private final CueResource res;
@@ -33,7 +34,10 @@ public final class CueError extends Exception {
 
     private static String getErrorStringFromHandle(long handle) {
         var cString = cue_error_string(handle);
-        return cString.getString(0);
+        var str = cString.getString(0);
+        libc_free(cString);
+
+        return str;
     }
 
     long handle() {
