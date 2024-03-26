@@ -52,28 +52,28 @@ class ValueTest {
             Value v;
 
             v = ctx.compile("null");
-            assertEquals(CueKind.NULL, v.kind());
+            assertEquals(Kind.NULL, v.kind());
 
             v = ctx.compile("true");
-            assertEquals(CueKind.BOOL, v.kind());
+            assertEquals(Kind.BOOL, v.kind());
 
             v = ctx.compile("42");
-            assertEquals(CueKind.INT, v.kind());
+            assertEquals(Kind.INT, v.kind());
 
             v = ctx.compile("123.456");
-            assertEquals(CueKind.FLOAT, v.kind());
+            assertEquals(Kind.FLOAT, v.kind());
 
             v = ctx.compile("\"hello\"");
-            assertEquals(CueKind.STRING, v.kind());
+            assertEquals(Kind.STRING, v.kind());
 
             v = ctx.compile("'\\x03abc'");
-            assertEquals(CueKind.BYTES, v.kind());
+            assertEquals(Kind.BYTES, v.kind());
 
             v = ctx.compile("{ a: 42 }");
-            assertEquals(CueKind.STRUCT, v.kind());
+            assertEquals(Kind.STRUCT, v.kind());
 
             v = ctx.compile("[1, 2.0, \"hello\"]");
-            assertEquals(CueKind.LIST, v.kind());
+            assertEquals(Kind.LIST, v.kind());
         });
     }
 
@@ -83,34 +83,34 @@ class ValueTest {
             Value v;
 
             v = ctx.bottom();
-            assertEquals(CueKind.BOTTOM, v.incompleteKind());
+            assertEquals(Kind.BOTTOM, v.incompleteKind());
 
             v = ctx.compile("bool");
-            assertEquals(CueKind.BOOL, v.incompleteKind());
+            assertEquals(Kind.BOOL, v.incompleteKind());
 
             v = ctx.compile("int");
-            assertEquals(CueKind.INT, v.incompleteKind());
+            assertEquals(Kind.INT, v.incompleteKind());
 
             v = ctx.compile("float");
-            assertEquals(CueKind.FLOAT, v.incompleteKind());
+            assertEquals(Kind.FLOAT, v.incompleteKind());
 
             v = ctx.compile("string");
-            assertEquals(CueKind.STRING, v.incompleteKind());
+            assertEquals(Kind.STRING, v.incompleteKind());
 
             v = ctx.compile("bytes");
-            assertEquals(CueKind.BYTES, v.incompleteKind());
+            assertEquals(Kind.BYTES, v.incompleteKind());
 
             v = ctx.compile("{ a: int }");
-            assertEquals(CueKind.STRUCT, v.incompleteKind());
+            assertEquals(Kind.STRUCT, v.incompleteKind());
 
             v = ctx.compile("[int, float, string]");
-            assertEquals(CueKind.LIST, v.incompleteKind());
+            assertEquals(Kind.LIST, v.incompleteKind());
 
             v = ctx.compile("number");
-            assertEquals(CueKind.NUMBER, v.incompleteKind());
+            assertEquals(Kind.NUMBER, v.incompleteKind());
 
             v = ctx.top();
-            assertEquals(CueKind.TOP, v.incompleteKind());
+            assertEquals(Kind.TOP, v.incompleteKind());
         });
     }
 
@@ -437,7 +437,7 @@ class ValueTest {
             var fooBar = foo.unify(bar);
 
             assertEquals(42, fooBar.lookup("a").getLong());
-            assertEquals(CueKind.STRING, fooBar.lookup("b").incompleteKind());
+            assertEquals(Kind.STRING, fooBar.lookup("b").incompleteKind());
             assertTrue(fooBar.lookup("c").getBoolean());
         });
     }

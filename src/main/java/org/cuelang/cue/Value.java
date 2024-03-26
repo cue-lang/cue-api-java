@@ -27,20 +27,20 @@ import java.util.Optional;
 import static org.cuelang.libcue.cue_h.*;
 
 public final class Value {
-    private static final Map<Integer, CueKind> toKind = new HashMap<>();
+    private static final Map<Integer, Kind> toKind = new HashMap<>();
 
     static {
-        toKind.put(CUE_KIND_BOTTOM(), CueKind.BOTTOM);
-        toKind.put(CUE_KIND_NULL(), CueKind.NULL);
-        toKind.put(CUE_KIND_BOOL(), CueKind.BOOL);
-        toKind.put(CUE_KIND_INT(), CueKind.INT);
-        toKind.put(CUE_KIND_FLOAT(), CueKind.FLOAT);
-        toKind.put(CUE_KIND_STRING(), CueKind.STRING);
-        toKind.put(CUE_KIND_BYTES(), CueKind.BYTES);
-        toKind.put(CUE_KIND_STRUCT(), CueKind.STRUCT);
-        toKind.put(CUE_KIND_LIST(), CueKind.LIST);
-        toKind.put(CUE_KIND_NUMBER(), CueKind.NUMBER);
-        toKind.put(CUE_KIND_TOP(), CueKind.TOP);
+        toKind.put(CUE_KIND_BOTTOM(), Kind.BOTTOM);
+        toKind.put(CUE_KIND_NULL(), Kind.NULL);
+        toKind.put(CUE_KIND_BOOL(), Kind.BOOL);
+        toKind.put(CUE_KIND_INT(), Kind.INT);
+        toKind.put(CUE_KIND_FLOAT(), Kind.FLOAT);
+        toKind.put(CUE_KIND_STRING(), Kind.STRING);
+        toKind.put(CUE_KIND_BYTES(), Kind.BYTES);
+        toKind.put(CUE_KIND_STRUCT(), Kind.STRUCT);
+        toKind.put(CUE_KIND_LIST(), Kind.LIST);
+        toKind.put(CUE_KIND_NUMBER(), Kind.NUMBER);
+        toKind.put(CUE_KIND_TOP(), Kind.TOP);
     }
 
     private final CueContext ctx;
@@ -185,11 +185,11 @@ public final class Value {
         return cue_is_equal(this.handle(), v.handle());
     }
 
-    public CueKind kind() {
+    public Kind kind() {
         return toKind.get(cue_concrete_kind(this.handle()));
     }
 
-    public CueKind incompleteKind() {
+    public Kind incompleteKind() {
         return toKind.get(cue_incomplete_kind(this.handle()));
     }
 

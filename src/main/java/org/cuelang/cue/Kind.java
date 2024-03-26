@@ -14,7 +14,7 @@
 
 package org.cuelang.cue;
 
-public enum CueKind {
+public enum Kind {
     BOTTOM,
     NULL,
     BOOL,
