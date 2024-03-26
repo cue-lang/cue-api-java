@@ -15,10 +15,10 @@
 --include-typedef cue_error
 --include-typedef cue_value
 --include-function cue_all
---include-function cue_attr_args
+--include-function cue_attr_getarg
 --include-function cue_attr_name
+--include-function cue_attr_numargs
 --include-function cue_attr_value
---include-function cue_attributes
 --include-function cue_attrs
 --include-function cue_bottom
 --include-function cue_compile_bytes

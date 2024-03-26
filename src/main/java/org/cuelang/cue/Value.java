@@ -348,4 +348,28 @@ public final class Value {
             return str;
         }
     }
+
+    public @NotNull Attribute[] attributes() {
+        return this.attributes(AttributeKind.VALUE);
+    }
+
+    public @NotNull Attribute[] attributes(AttributeKind k) {
+        try (Arena arena = Arena.ofConfined()) {
+            var lenPtr = arena.allocate(ValueLayout.JAVA_LONG);
+            var attrs = cue_attrs(this.handle(), k.kind(), lenPtr);
+
+            var len = (int)lenPtr.get(ValueLayout.JAVA_LONG, 0);
+            if (len == 0)
+                return new Attribute[0];
+
+            var attributes = new Attribute[len];
+            for (int i = 0; i < attributes.length; i++) {
+                var res = attrs.getAtIndex(ValueLayout.JAVA_LONG, i);
+                attributes[i] = new Attribute(new CueResource(ctx.cleaner(), res));
+            }
+            libc_free(attrs);
+
+            return attributes;
+        }
+    }
 }

@@ -1997,53 +1997,6 @@ public class cue_h {
         }
     }
 
-    private static class cue_attributes {
-        public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            cue_eopt.layout(),
-            cue_h.C_BOOL
-        );
-
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_attributes"),
-                    DESC);
-    }
-
-    /**
-     * Function descriptor for:
-     * {@snippet lang=c :
-     * cue_eopt cue_attributes(bool)
-     * }
-     */
-    public static FunctionDescriptor cue_attributes$descriptor() {
-        return cue_attributes.DESC;
-    }
-
-    /**
-     * Downcall method handle for:
-     * {@snippet lang=c :
-     * cue_eopt cue_attributes(bool)
-     * }
-     */
-    public static MethodHandle cue_attributes$handle() {
-        return cue_attributes.HANDLE;
-    }
-    /**
-     * {@snippet lang=c :
-     * cue_eopt cue_attributes(bool)
-     * }
-     */
-    public static MemorySegment cue_attributes(SegmentAllocator allocator, boolean x0) {
-        var mh$ = cue_attributes.HANDLE;
-        try {
-            if (TRACE_DOWNCALLS) {
-                traceDowncall("cue_attributes", allocator, x0);
-            }
-            return (MemorySegment)mh$.invokeExact(allocator, x0);
-        } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
-        }
-    }
-
     private static class cue_concrete {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
             cue_eopt.layout(),
@@ -2555,58 +2508,12 @@ public class cue_h {
         }
     }
 
-    private static class cue_attr_args {
-        public static final FunctionDescriptor DESC = FunctionDescriptor.of(
-            cue_h.C_POINTER,
-            cue_h.C_LONG
-        );
-
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_attr_args"),
-                    DESC);
-    }
-
-    /**
-     * Function descriptor for:
-     * {@snippet lang=c :
-     * cue_attr_arg *cue_attr_args(cue_attr)
-     * }
-     */
-    public static FunctionDescriptor cue_attr_args$descriptor() {
-        return cue_attr_args.DESC;
-    }
-
-    /**
-     * Downcall method handle for:
-     * {@snippet lang=c :
-     * cue_attr_arg *cue_attr_args(cue_attr)
-     * }
-     */
-    public static MethodHandle cue_attr_args$handle() {
-        return cue_attr_args.HANDLE;
-    }
-    /**
-     * {@snippet lang=c :
-     * cue_attr_arg *cue_attr_args(cue_attr)
-     * }
-     */
-    public static MemorySegment cue_attr_args(long x0) {
-        var mh$ = cue_attr_args.HANDLE;
-        try {
-            if (TRACE_DOWNCALLS) {
-                traceDowncall("cue_attr_args", x0);
-            }
-            return (MemorySegment)mh$.invokeExact(x0);
-        } catch (Throwable ex$) {
-           throw new AssertionError("should not reach here", ex$);
-        }
-    }
-
     private static class cue_attrs {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
             cue_h.C_POINTER,
             cue_h.C_LONG,
-            cue_h.C_INT
+            cue_h.C_INT,
+            cue_h.C_POINTER
         );
 
         public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
@@ -2617,7 +2524,7 @@ public class cue_h {
     /**
      * Function descriptor for:
      * {@snippet lang=c :
-     * cue_attr *cue_attrs(cue_value, cue_attr_kind)
+     * cue_attr *cue_attrs(cue_value, cue_attr_kind, size_t *)
      * }
      */
     public static FunctionDescriptor cue_attrs$descriptor() {
@@ -2627,7 +2534,7 @@ public class cue_h {
     /**
      * Downcall method handle for:
      * {@snippet lang=c :
-     * cue_attr *cue_attrs(cue_value, cue_attr_kind)
+     * cue_attr *cue_attrs(cue_value, cue_attr_kind, size_t *)
      * }
      */
     public static MethodHandle cue_attrs$handle() {
@@ -2635,16 +2542,16 @@ public class cue_h {
     }
     /**
      * {@snippet lang=c :
-     * cue_attr *cue_attrs(cue_value, cue_attr_kind)
+     * cue_attr *cue_attrs(cue_value, cue_attr_kind, size_t *)
      * }
      */
-    public static MemorySegment cue_attrs(long x0, int x1) {
+    public static MemorySegment cue_attrs(long x0, int x1, MemorySegment x2) {
         var mh$ = cue_attrs.HANDLE;
         try {
             if (TRACE_DOWNCALLS) {
-                traceDowncall("cue_attrs", x0, x1);
+                traceDowncall("cue_attrs", x0, x1, x2);
             }
-            return (MemorySegment)mh$.invokeExact(x0, x1);
+            return (MemorySegment)mh$.invokeExact(x0, x1, x2);
         } catch (Throwable ex$) {
            throw new AssertionError("should not reach here", ex$);
         }
@@ -2739,6 +2646,101 @@ public class cue_h {
                 traceDowncall("cue_attr_value", x0);
             }
             return (MemorySegment)mh$.invokeExact(x0);
+        } catch (Throwable ex$) {
+           throw new AssertionError("should not reach here", ex$);
+        }
+    }
+
+    private static class cue_attr_numargs {
+        public static final FunctionDescriptor DESC = FunctionDescriptor.of(
+            cue_h.C_LONG,
+            cue_h.C_LONG
+        );
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
+                    cue_h.findOrThrow("cue_attr_numargs"),
+                    DESC);
+    }
+
+    /**
+     * Function descriptor for:
+     * {@snippet lang=c :
+     * size_t cue_attr_numargs(cue_attr)
+     * }
+     */
+    public static FunctionDescriptor cue_attr_numargs$descriptor() {
+        return cue_attr_numargs.DESC;
+    }
+
+    /**
+     * Downcall method handle for:
+     * {@snippet lang=c :
+     * size_t cue_attr_numargs(cue_attr)
+     * }
+     */
+    public static MethodHandle cue_attr_numargs$handle() {
+        return cue_attr_numargs.HANDLE;
+    }
+    /**
+     * {@snippet lang=c :
+     * size_t cue_attr_numargs(cue_attr)
+     * }
+     */
+    public static long cue_attr_numargs(long x0) {
+        var mh$ = cue_attr_numargs.HANDLE;
+        try {
+            if (TRACE_DOWNCALLS) {
+                traceDowncall("cue_attr_numargs", x0);
+            }
+            return (long)mh$.invokeExact(x0);
+        } catch (Throwable ex$) {
+           throw new AssertionError("should not reach here", ex$);
+        }
+    }
+
+    private static class cue_attr_getarg {
+        public static final FunctionDescriptor DESC = FunctionDescriptor.ofVoid(
+            cue_h.C_LONG,
+            cue_h.C_LONG,
+            cue_h.C_POINTER
+        );
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
+                    cue_h.findOrThrow("cue_attr_getarg"),
+                    DESC);
+    }
+
+    /**
+     * Function descriptor for:
+     * {@snippet lang=c :
+     * void cue_attr_getarg(cue_attr, size_t, cue_attr_arg *)
+     * }
+     */
+    public static FunctionDescriptor cue_attr_getarg$descriptor() {
+        return cue_attr_getarg.DESC;
+    }
+
+    /**
+     * Downcall method handle for:
+     * {@snippet lang=c :
+     * void cue_attr_getarg(cue_attr, size_t, cue_attr_arg *)
+     * }
+     */
+    public static MethodHandle cue_attr_getarg$handle() {
+        return cue_attr_getarg.HANDLE;
+    }
+    /**
+     * {@snippet lang=c :
+     * void cue_attr_getarg(cue_attr, size_t, cue_attr_arg *)
+     * }
+     */
+    public static void cue_attr_getarg(long x0, long x1, MemorySegment x2) {
+        var mh$ = cue_attr_getarg.HANDLE;
+        try {
+            if (TRACE_DOWNCALLS) {
+                traceDowncall("cue_attr_getarg", x0, x1, x2);
+            }
+            mh$.invokeExact(x0, x1, x2);
         } catch (Throwable ex$) {
            throw new AssertionError("should not reach here", ex$);
         }

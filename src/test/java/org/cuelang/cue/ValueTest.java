@@ -547,4 +547,36 @@ class ValueTest {
                 ctx.compile("a: b: 1").checkSchema(ctx.compile("a: { b: int, c: int }"))
         );
     }
+
+    @Test
+    void checkAttributes() {
+        assertDoesNotThrow(() -> {
+            Value v;
+
+            v = ctx.compile("1");
+            assertEquals(0, v.attributes().length);
+
+            v = ctx.compile("x: 1 @foo() @bar(baz)");
+            assertEquals(2, v.lookup("x").attributes().length);
+
+            v = ctx.compile("""
+                    x : {
+                        @foo()
+                        @bar(baz)
+                        
+                        y: int @qux(quux)
+                    }
+                    """);
+            var x = v.lookup("x");
+            var y = x.lookup("y");
+            assertEquals(2,
+                    x.attributes(AttributeKind.DECLARATION).length);
+            assertEquals(0,
+                    x.attributes(AttributeKind.FIELD).length);
+            assertEquals(0,
+                    y.attributes(AttributeKind.DECLARATION).length);
+            assertEquals(1,
+                    y.attributes(AttributeKind.FIELD).length);
+        });
+    }
 }
