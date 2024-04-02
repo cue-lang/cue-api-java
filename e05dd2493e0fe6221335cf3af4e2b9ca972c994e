@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79e18af5_0c0c916e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020333
+      },
+      "writtenOn": "2024-04-02T15:53:23Z",
+      "side": 1,
+      "message": "Approving on behalf of myitcv to get first cut of CI in.",
+      "revId": "e05dd2493e0fe6221335cf3af4e2b9ca972c994e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
