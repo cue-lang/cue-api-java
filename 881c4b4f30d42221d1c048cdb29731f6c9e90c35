@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31f6570a_64430074",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020333
+      },
+      "writtenOn": "2024-04-02T16:04:53Z",
+      "side": 1,
+      "message": "Robotic +2 to verify that mirror to github is working",
+      "revId": "881c4b4f30d42221d1c048cdb29731f6c9e90c35",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
