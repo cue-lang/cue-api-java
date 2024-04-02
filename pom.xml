@@ -50,7 +50,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <argLine>
-                        --enable-native-access=ALL-UNNAMED -Djava.library.path=${java.library.path}:/Users/aram/src/libcue
+                        --enable-native-access=ALL-UNNAMED
                     </argLine>
                 </configuration>
             </plugin>
