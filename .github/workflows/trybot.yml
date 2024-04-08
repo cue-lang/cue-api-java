@@ -10,7 +10,15 @@ name: TryBot
   workflow_dispatch: {}
 jobs:
   test:
-    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        go-version:
+          - 1.22.x
+        runner:
+          - ubuntu-22.04
+          - macos-14
+    runs-on: ${{ matrix.runner }}
     defaults:
       run:
         shell: bash
@@ -62,9 +70,57 @@ jobs:
           Dispatch-Trailer: {"type":"'))
           EOD
           false
-      - uses: cue-lang/setup-cue@v1.0.0
+      - name: Install Go
+        uses: actions/setup-go@v5
         with:
-          version: v0.8.0
+          cache: false
+          go-version: ${{ matrix.go-version }}
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "22"
+      - id: go-mod-cache-dir
+        name: Get go mod cache directory
+        run: echo "dir=$(go env GOMODCACHE)" >> ${GITHUB_OUTPUT}
+      - id: go-cache-dir
+        name: Get go build/test cache directory
+        run: echo "dir=$(go env GOCACHE)" >> ${GITHUB_OUTPUT}
+      - if: |-
+          (((github.ref == 'refs/heads/main') && (! (contains(github.event.head_commit.message, '
+          Dispatch-Trailer: {"type":"')))) || (github.ref == 'refs/heads/ci/test'))
+        uses: actions/cache@v4
+        with:
+          path: |-
+            ${{ steps.go-mod-cache-dir.outputs.dir }}/cache/download
+            ${{ steps.go-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-${{ matrix.go-version }}-${{ github.run_id }}
+          restore-keys: ${{ runner.os }}-${{ matrix.go-version }}
+      - if: |-
+          ! (((github.ref == 'refs/heads/main') && (! (contains(github.event.head_commit.message, '
+          Dispatch-Trailer: {"type":"')))) || (github.ref == 'refs/heads/ci/test'))
+        uses: actions/cache/restore@v4
+        with:
+          path: |-
+            ${{ steps.go-mod-cache-dir.outputs.dir }}/cache/download
+            ${{ steps.go-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-${{ matrix.go-version }}-${{ github.run_id }}
+          restore-keys: ${{ runner.os }}-${{ matrix.go-version }}
+      - if: |-
+          github.repository == 'cue-lang/cue-api-java' && (((github.ref == 'refs/heads/main') && (! (contains(github.event.head_commit.message, '
+          Dispatch-Trailer: {"type":"')))) || github.ref == 'refs/heads/ci/test')
+        run: go clean -testcache
+      - name: Checkout libcue
+        uses: actions/checkout@v4
+        with:
+          repository: cue-lang/libcue
+          path: libcue
+      - name: Build libcue
+        run: |-
+          go build -o libcue.so -buildmode=c-shared
+          cp libcue.so libcue.dylib
+          cp libcue.so cue.dll
+        working-directory: libcue
       - name: Early git and code sanity checks
         run: |-
           # Ensure that commit messages have a blank second line.
@@ -103,10 +159,12 @@ jobs:
           	echo "${commit_signers}"
           	exit 1
           fi
-      - name: Re-generate CI
-        run: |-
-          cue cmd importjsonschema ./vendor
-          cue cmd gen
-        working-directory: ./internal/ci
+      - name: Test
+        run: mvn clean install package
+        env:
+          LD_LIBRARY_PATH: ${{ github.workspace }}/libcue
+          DYLD_LIBRARY_PATH: ${{ github.workspace }}/libcue
+      - name: go generate
+        run: go generate ./...
       - name: Check that git is clean at the end of the job
         run: test -z "$(git status --porcelain)" || (git status; git diff; false)
