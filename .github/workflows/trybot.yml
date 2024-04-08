@@ -62,9 +62,28 @@ jobs:
           Dispatch-Trailer: {"type":"'))
           EOD
           false
-      - uses: cue-lang/setup-cue@v1.0.0
+      - name: Install Go
+        uses: actions/setup-go@v5
         with:
-          version: v0.8.0
+          cache: false
+          go-version: 1.22.0
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "22"
+      - name: Checkout libcue
+        uses: actions/checkout@v4
+        with:
+          repository: cue-lang/libcue
+          path: libcue
+          ref: main
+      - name: Build libcue
+        run: |-
+          go build -o libcue.so -buildmode=c-shared
+          cp libcue.so libcue.dylib
+          cp libcue.so cue.dll
+        working-directory: libcue
       - name: Early git and code sanity checks
         run: |-
           # Ensure that commit messages have a blank second line.
@@ -103,10 +122,13 @@ jobs:
           	echo "${commit_signers}"
           	exit 1
           fi
-      - name: Re-generate CI
-        run: |-
-          cue cmd importjsonschema ./vendor
-          cue cmd gen
-        working-directory: ./internal/ci
+      - name: Clean
+        run: mvn clean
+        env:
+          LD_LIBRARY_PATH: ${{ github.workspace }}/libcue
+      - name: Test
+        run: mvn install
+        env:
+          LD_LIBRARY_PATH: ${{ github.workspace }}/libcue
       - name: Check that git is clean at the end of the job
         run: test -z "$(git status --porcelain)" || (git status; git diff; false)
