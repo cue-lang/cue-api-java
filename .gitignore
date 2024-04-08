@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+# CI might build libcue locally, in which case we want it ignored.
+libcue/
+
 # Maven
 target/
 !**/src/main/resources/archetype-resources/**/target/
