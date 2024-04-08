@@ -25,6 +25,15 @@ installGo: json.#step & {
 	}
 }
 
+installJava: json.#step & {
+	name: "Install Java"
+	uses: "actions/setup-java@v4"
+	with: {
+		distribution:   "temurin"
+		"java-version": "22"
+	}
+}
+
 checkoutCode: {
 	#actionsCheckout: json.#step & {
 		name: "Checkout code"
