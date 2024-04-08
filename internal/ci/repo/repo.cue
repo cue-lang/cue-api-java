@@ -18,4 +18,7 @@ defaultBranch: "main"
 
 linuxMachine: "ubuntu-22.04"
 
-latestGo: "1.21.x"
+// Use a specific latest version for release builds.
+// Note that we don't want ".x" for the sake of reproducibility,
+// so we instead pin a specific Go release.
+goVersion: "1.22.2"
