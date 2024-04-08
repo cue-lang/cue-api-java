@@ -35,6 +35,12 @@ workflows: trybot: _repo.bashWorkflow & {
 		test: {
 			"runs-on": _repo.linuxMachine
 
+			let _setupGoActionsCaches = _repo.setupGoActionsCaches & {
+				#goVersion: goVersionVal
+				#os:        runnerOSVal
+				_
+			}
+
 			// Only run the trybot workflow if we have the trybot trailer, or
 			// if we have no special trailers. Note this condition applies
 			// after and in addition to the "on" condition above.
@@ -43,45 +49,61 @@ workflows: trybot: _repo.bashWorkflow & {
 			steps: [
 				for v in _repo.checkoutCode {v},
 
-				json.#step & {
-					uses: "cue-lang/setup-cue@v1.0.0"
-					with: version: "v0.8.0"
+				_repo.installGo & {
+					with: "go-version": goVersionVal
 				},
+
+				// cachePre must come after installing Go,
+				// because the cache locations are established
+				// by running each tool.
+				for v in _setupGoActionsCaches {v},
+
+				_checkoutLibcue,
+
+				_buildLibcue,
+
+				_repo.installJava,
 
 				_repo.earlyChecks,
 
-				json.#step & {
-					name: "Re-generate CI"
-					run: """
-						cue cmd importjsonschema ./vendor
-						cue cmd gen
-						"""
-					"working-directory": "./internal/ci"
-				},
+				_javaTest,
 
 				_repo.checkGitClean,
 			]
 		}
 	}
 
-	_#goGenerate: json.#step & {
-		name: "Generate"
-		run:  "go generate ./..."
+	let runnerOS = "runner.os"
+	let runnerOSVal = "${{ \(runnerOS) }}"
+	let goVersion = "matrix.go-version"
+	let goVersionVal = "${{ \(goVersion) }}"
+
+	_checkoutLibcue: json.#step & {
+		name: "Checkout libcue"
+		uses: "actions/checkout@v4"
+		with: {
+			repository: "cue-lang/libcue"
+			path: "libcue"
+			ref: "02e4893ea550"
+		}
 	}
 
-	_#goTest: json.#step & {
+	_buildLibcue: json.#step & {
+		name: "Build libcue"
+		"working-directory": "libcue"
+		// The name of the shared library is target-dependent.
+		// Build libcue with all possible names so we're covered
+		// in all cases.
+		run: """
+			go build -o libcue.so -buildmode=c-shared
+			cp libcue.so libcue.dylib
+			cp libcue.so cue.dll
+			"""
+	}
+
+	_javaTest: json.#step & {
 		name: "Test"
-		run:  "go test ./..."
-	}
-
-	_#goCheck: json.#step & {
-		// These checks can vary between platforms, as different code can be built
-		// based on GOOS and GOARCH build tags.
-		// However, CUE does not have any such build tags yet, and we don't use
-		// dependencies that vary wildly between platforms.
-		// For now, to save CI resources, just run the checks on one matrix job.
-		// TODO: consider adding more checks as per https://github.com/golang/go/issues/42119.
-		name: "Check"
-		run:  "go vet ./..."
+		env: LD_LIBRARY_PATH: "${{ github.workspace }}/libcue"
+		run: "mvn clean install"
 	}
 }
