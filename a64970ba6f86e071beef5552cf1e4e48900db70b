@@ -16,6 +16,57 @@
       "message": "PTAL.",
       "revId": "a64970ba6f86e071beef5552cf1e4e48900db70b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31f320bb_42672690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-04-09T16:21:16Z",
+      "side": 1,
+      "message": "LGTM with two final changes.",
+      "revId": "a64970ba6f86e071beef5552cf1e4e48900db70b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87fd0147_94e40ba2",
+        "filename": "internal/ci/gen.go",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-04-09T16:21:16Z",
+      "side": 1,
+      "message": "We should build ignore this file because we don\u0027t want to create a package here.",
+      "revId": "a64970ba6f86e071beef5552cf1e4e48900db70b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9940129_b7764f4f",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-04-09T16:21:16Z",
+      "side": 1,
+      "message": "Somewhere prior to this last step you need a `go generate ./...` line.",
+      "revId": "a64970ba6f86e071beef5552cf1e4e48900db70b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
