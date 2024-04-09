@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95c0a663_cf47f1f7",
+        "filename": "go.mod",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-04-09T12:24:20Z",
+      "side": 1,
+      "message": "Did you accidentally make this a Go module?",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c94693e6_fa36ae8a",
+        "filename": "internal/ci/base/base.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-04-09T12:24:20Z",
+      "side": 1,
+      "message": "Why are there changes here?",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a59393c9_d5de07d2",
+        "filename": "internal/ci/base/gerrithub.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-04-09T12:24:20Z",
+      "side": 1,
+      "message": "Why are there changes here?",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f77858c_bbcfd10d",
+        "filename": "internal/ci/gen.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-04-09T12:24:20Z",
+      "side": 1,
+      "message": "Do these need to be as `go:generate` directives? Seems somewhat unnecessary to declare this repo as a Go module just for this.",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a41579d_c91f1b3c",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-04-09T12:24:20Z",
+      "side": 1,
+      "message": "As mentioned before, you are missing the Go cache setup that we use.",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77e4f364_2f805202",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-04-09T12:24:20Z",
+      "side": 1,
+      "message": "It feels like these steps should be lifted to scripts so they can also be run locally?",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a7b0ac_d9aaf712",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-04-09T12:24:20Z",
+      "side": 1,
+      "message": "Ditto, along with the setting of the env vars.",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b1acb54_c4c17925",
+        "filename": "internal/ci/repo/repo.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-04-09T12:24:20Z",
+      "side": 1,
+      "message": "Any particular reason you are not using go1.22.2?",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
