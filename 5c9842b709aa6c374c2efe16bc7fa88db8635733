@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b92d0f02_ee72b2eb",
+        "filename": "go.mod",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T13:05:18Z",
+      "side": 1,
+      "message": "It was not accidental, it was so that `go generate works`.",
+      "parentUuid": "95c0a663_cf47f1f7",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c94693e6_fa36ae8a",
         "filename": "internal/ci/base/base.cue",
         "patchSetId": 10
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-09T12:24:20Z",
       "side": 1,
       "message": "Why are there changes here?",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e73b6d88_994ea156",
+        "filename": "internal/ci/base/base.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T13:05:18Z",
+      "side": 1,
+      "message": "They are from `cue fmt`.",
+      "parentUuid": "c94693e6_fa36ae8a",
       "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bdf06cf_35ebd0be",
+        "filename": "internal/ci/base/gerrithub.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T13:05:18Z",
+      "side": 1,
+      "message": "`cue fmt` made them.",
+      "parentUuid": "a59393c9_d5de07d2",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f77858c_bbcfd10d",
         "filename": "internal/ci/gen.go",
         "patchSetId": 10
@@ -65,6 +119,24 @@
       "writtenOn": "2024-04-09T12:24:20Z",
       "side": 1,
       "message": "Do these need to be as `go:generate` directives? Seems somewhat unnecessary to declare this repo as a Go module just for this.",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f36781b2_3c09d63b",
+        "filename": "internal/ci/gen.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T13:05:18Z",
+      "side": 1,
+      "message": "I don\u0027t know, I just followed the pattern used in the other repositories.\n\nThere is no idiomatic equivalent to `go generate` for Java code.",
+      "parentUuid": "8f77858c_bbcfd10d",
       "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -122,6 +194,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "232b5211_08e6e6da",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T13:05:18Z",
+      "side": 1,
+      "message": "I am not sure if that\u0027s a good idea. Those steps concern `libcue` (and building `libcue` is documented elsewhere), not `cue-api-java`, and so far it is an explicit non-goal of `cue-api-java` to manage its `libcue` dependency.\n\nThe way to build and deploy `libcue` is very system and use-case dependent.",
+      "parentUuid": "77e4f364_2f805202",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2a7b0ac_d9aaf712",
         "filename": "internal/ci/github/trybot.cue",
         "patchSetId": 10
@@ -133,6 +223,24 @@
       "writtenOn": "2024-04-09T12:24:20Z",
       "side": 1,
       "message": "Ditto, along with the setting of the env vars.",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "662ca78e_8bce808e",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T13:05:18Z",
+      "side": 1,
+      "message": "We should never set these variables on behalf of a user because we remove their control on which `libcue` to use.",
+      "parentUuid": "c2a7b0ac_d9aaf712",
       "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
