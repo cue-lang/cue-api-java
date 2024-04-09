@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9152ae9_c9cf3058",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T15:42:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19d832d8_551ea527",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95c0a663_cf47f1f7",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "It was not accidental, it was so that `go generate works`.",
       "parentUuid": "95c0a663_cf47f1f7",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c9f9008_77dfb846",
+        "filename": "go.mod",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T15:42:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b92d0f02_ee72b2eb",
       "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -88,6 +124,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05215556_43f7ca39",
+        "filename": "internal/ci/base/base.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T15:42:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e73b6d88_994ea156",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a59393c9_d5de07d2",
@@ -119,6 +173,24 @@
       "side": 1,
       "message": "`cue fmt` made them.",
       "parentUuid": "a59393c9_d5de07d2",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db7eae5c_e4ab5ed5",
+        "filename": "internal/ci/base/gerrithub.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T15:42:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bdf06cf_35ebd0be",
       "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -158,6 +230,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a9c1911_32d64d93",
+        "filename": "internal/ci/gen.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T15:42:40Z",
+      "side": 1,
+      "message": "Keeping `go generate` for now, but mentioning it in the commit message. We may revisit this.",
+      "parentUuid": "f36781b2_3c09d63b",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c58ec744_e9994edc",
@@ -175,6 +265,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52491687_e8807bff",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T15:42:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c58ec744_e9994edc",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a41579d_c91f1b3c",
@@ -188,6 +296,24 @@
       "writtenOn": "2024-04-09T12:24:20Z",
       "side": 1,
       "message": "As mentioned before, you are missing the Go cache setup that we use.",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48ca0a49_0bf68bdc",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T15:42:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a41579d_c91f1b3c",
       "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -227,6 +353,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5952f1a_0700e0e8",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T15:42:40Z",
+      "side": 1,
+      "message": "Per our call, these are operational (not developer) concerns, and we want to keep these concerns separate, so keeping it as it is for now.\n\nUsers will get more thorough instructions in the Java guide and in the README.",
+      "parentUuid": "232b5211_08e6e6da",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2a7b0ac_d9aaf712",
@@ -262,6 +406,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42b6ec7b_7ba26fa8",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T15:42:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "662ca78e_8bce808e",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b1acb54_c4c17925",
@@ -275,6 +437,24 @@
       "writtenOn": "2024-04-09T12:24:20Z",
       "side": 1,
       "message": "Any particular reason you are not using go1.22.2?",
+      "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0d552f9_c1a763ba",
+        "filename": "internal/ci/repo/repo.cue",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-09T15:42:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b1acb54_c4c17925",
       "revId": "5c9842b709aa6c374c2efe16bc7fa88db8635733",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
