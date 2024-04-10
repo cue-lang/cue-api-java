@@ -52,6 +52,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4b3ae19_2e768937",
+        "filename": "internal/ci/gen.go",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-10T08:52:19Z",
+      "side": 1,
+      "message": "Unfortunately, this is not possible because `go generate` does not take into account excluded Go files.\n\nFor the same reason `$CUESRC/internal/ci/gen.go` is not ignored either.\n\nA somewhat redeeming factor is that this is an internal package.",
+      "parentUuid": "87fd0147_94e40ba2",
+      "revId": "a64970ba6f86e071beef5552cf1e4e48900db70b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9940129_b7764f4f",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-04-09T16:21:16Z",
       "side": 1,
       "message": "Somewhere prior to this last step you need a `go generate ./...` line.",
+      "revId": "a64970ba6f86e071beef5552cf1e4e48900db70b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "295ebbc8_231576fa",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-04-10T08:52:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9940129_b7764f4f",
       "revId": "a64970ba6f86e071beef5552cf1e4e48900db70b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
