@@ -16,6 +16,23 @@
       "message": "PTAL. I\u0027m unable to start the trybot in this repo.",
       "revId": "265071e9463dd29cfd82d201b88b274fab9fa918",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "128decc8_a814d715",
+        "filename": "README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-08-05T13:37:21Z",
+      "side": 1,
+      "message": "interesting, is this backslash meant to be a hard line break without a separate paragraph? never seen this markdown feature used before to be honest.",
+      "revId": "265071e9463dd29cfd82d201b88b274fab9fa918",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
