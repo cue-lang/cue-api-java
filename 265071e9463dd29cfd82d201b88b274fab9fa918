@@ -33,6 +33,24 @@
       "message": "interesting, is this backslash meant to be a hard line break without a separate paragraph? never seen this markdown feature used before to be honest.",
       "revId": "265071e9463dd29cfd82d201b88b274fab9fa918",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7023bf2b_c826c3ff",
+        "filename": "README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1021694
+      },
+      "writtenOn": "2024-08-05T13:49:23Z",
+      "side": 1,
+      "message": "Yep, it\u0027s the same as two trailing spaces on a line, but significantly better for review (IMHO!). We tend to avoid them -- Paul argues that the layout is the site\u0027s job, not the author\u0027s -- but in this instance the GitHub limited width layout rendered pretty poorly, so I added the line break.",
+      "parentUuid": "128decc8_a814d715",
+      "revId": "265071e9463dd29cfd82d201b88b274fab9fa918",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
