@@ -51,6 +51,7 @@ workflows: trybot: _repo.bashWorkflow & {
 				for v in _repo.checkoutCode {v},
 
 				_installGo,
+				_installJextract, // Jextract FIXME
 				_installJava,
 
 				// cachePre must come after installing Go,
@@ -98,17 +99,27 @@ workflows: trybot: _repo.bashWorkflow & {
 		}
 	}
 
+	// cf. https://github.com/oracle-actions/setup-java?tab=readme-ov-file#download-and-install-an-early-access-build-of-a-named-openjdk-project
+	_installJextract: json.#step & {
+		name: "Install Jextract"
+		uses: "oracle-actions/setup-java@v1"
+		with: {
+			website: "jdk.java.net"
+			release: "jextract"
+		}
+	}
+
 	_checkoutLibcue: json.#step & {
 		name: "Checkout libcue"
 		uses: "actions/checkout@v4"
 		with: {
 			repository: "cue-lang/libcue"
-			path: "libcue"
+			path:       "libcue"
 		}
 	}
 
 	_buildLibcue: json.#step & {
-		name: "Build libcue"
+		name:                "Build libcue"
 		"working-directory": "libcue"
 		// The name of the shared library is target-dependent.
 		// Build libcue with all possible names so we're covered
@@ -122,7 +133,7 @@ workflows: trybot: _repo.bashWorkflow & {
 
 	_mavenTest: json.#step & {
 		name: "Test"
-		env: LD_LIBRARY_PATH: "${{ github.workspace }}/libcue"
+		env: LD_LIBRARY_PATH:   "${{ github.workspace }}/libcue"
 		env: DYLD_LIBRARY_PATH: "${{ github.workspace }}/libcue"
 		run: "mvn clean install package"
 	}

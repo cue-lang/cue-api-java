@@ -66,6 +66,11 @@ jobs:
         with:
           cache: false
           go-version: ${{ matrix.go-version }}
+      - name: Install Jextract
+        uses: oracle-actions/setup-java@v1
+        with:
+          website: jdk.java.net
+          release: jextract
       - name: Install Java
         uses: actions/setup-java@v4
         with:
