@@ -71,6 +71,12 @@ jobs:
         with:
           distribution: temurin
           java-version: "22"
+      - name: Install Jextract
+        uses: oracle-actions/setup-java@v1
+        with:
+          website: jdk.java.net
+          release: jextract
+          version: jdk22
       - id: go-mod-cache-dir
         name: Get go mod cache directory
         run: echo "dir=$(go env GOMODCACHE)" >> ${GITHUB_OUTPUT}
