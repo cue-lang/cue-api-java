@@ -51,7 +51,10 @@ workflows: trybot: _repo.bashWorkflow & {
 				for v in _repo.checkoutCode {v},
 
 				_installGo,
-				_installJextract, // Jextract FIXME
+				// _installJextract needs to come before _installJava, or JAVA_HOME
+				// doesn't get set up correctly for later steps.
+				// TODO: install jextract some way that doesn't require this fixed ordering.
+				_installJextract,
 				_installJava,
 
 				// cachePre must come after installing Go,
@@ -141,5 +144,6 @@ workflows: trybot: _repo.bashWorkflow & {
 	_goGenerate: json.#step & {
 		name: "go generate"
 		run:  "go generate ./..."
+		env: LIBCUE: "libcue"
 	}
 }

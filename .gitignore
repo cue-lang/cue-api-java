@@ -2,7 +2,7 @@
 *.class
 
 # CI might build libcue locally, in which case we want it ignored.
-libcue/
+/libcue/
 
 # Maven
 target/

@@ -17,5 +17,5 @@ fi
 # developer's machine.
 : ${LIBCUE:=$HOME/src/libcue}
 
-rm -rf src/main/java/org/cuelang/libcue
+find src/main/java/org/cuelang/libcue -type f -not -name 'gen.go' -delete
 jextract -t org.cuelang.libcue --output src/main/java -lcue --use-system-load-library @includes.txt "$LIBCUE/cue.h"
