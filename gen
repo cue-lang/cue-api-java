@@ -1,14 +1,21 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -euo pipefail
 
-set -e
-srcdir="$(cd `dirname "$0"` && pwd)"
-cd "$srcdir"
+# Change into the project's root directory.
+cd "$(dirname "$0")"
 
-# TODO: remove this.
-PATH=$PATH:$HOME/src/jextract-22/bin
+# Allow for a machine-specific pointer to the jextract executable to be
+# communicated via the JEXTPATH variable, defaulting to a value for one
+# specific developer's machine.
+if ! command -v jextract >/dev/null; then
+    : ${JEXTPATH:=$HOME/src/jextract-22/bin}
+    PATH=$PATH:$JEXTPATH
+fi
 
-# TODO: find this in a more reliable way.
-CUE_H=$HOME/src/libcue/cue.h
+# Allow for a machine-specific pointer to the source of libcue to be
+# communicated via the LIBCUE variable, defaulting to a value for one specific
+# developer's machine.
+: ${LIBCUE:=$HOME/src/libcue}
 
 rm -rf src/main/java/org/cuelang/libcue
-jextract -t org.cuelang.libcue --output src/main/java -lcue --use-system-load-library @includes.txt $CUE_H
+jextract -t org.cuelang.libcue --output src/main/java -lcue --use-system-load-library @includes.txt "$LIBCUE/cue.h"
