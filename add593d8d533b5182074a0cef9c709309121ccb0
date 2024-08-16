@@ -33,6 +33,23 @@
       "message": "PTAL.",
       "revId": "add593d8d533b5182074a0cef9c709309121ccb0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cfa0f2d_70c71469",
+        "filename": "gen",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-08-16T11:14:48Z",
+      "side": 1,
+      "message": "out of curiosity, is it needed to add jextract to $PATH? can we not call the binary via a full path directly?",
+      "revId": "add593d8d533b5182074a0cef9c709309121ccb0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
