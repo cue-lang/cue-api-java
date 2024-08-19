@@ -50,6 +50,24 @@
       "message": "out of curiosity, is it needed to add jextract to $PATH? can we not call the binary via a full path directly?",
       "revId": "add593d8d533b5182074a0cef9c709309121ccb0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1e90a3b_7cd0c2a0",
+        "filename": "gen",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1021694
+      },
+      "writtenOn": "2024-08-19T10:50:24Z",
+      "side": 1,
+      "message": "Yes, if we place the final line (the `jextract` invocation) inside some kind of conditional -- i.e. the same test as /this/ conditional, or something similar. In other words, if we don\u0027t update `PATH`, then we\u0027ll need to vary the invocation based on *something*, so that folks with it in their `PATH` can just call the script:\n\ne.g.\n```\nif \u003csome condition\u003e; then\n  $JEXTRACT_PATH/jextract -params ...\nelse\n  jextract -params ...\n```\n\n... or we just set up some `JEXTRACT` var that captures the location of the executable; which is just re-implementing `PATH`, IMHO!\n\nI think that having some setup or preamble that compartmentalises any complexity required then permits the invocation to be simpler - making scripts clearer to me, personally. Reasonable folks may disagree, of course, and I don\u0027t feel particularly strongly about this! :-)",
+      "parentUuid": "5cfa0f2d_70c71469",
+      "revId": "add593d8d533b5182074a0cef9c709309121ccb0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
