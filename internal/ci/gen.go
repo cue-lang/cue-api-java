@@ -1,4 +1,4 @@
-// Copyright 2024 The CUE Authors
+// Copyright 2021 The CUE Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,5 +14,5 @@
 
 package ci
 
-//go:generate go run cuelang.org/go/cmd/cue@v0.8.1 cmd importjsonschema ./vendor
-//go:generate go run cuelang.org/go/cmd/cue@v0.8.1 cmd gen
+//go:generate go run cuelang.org/go/cmd/cue@v0.10.0 cmd importjsonschema ./vendor
+//go:generate go run cuelang.org/go/cmd/cue@v0.10.0 cmd gen
