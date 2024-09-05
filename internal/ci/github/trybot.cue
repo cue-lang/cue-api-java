@@ -50,7 +50,7 @@ workflows: trybot: _repo.bashWorkflow & {
 			steps: [
 				for v in _repo.checkoutCode {v},
 
-				_installGo,
+				for v in _installGo {v},
 				_installJava,
 
 				// cachePre must come after installing Go,
@@ -86,7 +86,8 @@ workflows: trybot: _repo.bashWorkflow & {
 	}
 
 	_installGo: _repo.installGo & {
-		with: "go-version": goVersionVal
+		#setupGo: with: "go-version": goVersionVal
+		_
 	}
 
 	_installJava: json.#step & {
@@ -103,12 +104,12 @@ workflows: trybot: _repo.bashWorkflow & {
 		uses: "actions/checkout@v4"
 		with: {
 			repository: "cue-lang/libcue"
-			path: "libcue"
+			path:       "libcue"
 		}
 	}
 
 	_buildLibcue: json.#step & {
-		name: "Build libcue"
+		name:                "Build libcue"
 		"working-directory": "libcue"
 		// The name of the shared library is target-dependent.
 		// Build libcue with all possible names so we're covered
@@ -122,7 +123,7 @@ workflows: trybot: _repo.bashWorkflow & {
 
 	_mavenTest: json.#step & {
 		name: "Test"
-		env: LD_LIBRARY_PATH: "${{ github.workspace }}/libcue"
+		env: LD_LIBRARY_PATH:   "${{ github.workspace }}/libcue"
 		env: DYLD_LIBRARY_PATH: "${{ github.workspace }}/libcue"
 		run: "mvn clean install package"
 	}
