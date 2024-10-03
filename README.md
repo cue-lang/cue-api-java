@@ -15,7 +15,8 @@ you might need to change that.
 
 ## Using
 
-TODO.
+- [Getting started using CUE in Java](https://cuelang.org/docs/tutorial/get-started-cue-java/) on cuelang.org
+- [Other Java+CUE guides](https://cuelang.org/search/?q=tag:%22java%20api%22) on cuelang.org
 
 ## Known Limitations
 
