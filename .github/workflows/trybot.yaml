@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         go-version:
-          - 1.22.x
+          - stable
         runner:
           - ubuntu-22.04
           - macos-14

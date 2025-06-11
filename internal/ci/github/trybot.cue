@@ -80,7 +80,7 @@ workflows: trybot: _repo.bashWorkflow & {
 	_testStrategy: {
 		"fail-fast": false
 		matrix: {
-			"go-version": [_repo.latestStableGo]
+			"go-version": ["stable"]
 
 			// TODO: Windows is missing because of issue #3016.
 			runner: [_repo.linuxMachine, _repo.macosMachine]
