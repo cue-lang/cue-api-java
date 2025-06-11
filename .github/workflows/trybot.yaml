@@ -10,6 +10,9 @@ name: TryBot
   workflow_dispatch: {}
 jobs:
   test:
+    defaults:
+      run:
+        shell: bash --noprofile --norc -euo pipefail {0}
     strategy:
       fail-fast: false
       matrix:
@@ -19,9 +22,6 @@ jobs:
           - ubuntu-22.04
           - macos-14
     runs-on: ${{ matrix.runner }}
-    defaults:
-      run:
-        shell: bash
     if: |-
       (contains(github.event.head_commit.message, '
       Dispatch-Trailer: {"type":"trybot"')) || ! (contains(github.event.head_commit.message, '
@@ -107,6 +107,10 @@ jobs:
           github.repository == 'cue-lang/cue-api-java' && (((github.ref == 'refs/heads/main') && (! (contains(github.event.head_commit.message, '
           Dispatch-Trailer: {"type":"')))) || github.ref == 'refs/heads/ci/test')
         run: go clean -testcache
+      - name: Install CUE
+        uses: cue-lang/setup-cue@v1.0.1
+        with:
+          version: latest
       - name: Checkout libcue
         uses: actions/checkout@v4
         with:
@@ -121,10 +125,10 @@ jobs:
       - name: Early git and code sanity checks
         run: go run cuelang.org/go/internal/ci/checks@v0.11.0-0.dev.0.20240903133435-46fb300df650
       - name: Test
-        run: mvn clean install package
         env:
           LD_LIBRARY_PATH: ${{ github.workspace }}/libcue
           DYLD_LIBRARY_PATH: ${{ github.workspace }}/libcue
+        run: mvn clean install package
       - name: go generate
         run: go generate ./...
       - if: always()
