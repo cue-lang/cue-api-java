@@ -16,8 +16,7 @@ package github
 
 import (
 	"list"
-
-	"github.com/SchemaStore/schemastore/src/schemas/json"
+	"cue.dev/x/githubactions"
 )
 
 // The trybot workflow.
@@ -58,6 +57,9 @@ workflows: trybot: _repo.bashWorkflow & {
 				// are established by running each tool.
 				for v in _setupGoActionsCaches {v},
 
+				// CUE setup
+				_installCUE,
+
 				_checkoutLibcue,
 				_buildLibcue,
 
@@ -90,7 +92,13 @@ workflows: trybot: _repo.bashWorkflow & {
 		_
 	}
 
-	_installJava: json.#step & {
+	_installCUE: githubactions.#Step & {
+		name: "Install CUE"
+		uses: "cue-lang/setup-cue@v1.0.1"
+		with: version: "latest"
+	}
+
+	_installJava: githubactions.#Step & {
 		name: "Install Java"
 		uses: "actions/setup-java@v4"
 		with: {
@@ -99,7 +107,7 @@ workflows: trybot: _repo.bashWorkflow & {
 		}
 	}
 
-	_checkoutLibcue: json.#step & {
+	_checkoutLibcue: githubactions.#Step & {
 		name: "Checkout libcue"
 		uses: "actions/checkout@v4"
 		with: {
@@ -108,7 +116,7 @@ workflows: trybot: _repo.bashWorkflow & {
 		}
 	}
 
-	_buildLibcue: json.#step & {
+	_buildLibcue: githubactions.#Step & {
 		name:                "Build libcue"
 		"working-directory": "libcue"
 		// The name of the shared library is target-dependent.
@@ -121,14 +129,14 @@ workflows: trybot: _repo.bashWorkflow & {
 			"""
 	}
 
-	_mavenTest: json.#step & {
+	_mavenTest: githubactions.#Step & {
 		name: "Test"
 		env: LD_LIBRARY_PATH:   "${{ github.workspace }}/libcue"
 		env: DYLD_LIBRARY_PATH: "${{ github.workspace }}/libcue"
 		run: "mvn clean install package"
 	}
 
-	_goGenerate: json.#step & {
+	_goGenerate: githubactions.#Step & {
 		name: "go generate"
 		run:  "go generate ./..."
 	}
