@@ -1,0 +1,7 @@
+Code-Review+2: Daniel Martí <mvdan@mvdan.cc>
+TryBot-Result+1: CUEcueckoo <cueckoo@cuelang.org>
+Submitted-by: Paul Jolly <paul@myitcv.io>
+Submitted-at: Thu, 12 Jun 2025 06:39:11 +0000
+Reviewed-on: https://review.gerrithub.io/c/cue-lang/cue-api-java/+/1216795
+Project: cue-lang/cue-api-java
+Branch: refs/heads/main
