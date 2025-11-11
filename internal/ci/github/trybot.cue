@@ -35,12 +35,6 @@ workflows: trybot: _repo.bashWorkflow & {
 			strategy:  _testStrategy
 			"runs-on": "${{ matrix.runner }}"
 
-			let _setupGoActionsCaches = _repo.setupGoActionsCaches & {
-				#goVersion: goVersionVal
-				#os:        runnerOSVal
-				_
-			}
-
 			// Only run the trybot workflow if we have the trybot trailer, or
 			// if we have no special trailers. Note this condition applies
 			// after and in addition to the "on" condition above.
@@ -48,14 +42,13 @@ workflows: trybot: _repo.bashWorkflow & {
 
 			steps: [
 				for v in _repo.checkoutCode {v},
-
-				for v in _installGo {v},
+				for v in _repo.installGo {v},
 				_installJava,
 
 				// cachePre must come after installing Go,
 				// because the cache locations
 				// are established by running each tool.
-				for v in _setupGoActionsCaches {v},
+				for v in _repo.setupCaches {v},
 
 				// CUE setup
 				_installCUE,
@@ -72,11 +65,6 @@ workflows: trybot: _repo.bashWorkflow & {
 		}
 	}
 
-	let runnerOS = "runner.os"
-	let runnerOSVal = "${{ \(runnerOS) }}"
-	let goVersion = "matrix.go-version"
-	let goVersionVal = "${{ \(goVersion) }}"
-
 	_testStrategy: {
 		"fail-fast": false
 		matrix: {
@@ -85,11 +73,6 @@ workflows: trybot: _repo.bashWorkflow & {
 			// TODO: Windows is missing because of issue #3016.
 			runner: [_repo.linuxMachine, _repo.macosMachine]
 		}
-	}
-
-	_installGo: _repo.installGo & {
-		#setupGo: with: "go-version": goVersionVal
-		_
 	}
 
 	_installCUE: githubactions.#Step & {
