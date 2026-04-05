@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.cuelang</groupId>
-    <artifactId>CUE</artifactId>
-    <version>0.0-devel</version>
+    <artifactId>cue-api-java</artifactId>
+    <version>0.0.1-devel</version>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>22</maven.compiler.target>
     </properties>
 
     <dependencies>

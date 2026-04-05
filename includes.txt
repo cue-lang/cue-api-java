@@ -39,6 +39,7 @@
 --include-function cue_errors_as_values
 --include-function cue_error_string
 --include-function cue_filename
+--include-function cue_fields
 --include-function cue_final
 --include-function cue_free
 --include-function cue_free_all
@@ -46,6 +47,7 @@
 --include-function cue_from_bytes
 --include-function cue_from_double
 --include-function cue_from_int64
+--include-function cue_from_list
 --include-function cue_from_string
 --include-function cue_from_uint64
 --include-function cue_hidden
@@ -55,9 +57,11 @@
 --include-function cue_inline_imports
 --include-function cue_instance_of
 --include-function cue_is_equal
+--include-function cue_list
 --include-function cue_lookup_string
 --include-function cue_newctx
 --include-function cue_optionals
+--include-function cue_path
 --include-function cue_raw
 --include-function cue_schema
 --include-function cue_scope

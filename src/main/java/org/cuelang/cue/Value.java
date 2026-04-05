@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.foreign.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -82,6 +83,18 @@ public final class Value {
         try (Arena arena = Arena.ofConfined()) {
             var mem = arena.allocateFrom(ValueLayout.JAVA_BYTE, buf);
             var res = cue_from_bytes(ctx.handle(), mem, buf.length);
+            this.res = new CueResource(ctx.cleaner(), res);
+            this.ctx = ctx;
+        }
+    }
+
+    public Value(@NotNull CueContext ctx, Value... values) {
+        try (Arena arena = Arena.ofConfined()) {
+            var mem = arena.allocate(ValueLayout.JAVA_LONG, values.length);
+            for (int i = 0; i < values.length; i++) {
+                mem.setAtIndex(ValueLayout.JAVA_LONG, i, values[i].res.handle());
+            }
+            var res = cue_from_list(ctx.handle(), mem, values.length);
             this.res = new CueResource(ctx.cleaner(), res);
             this.ctx = ctx;
         }
@@ -371,5 +384,43 @@ public final class Value {
 
             return attributes;
         }
+    }
+
+    public String path() {
+        var labelPtr = cue_path(this.handle());
+        return labelPtr.getString(0);
+    }
+
+    public @NotNull Value[] fields() {
+        try (Arena arena = Arena.ofConfined()) {
+            var lenPtr = arena.allocate(ValueLayout.JAVA_LONG);
+            var valuesPtr = cue_fields(this.handle(), lenPtr);
+
+            return mapToValueAndMemFree(lenPtr, valuesPtr);
+        }
+    }
+
+    public @NotNull Value[] list() {
+        try (Arena arena = Arena.ofConfined()) {
+            var lenPtr = arena.allocate(ValueLayout.JAVA_LONG);
+            var valuesPtr = cue_list(this.handle(), lenPtr);
+
+            return mapToValueAndMemFree(lenPtr, valuesPtr);
+        }
+    }
+
+    private @NotNull Value[] mapToValueAndMemFree(MemorySegment lenPtr, MemorySegment valuesPtr) {
+        var len = (int)lenPtr.get(ValueLayout.JAVA_LONG, 0);
+        if (len == 0)
+            return new Value[0];
+
+        var jValues = new Value[len];
+        for (int i = 0; i < jValues.length; i++) {
+            var res = valuesPtr.getAtIndex(ValueLayout.JAVA_LONG, i);
+            var cueRes = new CueResource(ctx.cleaner(), res);
+            jValues[i] = new Value(ctx, cueRes);
+        }
+        libc_free(valuesPtr);
+        return jValues;
     }
 }

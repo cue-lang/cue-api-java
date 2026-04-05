@@ -32,3 +32,8 @@ buildNumber.properties
 *.zip
 *.tar.gz
 *.rar
+
+/.idea/
+
+/src/main/resources/darwin-arm64
+/src/main/resources/linux-amd64

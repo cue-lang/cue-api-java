@@ -1,6 +1,8 @@
 package org.cuelang.cue;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -577,6 +579,68 @@ class ValueTest {
                     y.attributes(AttributeKind.DECLARATION).length);
             assertEquals(1,
                     y.attributes(AttributeKind.FIELD).length);
+        });
+    }
+
+    @Test
+    @DisplayName("should return path of value")
+    void checkPath() {
+        assertDoesNotThrow(() -> {
+            Value v;
+            v = ctx.compile("""
+                a: int
+                b: c: string
+            """);
+            assertEquals("", v.path());
+            assertEquals("a", v.lookup("a").path());
+            assertEquals("b.c", v.lookup("b.c").path());
+        });
+    }
+
+    @Test
+    @DisplayName("should return array of Value")
+    void checkFields() {
+        assertDoesNotThrow(() -> {
+            Value v;
+            v = ctx.compile("""
+                a: int
+                b: string
+                c: [...]
+                """);
+            Value[] fields = v.fields();
+
+            assertEquals(3, fields.length);
+
+            assertEquals("a", fields[0].path());
+            assertEquals("b", fields[1].path());
+            assertEquals("c",fields[2].path());
+
+            assertEquals(0, v.lookup("a").fields().length);
+            assertEquals(0, v.lookup("c").fields().length);
+        });
+    }
+
+    @Test
+    @DisplayName("should return array of Value")
+    void checkList() {
+        assertDoesNotThrow(() -> {
+            Value[] values = ctx.compile("[1,2,3]").list();
+
+            assertEquals(3, values.length);
+        });
+    }
+
+    @Test
+    @DisplayName("should zip values into one value")
+    void createValueFromListValues() {
+        assertDoesNotThrow(() -> {
+            Value a = ctx.compile("\"a\"");
+            Value b = ctx.compile("\"b\"");
+            Value c = ctx.compile("\"c\"");
+
+            Value zip = ctx.toValue(a, b, c);
+
+            assertEquals("[\"a\",\"b\",\"c\"]", zip.getJSON());
         });
     }
 }
