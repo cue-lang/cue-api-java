@@ -57,7 +57,6 @@ public class cue_h {
 
 
     static {
-        System.loadLibrary("cue");
     }
 
     static final SymbolLookup SYMBOL_LOOKUP = SymbolLookup.loaderLookup()
@@ -423,9 +422,9 @@ public class cue_h {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
             cue_h.C_LONG    );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_newctx"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_newctx");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -447,6 +446,17 @@ public class cue_h {
     public static MethodHandle cue_newctx$handle() {
         return cue_newctx.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_ctx cue_newctx()
+     * }
+     */
+    public static MemorySegment cue_newctx$address() {
+        return cue_newctx.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_ctx cue_newctx()
@@ -470,9 +480,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_error_string"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_error_string");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -494,6 +504,17 @@ public class cue_h {
     public static MethodHandle cue_error_string$handle() {
         return cue_error_string.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * char *cue_error_string(cue_error)
+     * }
+     */
+    public static MemorySegment cue_error_string$address() {
+        return cue_error_string.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * char *cue_error_string(cue_error)
@@ -520,9 +541,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_compile_string"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_compile_string");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -544,6 +565,17 @@ public class cue_h {
     public static MethodHandle cue_compile_string$handle() {
         return cue_compile_string.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_compile_string(cue_ctx, char *, cue_bopt *, cue_value *)
+     * }
+     */
+    public static MemorySegment cue_compile_string$address() {
+        return cue_compile_string.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_compile_string(cue_ctx, char *, cue_bopt *, cue_value *)
@@ -571,9 +603,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_compile_bytes"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_compile_bytes");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -595,6 +627,17 @@ public class cue_h {
     public static MethodHandle cue_compile_bytes$handle() {
         return cue_compile_bytes.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_compile_bytes(cue_ctx, void *, size_t, cue_bopt *, cue_value *)
+     * }
+     */
+    public static MemorySegment cue_compile_bytes$address() {
+        return cue_compile_bytes.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_compile_bytes(cue_ctx, void *, size_t, cue_bopt *, cue_value *)
@@ -612,15 +655,133 @@ public class cue_h {
         }
     }
 
+    private static class cue_fields {
+        public static final FunctionDescriptor DESC = FunctionDescriptor.of(
+            cue_h.C_POINTER,
+            cue_h.C_LONG,
+            cue_h.C_POINTER
+        );
+
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_fields");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
+    }
+
+    /**
+     * Function descriptor for:
+     * {@snippet lang=c :
+     * cue_value *cue_fields(cue_value, size_t *)
+     * }
+     */
+    public static FunctionDescriptor cue_fields$descriptor() {
+        return cue_fields.DESC;
+    }
+
+    /**
+     * Downcall method handle for:
+     * {@snippet lang=c :
+     * cue_value *cue_fields(cue_value, size_t *)
+     * }
+     */
+    public static MethodHandle cue_fields$handle() {
+        return cue_fields.HANDLE;
+    }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value *cue_fields(cue_value, size_t *)
+     * }
+     */
+    public static MemorySegment cue_fields$address() {
+        return cue_fields.ADDR;
+    }
+
+    /**
+     * {@snippet lang=c :
+     * cue_value *cue_fields(cue_value, size_t *)
+     * }
+     */
+    public static MemorySegment cue_fields(long x0, MemorySegment x1) {
+        var mh$ = cue_fields.HANDLE;
+        try {
+            if (TRACE_DOWNCALLS) {
+                traceDowncall("cue_fields", x0, x1);
+            }
+            return (MemorySegment)mh$.invokeExact(x0, x1);
+        } catch (Throwable ex$) {
+           throw new AssertionError("should not reach here", ex$);
+        }
+    }
+
+    private static class cue_list {
+        public static final FunctionDescriptor DESC = FunctionDescriptor.of(
+            cue_h.C_POINTER,
+            cue_h.C_LONG,
+            cue_h.C_POINTER
+        );
+
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_list");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
+    }
+
+    /**
+     * Function descriptor for:
+     * {@snippet lang=c :
+     * cue_value *cue_list(cue_value, size_t *)
+     * }
+     */
+    public static FunctionDescriptor cue_list$descriptor() {
+        return cue_list.DESC;
+    }
+
+    /**
+     * Downcall method handle for:
+     * {@snippet lang=c :
+     * cue_value *cue_list(cue_value, size_t *)
+     * }
+     */
+    public static MethodHandle cue_list$handle() {
+        return cue_list.HANDLE;
+    }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value *cue_list(cue_value, size_t *)
+     * }
+     */
+    public static MemorySegment cue_list$address() {
+        return cue_list.ADDR;
+    }
+
+    /**
+     * {@snippet lang=c :
+     * cue_value *cue_list(cue_value, size_t *)
+     * }
+     */
+    public static MemorySegment cue_list(long x0, MemorySegment x1) {
+        var mh$ = cue_list.HANDLE;
+        try {
+            if (TRACE_DOWNCALLS) {
+                traceDowncall("cue_list", x0, x1);
+            }
+            return (MemorySegment)mh$.invokeExact(x0, x1);
+        } catch (Throwable ex$) {
+           throw new AssertionError("should not reach here", ex$);
+        }
+    }
+
     private static class cue_top {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
             cue_h.C_LONG,
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_top"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_top");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -642,6 +803,17 @@ public class cue_h {
     public static MethodHandle cue_top$handle() {
         return cue_top.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value cue_top(cue_ctx)
+     * }
+     */
+    public static MemorySegment cue_top$address() {
+        return cue_top.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_value cue_top(cue_ctx)
@@ -665,9 +837,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_bottom"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_bottom");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -689,6 +861,17 @@ public class cue_h {
     public static MethodHandle cue_bottom$handle() {
         return cue_bottom.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value cue_bottom(cue_ctx)
+     * }
+     */
+    public static MemorySegment cue_bottom$address() {
+        return cue_bottom.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_value cue_bottom(cue_ctx)
@@ -713,9 +896,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_unify"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_unify");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -737,6 +920,17 @@ public class cue_h {
     public static MethodHandle cue_unify$handle() {
         return cue_unify.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value cue_unify(cue_value, cue_value)
+     * }
+     */
+    public static MemorySegment cue_unify$address() {
+        return cue_unify.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_value cue_unify(cue_value, cue_value)
@@ -762,9 +956,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_instance_of"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_instance_of");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -786,6 +980,17 @@ public class cue_h {
     public static MethodHandle cue_instance_of$handle() {
         return cue_instance_of.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_instance_of(cue_value, cue_value, cue_eopt *)
+     * }
+     */
+    public static MemorySegment cue_instance_of$address() {
+        return cue_instance_of.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_instance_of(cue_value, cue_value, cue_eopt *)
@@ -811,9 +1016,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_lookup_string"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_lookup_string");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -835,6 +1040,17 @@ public class cue_h {
     public static MethodHandle cue_lookup_string$handle() {
         return cue_lookup_string.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_lookup_string(cue_value, char *, cue_value *)
+     * }
+     */
+    public static MemorySegment cue_lookup_string$address() {
+        return cue_lookup_string.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_lookup_string(cue_value, char *, cue_value *)
@@ -859,9 +1075,9 @@ public class cue_h {
             cue_h.C_LONG_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_from_int64"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_from_int64");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -883,6 +1099,17 @@ public class cue_h {
     public static MethodHandle cue_from_int64$handle() {
         return cue_from_int64.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value cue_from_int64(cue_ctx, int64_t)
+     * }
+     */
+    public static MemorySegment cue_from_int64$address() {
+        return cue_from_int64.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_value cue_from_int64(cue_ctx, int64_t)
@@ -907,9 +1134,9 @@ public class cue_h {
             cue_h.C_LONG_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_from_uint64"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_from_uint64");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -931,6 +1158,17 @@ public class cue_h {
     public static MethodHandle cue_from_uint64$handle() {
         return cue_from_uint64.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value cue_from_uint64(cue_ctx, uint64_t)
+     * }
+     */
+    public static MemorySegment cue_from_uint64$address() {
+        return cue_from_uint64.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_value cue_from_uint64(cue_ctx, uint64_t)
@@ -955,9 +1193,9 @@ public class cue_h {
             cue_h.C_BOOL
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_from_bool"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_from_bool");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -979,6 +1217,17 @@ public class cue_h {
     public static MethodHandle cue_from_bool$handle() {
         return cue_from_bool.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value cue_from_bool(cue_ctx, bool)
+     * }
+     */
+    public static MemorySegment cue_from_bool$address() {
+        return cue_from_bool.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_value cue_from_bool(cue_ctx, bool)
@@ -1003,9 +1252,9 @@ public class cue_h {
             cue_h.C_DOUBLE
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_from_double"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_from_double");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1027,6 +1276,17 @@ public class cue_h {
     public static MethodHandle cue_from_double$handle() {
         return cue_from_double.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value cue_from_double(cue_ctx, double)
+     * }
+     */
+    public static MemorySegment cue_from_double$address() {
+        return cue_from_double.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_value cue_from_double(cue_ctx, double)
@@ -1051,9 +1311,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_from_string"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_from_string");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1075,6 +1335,17 @@ public class cue_h {
     public static MethodHandle cue_from_string$handle() {
         return cue_from_string.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value cue_from_string(cue_ctx, char *)
+     * }
+     */
+    public static MemorySegment cue_from_string$address() {
+        return cue_from_string.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_value cue_from_string(cue_ctx, char *)
@@ -1100,9 +1371,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_from_bytes"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_from_bytes");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1124,6 +1395,17 @@ public class cue_h {
     public static MethodHandle cue_from_bytes$handle() {
         return cue_from_bytes.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value cue_from_bytes(cue_ctx, void *, size_t)
+     * }
+     */
+    public static MemorySegment cue_from_bytes$address() {
+        return cue_from_bytes.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_value cue_from_bytes(cue_ctx, void *, size_t)
@@ -1141,6 +1423,66 @@ public class cue_h {
         }
     }
 
+    private static class cue_from_list {
+        public static final FunctionDescriptor DESC = FunctionDescriptor.of(
+            cue_h.C_LONG,
+            cue_h.C_LONG,
+            cue_h.C_POINTER,
+            cue_h.C_LONG
+        );
+
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_from_list");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
+    }
+
+    /**
+     * Function descriptor for:
+     * {@snippet lang=c :
+     * cue_value cue_from_list(cue_ctx, cue_value *, size_t)
+     * }
+     */
+    public static FunctionDescriptor cue_from_list$descriptor() {
+        return cue_from_list.DESC;
+    }
+
+    /**
+     * Downcall method handle for:
+     * {@snippet lang=c :
+     * cue_value cue_from_list(cue_ctx, cue_value *, size_t)
+     * }
+     */
+    public static MethodHandle cue_from_list$handle() {
+        return cue_from_list.HANDLE;
+    }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value cue_from_list(cue_ctx, cue_value *, size_t)
+     * }
+     */
+    public static MemorySegment cue_from_list$address() {
+        return cue_from_list.ADDR;
+    }
+
+    /**
+     * {@snippet lang=c :
+     * cue_value cue_from_list(cue_ctx, cue_value *, size_t)
+     * }
+     */
+    public static long cue_from_list(long x0, MemorySegment x1, long x2) {
+        var mh$ = cue_from_list.HANDLE;
+        try {
+            if (TRACE_DOWNCALLS) {
+                traceDowncall("cue_from_list", x0, x1, x2);
+            }
+            return (long)mh$.invokeExact(x0, x1, x2);
+        } catch (Throwable ex$) {
+           throw new AssertionError("should not reach here", ex$);
+        }
+    }
+
     private static class cue_dec_int64 {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
             cue_h.C_LONG,
@@ -1148,9 +1490,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_dec_int64"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_dec_int64");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1172,6 +1514,17 @@ public class cue_h {
     public static MethodHandle cue_dec_int64$handle() {
         return cue_dec_int64.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_dec_int64(cue_value, int64_t *)
+     * }
+     */
+    public static MemorySegment cue_dec_int64$address() {
+        return cue_dec_int64.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_dec_int64(cue_value, int64_t *)
@@ -1196,9 +1549,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_dec_uint64"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_dec_uint64");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1220,6 +1573,17 @@ public class cue_h {
     public static MethodHandle cue_dec_uint64$handle() {
         return cue_dec_uint64.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_dec_uint64(cue_value, uint64_t *)
+     * }
+     */
+    public static MemorySegment cue_dec_uint64$address() {
+        return cue_dec_uint64.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_dec_uint64(cue_value, uint64_t *)
@@ -1244,9 +1608,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_dec_bool"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_dec_bool");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1268,6 +1632,17 @@ public class cue_h {
     public static MethodHandle cue_dec_bool$handle() {
         return cue_dec_bool.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_dec_bool(cue_value, bool *)
+     * }
+     */
+    public static MemorySegment cue_dec_bool$address() {
+        return cue_dec_bool.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_dec_bool(cue_value, bool *)
@@ -1292,9 +1667,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_dec_double"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_dec_double");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1316,6 +1691,17 @@ public class cue_h {
     public static MethodHandle cue_dec_double$handle() {
         return cue_dec_double.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_dec_double(cue_value, double *)
+     * }
+     */
+    public static MemorySegment cue_dec_double$address() {
+        return cue_dec_double.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_dec_double(cue_value, double *)
@@ -1340,9 +1726,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_dec_string"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_dec_string");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1364,6 +1750,17 @@ public class cue_h {
     public static MethodHandle cue_dec_string$handle() {
         return cue_dec_string.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_dec_string(cue_value, char **)
+     * }
+     */
+    public static MemorySegment cue_dec_string$address() {
+        return cue_dec_string.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_dec_string(cue_value, char **)
@@ -1389,9 +1786,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_dec_bytes"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_dec_bytes");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1413,6 +1810,17 @@ public class cue_h {
     public static MethodHandle cue_dec_bytes$handle() {
         return cue_dec_bytes.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_dec_bytes(cue_value, void **, size_t *)
+     * }
+     */
+    public static MemorySegment cue_dec_bytes$address() {
+        return cue_dec_bytes.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_dec_bytes(cue_value, void **, size_t *)
@@ -1438,9 +1846,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_dec_json"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_dec_json");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1462,6 +1870,17 @@ public class cue_h {
     public static MethodHandle cue_dec_json$handle() {
         return cue_dec_json.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_dec_json(cue_value, void **, size_t *)
+     * }
+     */
+    public static MemorySegment cue_dec_json$address() {
+        return cue_dec_json.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_dec_json(cue_value, void **, size_t *)
@@ -1486,9 +1905,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_validate"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_validate");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1510,6 +1929,17 @@ public class cue_h {
     public static MethodHandle cue_validate$handle() {
         return cue_validate.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_validate(cue_value, cue_eopt *)
+     * }
+     */
+    public static MemorySegment cue_validate$address() {
+        return cue_validate.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_validate(cue_value, cue_eopt *)
@@ -1534,9 +1964,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_default"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_default");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1558,6 +1988,17 @@ public class cue_h {
     public static MethodHandle cue_default$handle() {
         return cue_default.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_value cue_default(cue_value, bool *)
+     * }
+     */
+    public static MemorySegment cue_default$address() {
+        return cue_default.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_value cue_default(cue_value, bool *)
@@ -1581,9 +2022,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_concrete_kind"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_concrete_kind");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1605,6 +2046,17 @@ public class cue_h {
     public static MethodHandle cue_concrete_kind$handle() {
         return cue_concrete_kind.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_kind cue_concrete_kind(cue_value)
+     * }
+     */
+    public static MemorySegment cue_concrete_kind$address() {
+        return cue_concrete_kind.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_kind cue_concrete_kind(cue_value)
@@ -1628,9 +2080,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_incomplete_kind"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_incomplete_kind");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1652,6 +2104,17 @@ public class cue_h {
     public static MethodHandle cue_incomplete_kind$handle() {
         return cue_incomplete_kind.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_kind cue_incomplete_kind(cue_value)
+     * }
+     */
+    public static MemorySegment cue_incomplete_kind$address() {
+        return cue_incomplete_kind.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_kind cue_incomplete_kind(cue_value)
@@ -1675,9 +2138,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_value_error"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_value_error");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1699,6 +2162,17 @@ public class cue_h {
     public static MethodHandle cue_value_error$handle() {
         return cue_value_error.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_error cue_value_error(cue_value)
+     * }
+     */
+    public static MemorySegment cue_value_error$address() {
+        return cue_value_error.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_error cue_value_error(cue_value)
@@ -1716,6 +2190,64 @@ public class cue_h {
         }
     }
 
+    private static class cue_path {
+        public static final FunctionDescriptor DESC = FunctionDescriptor.of(
+            cue_h.C_POINTER,
+            cue_h.C_LONG
+        );
+
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_path");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
+    }
+
+    /**
+     * Function descriptor for:
+     * {@snippet lang=c :
+     * char *cue_path(cue_value)
+     * }
+     */
+    public static FunctionDescriptor cue_path$descriptor() {
+        return cue_path.DESC;
+    }
+
+    /**
+     * Downcall method handle for:
+     * {@snippet lang=c :
+     * char *cue_path(cue_value)
+     * }
+     */
+    public static MethodHandle cue_path$handle() {
+        return cue_path.HANDLE;
+    }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * char *cue_path(cue_value)
+     * }
+     */
+    public static MemorySegment cue_path$address() {
+        return cue_path.ADDR;
+    }
+
+    /**
+     * {@snippet lang=c :
+     * char *cue_path(cue_value)
+     * }
+     */
+    public static MemorySegment cue_path(long x0) {
+        var mh$ = cue_path.HANDLE;
+        try {
+            if (TRACE_DOWNCALLS) {
+                traceDowncall("cue_path", x0);
+            }
+            return (MemorySegment)mh$.invokeExact(x0);
+        } catch (Throwable ex$) {
+           throw new AssertionError("should not reach here", ex$);
+        }
+    }
+
     private static class cue_is_equal {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
             cue_h.C_BOOL,
@@ -1723,9 +2255,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_is_equal"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_is_equal");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1747,6 +2279,17 @@ public class cue_h {
     public static MethodHandle cue_is_equal$handle() {
         return cue_is_equal.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * bool cue_is_equal(cue_value, cue_value)
+     * }
+     */
+    public static MemorySegment cue_is_equal$address() {
+        return cue_is_equal.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * bool cue_is_equal(cue_value, cue_value)
@@ -1770,9 +2313,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_filename"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_filename");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1794,6 +2337,17 @@ public class cue_h {
     public static MethodHandle cue_filename$handle() {
         return cue_filename.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_bopt cue_filename(char *)
+     * }
+     */
+    public static MemorySegment cue_filename$address() {
+        return cue_filename.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_bopt cue_filename(char *)
@@ -1817,9 +2371,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_import_path"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_import_path");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1841,6 +2395,17 @@ public class cue_h {
     public static MethodHandle cue_import_path$handle() {
         return cue_import_path.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_bopt cue_import_path(char *)
+     * }
+     */
+    public static MemorySegment cue_import_path$address() {
+        return cue_import_path.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_bopt cue_import_path(char *)
@@ -1864,9 +2429,9 @@ public class cue_h {
             cue_h.C_BOOL
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_infer_builtins"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_infer_builtins");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1888,6 +2453,17 @@ public class cue_h {
     public static MethodHandle cue_infer_builtins$handle() {
         return cue_infer_builtins.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_bopt cue_infer_builtins(bool)
+     * }
+     */
+    public static MemorySegment cue_infer_builtins$address() {
+        return cue_infer_builtins.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_bopt cue_infer_builtins(bool)
@@ -1911,9 +2487,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_scope"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_scope");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1935,6 +2511,17 @@ public class cue_h {
     public static MethodHandle cue_scope$handle() {
         return cue_scope.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_bopt cue_scope(cue_value)
+     * }
+     */
+    public static MemorySegment cue_scope$address() {
+        return cue_scope.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_bopt cue_scope(cue_value)
@@ -1956,9 +2543,9 @@ public class cue_h {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
             cue_eopt.layout()    );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_all"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_all");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -1980,6 +2567,17 @@ public class cue_h {
     public static MethodHandle cue_all$handle() {
         return cue_all.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_all()
+     * }
+     */
+    public static MemorySegment cue_all$address() {
+        return cue_all.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_all()
@@ -2003,9 +2601,9 @@ public class cue_h {
             cue_h.C_BOOL
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_concrete"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_concrete");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2027,6 +2625,17 @@ public class cue_h {
     public static MethodHandle cue_concrete$handle() {
         return cue_concrete.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_concrete(bool)
+     * }
+     */
+    public static MemorySegment cue_concrete$address() {
+        return cue_concrete.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_concrete(bool)
@@ -2050,9 +2659,9 @@ public class cue_h {
             cue_h.C_BOOL
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_definitions"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_definitions");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2074,6 +2683,17 @@ public class cue_h {
     public static MethodHandle cue_definitions$handle() {
         return cue_definitions.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_definitions(bool)
+     * }
+     */
+    public static MemorySegment cue_definitions$address() {
+        return cue_definitions.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_definitions(bool)
@@ -2097,9 +2717,9 @@ public class cue_h {
             cue_h.C_BOOL
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_disallow_cycles"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_disallow_cycles");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2121,6 +2741,17 @@ public class cue_h {
     public static MethodHandle cue_disallow_cycles$handle() {
         return cue_disallow_cycles.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_disallow_cycles(bool)
+     * }
+     */
+    public static MemorySegment cue_disallow_cycles$address() {
+        return cue_disallow_cycles.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_disallow_cycles(bool)
@@ -2144,9 +2775,9 @@ public class cue_h {
             cue_h.C_BOOL
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_docs"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_docs");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2168,6 +2799,17 @@ public class cue_h {
     public static MethodHandle cue_docs$handle() {
         return cue_docs.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_docs(bool)
+     * }
+     */
+    public static MemorySegment cue_docs$address() {
+        return cue_docs.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_docs(bool)
@@ -2191,9 +2833,9 @@ public class cue_h {
             cue_h.C_BOOL
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_errors_as_values"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_errors_as_values");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2215,6 +2857,17 @@ public class cue_h {
     public static MethodHandle cue_errors_as_values$handle() {
         return cue_errors_as_values.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_errors_as_values(bool)
+     * }
+     */
+    public static MemorySegment cue_errors_as_values$address() {
+        return cue_errors_as_values.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_errors_as_values(bool)
@@ -2236,9 +2889,9 @@ public class cue_h {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
             cue_eopt.layout()    );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_final"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_final");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2260,6 +2913,17 @@ public class cue_h {
     public static MethodHandle cue_final$handle() {
         return cue_final.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_final()
+     * }
+     */
+    public static MemorySegment cue_final$address() {
+        return cue_final.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_final()
@@ -2283,9 +2947,9 @@ public class cue_h {
             cue_h.C_BOOL
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_hidden"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_hidden");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2307,6 +2971,17 @@ public class cue_h {
     public static MethodHandle cue_hidden$handle() {
         return cue_hidden.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_hidden(bool)
+     * }
+     */
+    public static MemorySegment cue_hidden$address() {
+        return cue_hidden.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_hidden(bool)
@@ -2330,9 +3005,9 @@ public class cue_h {
             cue_h.C_BOOL
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_inline_imports"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_inline_imports");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2354,6 +3029,17 @@ public class cue_h {
     public static MethodHandle cue_inline_imports$handle() {
         return cue_inline_imports.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_inline_imports(bool)
+     * }
+     */
+    public static MemorySegment cue_inline_imports$address() {
+        return cue_inline_imports.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_inline_imports(bool)
@@ -2377,9 +3063,9 @@ public class cue_h {
             cue_h.C_BOOL
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_optionals"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_optionals");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2401,6 +3087,17 @@ public class cue_h {
     public static MethodHandle cue_optionals$handle() {
         return cue_optionals.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_optionals(bool)
+     * }
+     */
+    public static MemorySegment cue_optionals$address() {
+        return cue_optionals.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_optionals(bool)
@@ -2422,9 +3119,9 @@ public class cue_h {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
             cue_eopt.layout()    );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_raw"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_raw");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2446,6 +3143,17 @@ public class cue_h {
     public static MethodHandle cue_raw$handle() {
         return cue_raw.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_raw()
+     * }
+     */
+    public static MemorySegment cue_raw$address() {
+        return cue_raw.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_raw()
@@ -2467,9 +3175,9 @@ public class cue_h {
         public static final FunctionDescriptor DESC = FunctionDescriptor.of(
             cue_eopt.layout()    );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_schema"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_schema");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2491,6 +3199,17 @@ public class cue_h {
     public static MethodHandle cue_schema$handle() {
         return cue_schema.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_eopt cue_schema()
+     * }
+     */
+    public static MemorySegment cue_schema$address() {
+        return cue_schema.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_eopt cue_schema()
@@ -2516,9 +3235,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_attrs"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_attrs");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2540,6 +3259,17 @@ public class cue_h {
     public static MethodHandle cue_attrs$handle() {
         return cue_attrs.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * cue_attr *cue_attrs(cue_value, cue_attr_kind, size_t *)
+     * }
+     */
+    public static MemorySegment cue_attrs$address() {
+        return cue_attrs.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * cue_attr *cue_attrs(cue_value, cue_attr_kind, size_t *)
@@ -2563,9 +3293,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_attr_name"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_attr_name");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2587,6 +3317,17 @@ public class cue_h {
     public static MethodHandle cue_attr_name$handle() {
         return cue_attr_name.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * char *cue_attr_name(cue_attr)
+     * }
+     */
+    public static MemorySegment cue_attr_name$address() {
+        return cue_attr_name.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * char *cue_attr_name(cue_attr)
@@ -2610,9 +3351,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_attr_value"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_attr_value");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2634,6 +3375,17 @@ public class cue_h {
     public static MethodHandle cue_attr_value$handle() {
         return cue_attr_value.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * char *cue_attr_value(cue_attr)
+     * }
+     */
+    public static MemorySegment cue_attr_value$address() {
+        return cue_attr_value.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * char *cue_attr_value(cue_attr)
@@ -2657,9 +3409,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_attr_numargs"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_attr_numargs");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2681,6 +3433,17 @@ public class cue_h {
     public static MethodHandle cue_attr_numargs$handle() {
         return cue_attr_numargs.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * size_t cue_attr_numargs(cue_attr)
+     * }
+     */
+    public static MemorySegment cue_attr_numargs$address() {
+        return cue_attr_numargs.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * size_t cue_attr_numargs(cue_attr)
@@ -2705,9 +3468,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_attr_getarg"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_attr_getarg");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2729,6 +3492,17 @@ public class cue_h {
     public static MethodHandle cue_attr_getarg$handle() {
         return cue_attr_getarg.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * void cue_attr_getarg(cue_attr, size_t, cue_attr_arg *)
+     * }
+     */
+    public static MemorySegment cue_attr_getarg$address() {
+        return cue_attr_getarg.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * void cue_attr_getarg(cue_attr, size_t, cue_attr_arg *)
@@ -2751,9 +3525,9 @@ public class cue_h {
             cue_h.C_LONG
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_free"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_free");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2775,6 +3549,17 @@ public class cue_h {
     public static MethodHandle cue_free$handle() {
         return cue_free.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * void cue_free(uintptr_t)
+     * }
+     */
+    public static MemorySegment cue_free$address() {
+        return cue_free.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * void cue_free(uintptr_t)
@@ -2797,9 +3582,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("cue_free_all"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("cue_free_all");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2821,6 +3606,17 @@ public class cue_h {
     public static MethodHandle cue_free_all$handle() {
         return cue_free_all.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * void cue_free_all(uintptr_t *)
+     * }
+     */
+    public static MemorySegment cue_free_all$address() {
+        return cue_free_all.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * void cue_free_all(uintptr_t *)
@@ -2843,9 +3639,9 @@ public class cue_h {
             cue_h.C_POINTER
         );
 
-        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(
-                    cue_h.findOrThrow("libc_free"),
-                    DESC);
+        public static final MemorySegment ADDR = cue_h.findOrThrow("libc_free");
+
+        public static final MethodHandle HANDLE = Linker.nativeLinker().downcallHandle(ADDR, DESC);
     }
 
     /**
@@ -2867,6 +3663,17 @@ public class cue_h {
     public static MethodHandle libc_free$handle() {
         return libc_free.HANDLE;
     }
+
+    /**
+     * Address for:
+     * {@snippet lang=c :
+     * void libc_free(void *)
+     * }
+     */
+    public static MemorySegment libc_free$address() {
+        return libc_free.ADDR;
+    }
+
     /**
      * {@snippet lang=c :
      * void libc_free(void *)

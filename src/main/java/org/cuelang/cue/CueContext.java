@@ -15,6 +15,7 @@
 package org.cuelang.cue;
 
 import org.cuelang.libcue.cue_bopt;
+import org.cuelang.cue.loader.NativeLibraryLoader;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,6 +27,11 @@ import java.lang.ref.Cleaner;
 import static org.cuelang.libcue.cue_h.*;
 
 public final class CueContext {
+
+    static {
+        NativeLibraryLoader.loadLibcue();
+    }
+
     private static final Cleaner cleaner = Cleaner.create();
     private final CueResource ctx;
 
@@ -156,4 +162,7 @@ public final class CueContext {
     public @NotNull Value toValue(byte[] buf) {
         return new Value(this, buf);
     }
+
+    @Contract("_ -> new")
+    public @NotNull Value toValue(Value... values) { return new Value(this, values); }
 }

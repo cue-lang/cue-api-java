@@ -71,7 +71,10 @@ workflows: trybot: _repo.bashWorkflow & {
 			"go-version": ["stable"]
 
 			// TODO: Windows is missing because of issue #3016.
-			runner: [_repo.linuxMachine, _repo.macosMachine]
+			include: [
+				{runner: _repo.linuxMachine, binary: "linux-amd64"},
+				{runner: _repo.macosMachine, binary: "darwin-arm64"},
+			]
 		}
 	}
 
@@ -105,18 +108,12 @@ workflows: trybot: _repo.bashWorkflow & {
 		// The name of the shared library is target-dependent.
 		// Build libcue with all possible names so we're covered
 		// in all cases.
-		run: """
-			go build -o libcue.so -buildmode=c-shared
-			cp libcue.so libcue.dylib
-			cp libcue.so cue.dll
-			"""
+		run: "go build -o ../src/main/resources/${{ matrix.binary }} -buildmode=c-shared"
 	}
 
 	_mavenTest: githubactions.#Step & {
 		name: "Test"
-		env: LD_LIBRARY_PATH:   "${{ github.workspace }}/libcue"
-		env: DYLD_LIBRARY_PATH: "${{ github.workspace }}/libcue"
-		run: "mvn clean install package"
+		run: "./mvnw clean install package"
 	}
 
 	_goGenerate: githubactions.#Step & {

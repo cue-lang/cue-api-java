@@ -18,4 +18,4 @@ fi
 : ${LIBCUE:=$HOME/src/libcue}
 
 rm -rf src/main/java/org/cuelang/libcue
-jextract -t org.cuelang.libcue --output src/main/java -lcue --use-system-load-library @includes.txt "$LIBCUE/cue.h"
+jextract -t org.cuelang.libcue --output src/main/java --use-system-load-library @includes.txt "$LIBCUE/cue.h"

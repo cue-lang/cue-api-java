@@ -20,9 +20,11 @@ jobs:
       matrix:
         go-version:
           - stable
-        runner:
-          - namespace-profile-linux-amd64
-          - ns-macos-arm64
+        include:
+          - runner: namespace-profile-linux-amd64
+            binary: linux-amd64
+          - runner: ns-macos-arm64
+            binary: darwin-arm64
     runs-on: ${{ matrix.runner }}
     if: |-
       (contains(github.event.head_commit.message, '
@@ -101,17 +103,11 @@ jobs:
           path: libcue
       - name: Build libcue
         working-directory: libcue
-        run: |-
-          go build -o libcue.so -buildmode=c-shared
-          cp libcue.so libcue.dylib
-          cp libcue.so cue.dll
+        run: go build -o ../src/main/resources/${{ matrix.binary }} -buildmode=c-shared
       - name: Early git and code sanity checks
         run: go run cuelang.org/go/internal/ci/checks@v0.14.1
       - name: Test
-        env:
-          LD_LIBRARY_PATH: ${{ github.workspace }}/libcue
-          DYLD_LIBRARY_PATH: ${{ github.workspace }}/libcue
-        run: mvn clean install package
+        run: ./mvnw clean install package
       - name: go generate
         run: go generate ./...
       - if: always()
